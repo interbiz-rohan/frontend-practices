@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
       @font-face {
         font-family: "vast";
@@ -14,7 +15,6 @@
 
       :root {
         --secondary-color: #efece1;
-        /* background-color:cornsilk; */
       }
 
       body {
@@ -27,20 +27,17 @@
         background-color: var(--secondary-color);
         min-height: 100vh;
         padding: 8px 40px;
+        width: fit-content;
       }
 
       nav {
         height: 90px;
-        line-height: 90px; /* This centers inline content vertically */
+        line-height: 90px;
         background-color: #f7f7f7;
         margin: 10px 0;
         border-radius: 30px;
         padding: 0 15px;
         text-align: center;
-        position: relative;
-        white-space: nowrap;
-        border: none;
-        outline: none;
         position: sticky;
         top: 20px;
         z-index: 99;
@@ -69,7 +66,6 @@
       ul li {
         display: inline-block;
         margin-right: 20px;
-        letter-spacing: 0;
         padding: 0.5rem 1rem;
         font-size: 1rem;
         font-weight: 500;
@@ -93,10 +89,12 @@
         background-color: orangered;
         border: none;
         color: white;
-        font-size: 1.4rem;
+        font-size: 1rem;
         padding: 0 40px;
-        border-radius: 20px;
+        border-radius: 80px;
         font-weight: bolder;
+        text-transform: uppercase;
+        font-family: bric, sans-serif;
         cursor: pointer;
       }
 
@@ -111,39 +109,13 @@
         border-radius: 10px;
       }
 
-      .hero-section {
-        background-color: white;
-        height: 500px;
-        line-height: 500px;
-        text-align: center;
-        font-size: 40px;
-        margin-top: 50px;
-      }
-
-      .gallery {
-        height: 500px;
-        background-color: white;
-        margin-top: 40px;
-      }
-
-      .flex-area {
-        height: 500px;
-        background-color: orangered;
-        margin-top: 40px;
-        border-radius: 40px;
-      }
-
-      /* Grid code  */
-
       .grid-area {
         margin-top: 40px;
         display: grid;
-        /* grid-template-columns: 1fr 1fr; */
         grid-template-areas:
           "heading heading"
           "card animation";
         gap: 20px;
-
       }
 
       .area-1 {
@@ -164,7 +136,6 @@
       .mid-heading-container {
         width: 700px;
         margin: auto;
-        /* transform: translateX(-50%); */
       }
 
       .first-heading {
@@ -182,25 +153,256 @@
       }
 
       .area-2 {
-        width: 500px;
+        width: 50%;
         height: 200px;
         background-color: black;
         grid-area: card;
         justify-self: right;
+        position: relative;
       }
 
       .area-3 {
-        width: 500px;
+        width: 50%;
         height: 200px;
         background-color: black;
         grid-area: animation;
         justify-self: left;
       }
 
-      /* End of Grid code */
+      .highlight-container {
+        min-height: 600px;
+        background-color: orangered;
+        margin-top: 100px;
+        border-radius: 40px;
+        padding: 10px;
+        position: relative;
+      }
+
+      .design1 {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 15%;
+      }
+
+      .design2 {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 15%;
+      }
+
+      .oopslogo {
+        height: 3rem;
+        position: relative;
+        top: 0.5rem;
+        left: 1rem;
+      }
+
+      .second-heading {
+        color: white;
+        font-size: 3.5rem;
+        font-weight: 600;
+        margin: 20px auto;
+        margin-top: 60px;
+        text-align: center;
+      }
+
+      .second-sub-heading {
+        color: white;
+        font-size: 3rem;
+        text-align: center;
+        padding: 0 10%;
+        font-weight: 400;
+        letter-spacing: 2px;
+        line-height: 4rem;
+      }
+
+      .second-button {
+        padding: 15px 40px;
+        font-family: vast, sans-serif;
+        color: orangered;
+        background-color: white;
+        border: none;
+        font-size: 1.5rem;
+        font-weight: 800;
+        border-radius: 40px;
+        display: block;
+        margin: auto;
+      }
+
+      .hero-section {
+        border-radius: 40px;
+        background-color: white;
+        min-height: 500px;
+        text-align: center;
+        font-size: 40px;
+        padding: 5px;
+        position: relative;
+      }
+
+      .hero-heading {
+        margin-top: 50px;
+        font-size: 6rem;
+        font-family: bric, sans-serif;
+        font-weight: 500;
+        line-height: 5rem;
+      }
+
+      .curved-wrapper {
+        width: 100%;
+        height: 400px;
+        position: relative;
+        overflow: hidden;
+        mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,0 Q50,30 100,0 L100,100 Q50,70 0,100 Z" fill="white"/></svg>');
+        -webkit-mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,0 Q50,30 100,0 L100,100 Q50,70 0,100 Z" fill="white"/></svg>');
+        mask-size: 100% 100%;
+        -webkit-mask-size: 100% 100%;
+        mask-repeat: no-repeat;
+        -webkit-mask-repeat: no-repeat;
+        mask-position: top;
+        -webkit-mask-position: top;
+        background-color: black;
+      }
+
+      .image-track {
+        display: flex;
+        width: fit-content;
+        height: 100%;
+        animation: scroll 40s linear infinite;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+      }
+
+      .image-track img {
+        width: auto;
+        object-fit: cover;
+      }
+
+      .gallery {
+        height: 500px;
+        margin-top: 100px;
+        text-align: center;
+      }
+
+      .scroll-wrapper {
+        height: 300px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .card-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        top: 30%;
+        width: 100%;
+        height: 300px;
+      }
+
+      .card {
+        width: 25%;
+        min-height: 250px;
+        background-color: black;
+        transition: transform 1s ease;
+      }
+
+      .card-1 {
+        transform: translateX(100%);
+      }
+
+      .card-container:hover .card-1 {
+        transform: translateX(0%);
+      }
+
+      .card-3 {
+        transform: translateX(-100%);
+      }
+
+      .card-container:hover .card-3 {
+        transform: translateX(0%);
+      }
+
+      .card-2 {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-family: sans-serif;
+        font-size: 1.2rem;
+        cursor: pointer;
+        z-index: 1;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .card-2::before {
+        content: "🖱️ Hover here";
+        position: absolute;
+        top: 40%;
+        text-align: center;
+        font-size: 1.2rem;
+        color: #ffffff;
+        animation: glow 1.5s infinite alternate;
+      }
+
+      .card-2:hover {
+        transform: scale(1.05);
+      }
+
+      .card-2:hover::before {
+        content: "";
+      }
+
+      @keyframes glow {
+        from {
+          text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
+        }
+        to {
+          text-shadow: 0 0 20px #0ff, 0 0 30px #0ff;
+        }
+      }
+
+      @keyframes scroll {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-60%);
+        }
+      }
+
+      /* Default - hide image on larger screens */
       @media screen and (max-width: 1004px) {
         .list {
           display: none;
+        }
+      }
+
+      /* Mobile override - show image again on very small screens */
+      @media screen and (max-width: 480px) {
+        .grid-area {
+          grid-template-areas:
+            "heading heading"
+            "card card"
+            "animation animation" !important;
+        }
+
+        .area-2 {
+          width: 80%;
+          justify-self: center;
+        }
+
+        .area-3 {
+          width: 80%;
+          justify-self: center;
         }
       }
     </style>
@@ -226,7 +428,43 @@
       </nav>
 
       <section class="hero-section heading">
-        <span>Will add animation and transition later</span>
+        <h1 class="heading first-heading hero-heading">
+          Branding that's
+          <br />
+          crazy g d
+        </h1>
+
+        <p class="sub-heading first-sub-heading">
+          We create brands that turn heads and drop jaws. Ready to stand out?
+        </p>
+        <button
+          class="appoinment sub-heading"
+          style="display: block; margin: auto; float: none"
+        >
+          Let's Talk
+        </button>
+
+        <div class="curved-wrapper">
+          <div class="image-track">
+            <!-- Repeat images for smooth loop -->
+            <img src="https://picsum.photos/800/500?random=1" alt="img1" />
+            <img src="https://picsum.photos/800/500?random=2" alt="img2" />
+            <img src="https://picsum.photos/800/500?random=3" alt="img3" />
+            <img src="https://picsum.photos/800/500?random=4" alt="img4" />
+            <img src="https://picsum.photos/800/500?random=5" alt="img5" />
+            <img src="https://picsum.photos/800/500?random=6" alt="img6" />
+            <img src="https://picsum.photos/800/500?random=7" alt="img7" />
+            <img src="https://picsum.photos/800/500?random=8" alt="img8" />
+            <img src="https://picsum.photos/800/500?random=9" alt="img9" />
+            <img src="https://picsum.photos/800/500?random=10" alt="img10" />
+9
+            <!-- Duplicate for seamless scroll -->
+            <img src="https://picsum.photos/800/500?random=1" alt="img1" />
+            <img src="https://picsum.photos/800/500?random=2" alt="img2" />
+            <img src="https://picsum.photos/800/500?random=3" alt="img3" />
+          </div>
+        </div>
+        <img src="./svg-viewer.svg" class="design1" />
       </section>
 
       <section class="grid-area">
@@ -249,13 +487,54 @@
         <div class="area-3"></div>
       </section>
 
-      <section class="flex-area">
+      <section class="highlight-container">
+        <img
+          src="./svg-viewer.svg"
+          alt="Design 1"
+          class="design1"
+          width="300"
+          height="300"
+        />
+        <h1 class="heading second-heading">
+          This is where
+          <img src="./oopslogo.svg" alt="logo" class="oopslogo" />
+          hhMyAds comes in
+        </h1>
+        <p class="sub-heading second-sub-heading">
+          We make boring things, interesting! Our design is built to scale,
+          adapt, and grow with you. And hey, we don’t ghost you after
+          delivery—count on us for ongoing tweaks and upgrades.
+        </p>
+        <img
+          src="./svg-viewer2.svg"
+          alt="Design 2"
+          class="design2"
+          width="300"
+          height="300"
+        />
 
-
+        <button class="second-button">BOOK A CALL</button>
       </section>
 
       <section class="gallery">
-        <h1>Gallery</h1>
+        <div class="xl-badge sub-heading">* HOW IT WORKS</div>
+        <div class="mid-heading-container">
+          <h1 class="heading first-heading">
+            Work gets done.
+            <strong class="highlighted-text">Fast.</strong>
+          </h1>
+          <p class="sub-heading first-sub-heading">
+            It’s just how you’ve always wanted imagination to work.
+          </p>
+        </div>
+
+        <section class="scroll-wrapper">
+          <div class="card-container">
+            <div class="card card-1"></div>
+            <div class="card card-2"></div>
+            <div class="card card-3"></div>
+          </div>
+        </section>
       </section>
     </main>
   </body>

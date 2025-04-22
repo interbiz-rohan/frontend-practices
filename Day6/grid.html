@@ -44,7 +44,7 @@
     /* Mobile view: show only 2 columns */
     @media screen and (max-width: 480px) {
       .container {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat("auto-fill", minmax(200px,1fr));
       }
 
       .box {
