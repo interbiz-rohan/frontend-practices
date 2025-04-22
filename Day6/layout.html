@@ -1,541 +1,133 @@
+
 <!DOCTYPE html>
-<html lang="en-US">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>
-      @font-face {
-        font-family: "vast";
-        src: url(./VastagoGrotesk.otf);
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Realistic Drop Tags</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 2.5rem;
+    }
+
+    .ground {
+      position: relative;
+      width: 100%;
+      height: calc(100vh - 100px);
+      overflow: hidden;
+    }
+
+    .tag {
+      position: absolute;
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-weight: 600;
+      white-space: nowrap;
+      color: black;
+      animation: dropBounce 2s ease-out forwards;
+      opacity: 0;
+    }
+
+    .pink { background: #ff69b4; }
+    .green { background: #d0ff00; }
+    .purple { background: #b072ff; }
+    .white { background: white; }
+    .cyan { background: #3ae3be; }
+    .yellow { background: #d6ff00; }
+
+    @keyframes dropBounce {
+      0% {
+        top: -100px;
+        opacity: 0;
       }
-
-      @font-face {
-        font-family: "bric";
-        src: url(./BricolageGrotesque.ttf);
+      60% {
+        top: calc(100% - 70px);
+        opacity: 1;
       }
-
-      :root {
-        --secondary-color: #efece1;
+      75% {
+        top: calc(100% - 100px);
       }
-
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
+      90% {
+        top: calc(100% - 80px);
       }
-
-      main {
-        background-color: var(--secondary-color);
-        min-height: 100vh;
-        padding: 8px 40px;
-        width: fit-content;
+      100% {
+        top: calc(100% - 70px);
+        opacity: 1;
       }
+    }
 
-      nav {
-        height: 90px;
-        line-height: 90px;
-        background-color: #f7f7f7;
-        margin: 10px 0;
-        border-radius: 30px;
-        padding: 0 15px;
-        text-align: center;
-        position: sticky;
-        top: 20px;
-        z-index: 99;
-        box-shadow: 1px 1px 10px #e2dfd2;
-      }
+    .tag:hover {
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
 
-      .logo-section {
-        vertical-align: middle;
-        float: left;
-      }
+  <h1>The List Goes On...</h1>
 
-      .logo-section img {
-        height: 40px;
-        vertical-align: middle;
-      }
+  <div class="ground" id="ground">
+    <!-- Tags will be created with JS -->
+    <div class="tag purple">Banners & Posters</div>
+    <div class="tag white">Appstore Graphics</div>
+    <div class="tag green">UI UX Design</div>
+    <div class="tag pink">NFT Art</div>
+    <div class="tag green">Infographics</div>
+    <div class="tag purple">Graphic Design</div>
+    <div class="tag pink">Branding</div>
+    <div class="tag pink">Marketing</div>
+    <div class="tag white">Product Design</div>
+    <div class="tag yellow">Motion Design</div>
+    <div class="tag cyan">Framer Development</div>
+    <div class="tag cyan">Webflow Development</div>
+    <div class="tag cyan">T-shirt & Merch</div>
+    <div class="tag purple">Illustrations</div>
+    <div class="tag white">Website Design</div>
+  </div>
 
-      ul {
-        display: inline-block;
-        vertical-align: middle;
-        margin: 0;
-        margin-left: 40px;
-        padding: 0;
-        list-style: none;
-      }
+  <script>
+    const labels = [
+      { text: "Banners & Posters", color: "purple" },
+      { text: "Appstore Graphics", color: "white" },
+      { text: "UI UX Design", color: "green" },
+      { text: "NFT Art", color: "pink" },
+      { text: "Infographics", color: "green" },
+      { text: "Graphic Design", color: "purple" },
+      { text: "Branding", color: "pink" },
+      { text: "Marketing", color: "pink" },
+      { text: "Product Design", color: "white" },
+      { text: "Motion Design", color: "yellow" },
+      { text: "Framer Development", color: "cyan" },
+      { text: "Webflow Development", color: "cyan" },
+      { text: "T-shirt & Merch", color: "cyan" },
+      { text: "Illustrations", color: "purple" },
+      { text: "Website Design", color: "white" }
+    ];
 
-      ul li {
-        display: inline-block;
-        margin-right: 20px;
-        padding: 0.5rem 1rem;
-        font-size: 1rem;
-        font-weight: 500;
-        line-height: 1.5;
-        cursor: pointer;
-        position: relative;
-      }
+    const ground = document.getElementById("ground");
 
-      .heading {
-        font-family: vast, sans-serif;
-      }
+    labels.forEach((label, i) => {
+      const tag = document.createElement("div");
+      tag.className = `tag ${label.color}`;
+      tag.innerText = label.text;
+      tag.style.left = `${Math.random() * 90}%`; // Random horizontal placement
+      tag.style.animationDelay = `${i * 0.2}s`;
+      ground.appendChild(tag);
+    });
+  </script>
 
-      .sub-heading {
-        font-family: bric, Arial, Helvetica, sans-serif;
-      }
-
-      .appoinment {
-        float: right;
-        transform: translateY(25%);
-        height: 60px;
-        background-color: orangered;
-        border: none;
-        color: white;
-        font-size: 1rem;
-        padding: 0 40px;
-        border-radius: 80px;
-        font-weight: bolder;
-        text-transform: uppercase;
-        font-family: bric, sans-serif;
-        cursor: pointer;
-      }
-
-      .offer-badge {
-        position: absolute;
-        font-size: 12px;
-        right: -40px;
-        top: -5px;
-        background-color: tomato;
-        color: white;
-        padding: 2px 5px;
-        border-radius: 10px;
-      }
-
-      .grid-area {
-        margin-top: 40px;
-        display: grid;
-        grid-template-areas:
-          "heading heading"
-          "card animation";
-        gap: 20px;
-      }
-
-      .area-1 {
-        text-align: center;
-        grid-area: heading;
-      }
-
-      .xl-badge {
-        display: inline-block;
-        padding: 10px 20px;
-        font-weight: 600;
-        background-color: white;
-        border-radius: 20px;
-        box-shadow: 1px 1px #e2dfd2;
-        letter-spacing: 1.3px;
-      }
-
-      .mid-heading-container {
-        width: 700px;
-        margin: auto;
-      }
-
-      .first-heading {
-        font-size: 4rem;
-        margin: 20px 0px;
-      }
-
-      .first-sub-heading {
-        font-size: 1.2rem;
-        color: grey;
-      }
-
-      .highlighted-text {
-        color: orangered;
-      }
-
-      .area-2 {
-        width: 50%;
-        height: 200px;
-        background-color: black;
-        grid-area: card;
-        justify-self: right;
-        position: relative;
-      }
-
-      .area-3 {
-        width: 50%;
-        height: 200px;
-        background-color: black;
-        grid-area: animation;
-        justify-self: left;
-      }
-
-      .highlight-container {
-        min-height: 600px;
-        background-color: orangered;
-        margin-top: 100px;
-        border-radius: 40px;
-        padding: 10px;
-        position: relative;
-      }
-
-      .design1 {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 15%;
-      }
-
-      .design2 {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 15%;
-      }
-
-      .oopslogo {
-        height: 3rem;
-        position: relative;
-        top: 0.5rem;
-        left: 1rem;
-      }
-
-      .second-heading {
-        color: white;
-        font-size: 3.5rem;
-        font-weight: 600;
-        margin: 20px auto;
-        margin-top: 60px;
-        text-align: center;
-      }
-
-      .second-sub-heading {
-        color: white;
-        font-size: 3rem;
-        text-align: center;
-        padding: 0 10%;
-        font-weight: 400;
-        letter-spacing: 2px;
-        line-height: 4rem;
-      }
-
-      .second-button {
-        padding: 15px 40px;
-        font-family: vast, sans-serif;
-        color: orangered;
-        background-color: white;
-        border: none;
-        font-size: 1.5rem;
-        font-weight: 800;
-        border-radius: 40px;
-        display: block;
-        margin: auto;
-      }
-
-      .hero-section {
-        border-radius: 40px;
-        background-color: white;
-        min-height: 500px;
-        text-align: center;
-        font-size: 40px;
-        padding: 5px;
-        position: relative;
-      }
-
-      .hero-heading {
-        margin-top: 50px;
-        font-size: 6rem;
-        font-family: bric, sans-serif;
-        font-weight: 500;
-        line-height: 5rem;
-      }
-
-      .curved-wrapper {
-        width: 100%;
-        height: 400px;
-        position: relative;
-        overflow: hidden;
-        mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,0 Q50,30 100,0 L100,100 Q50,70 0,100 Z" fill="white"/></svg>');
-        -webkit-mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,0 Q50,30 100,0 L100,100 Q50,70 0,100 Z" fill="white"/></svg>');
-        mask-size: 100% 100%;
-        -webkit-mask-size: 100% 100%;
-        mask-repeat: no-repeat;
-        -webkit-mask-repeat: no-repeat;
-        mask-position: top;
-        -webkit-mask-position: top;
-        background-color: black;
-      }
-
-      .image-track {
-        display: flex;
-        width: fit-content;
-        height: 100%;
-        animation: scroll 40s linear infinite;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 1;
-      }
-
-      .image-track img {
-        width: auto;
-        object-fit: cover;
-      }
-
-      .gallery {
-        height: 500px;
-        margin-top: 100px;
-        text-align: center;
-      }
-
-      .scroll-wrapper {
-        height: 300px;
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-      }
-
-      .card-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 20px;
-        top: 30%;
-        width: 100%;
-        height: 300px;
-      }
-
-      .card {
-        width: 25%;
-        min-height: 250px;
-        background-color: black;
-        transition: transform 1s ease;
-      }
-
-      .card-1 {
-        transform: translateX(100%);
-      }
-
-      .card-container:hover .card-1 {
-        transform: translateX(0%);
-      }
-
-      .card-3 {
-        transform: translateX(-100%);
-      }
-
-      .card-container:hover .card-3 {
-        transform: translateX(0%);
-      }
-
-      .card-2 {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: white;
-        font-family: sans-serif;
-        font-size: 1.2rem;
-        cursor: pointer;
-        z-index: 1;
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-        transition: all 0.3s ease;
-      }
-
-      .card-2::before {
-        content: "🖱️ Hover here";
-        position: absolute;
-        top: 40%;
-        text-align: center;
-        font-size: 1.2rem;
-        color: #ffffff;
-        animation: glow 1.5s infinite alternate;
-      }
-
-      .card-2:hover {
-        transform: scale(1.05);
-      }
-
-      .card-2:hover::before {
-        content: "";
-      }
-
-      @keyframes glow {
-        from {
-          text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
-        }
-        to {
-          text-shadow: 0 0 20px #0ff, 0 0 30px #0ff;
-        }
-      }
-
-      @keyframes scroll {
-        0% {
-          transform: translateX(0);
-        }
-        100% {
-          transform: translateX(-60%);
-        }
-      }
-
-      /* Default - hide image on larger screens */
-      @media screen and (max-width: 1004px) {
-        .list {
-          display: none;
-        }
-      }
-
-      /* Mobile override - show image again on very small screens */
-      @media screen and (max-width: 480px) {
-        .grid-area {
-          grid-template-areas:
-            "heading heading"
-            "card card"
-            "animation animation" !important;
-        }
-
-        .area-2 {
-          width: 80%;
-          justify-self: center;
-        }
-
-        .area-3 {
-          width: 80%;
-          justify-self: center;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <main>
-      <nav>
-        <a href="#" class="logo-section">
-          <img src="./Logo.svg" alt="Logo Image" />
-        </a>
-
-        <ul class="sub-heading list">
-          <li>Work</li>
-          <li>Capabilities</li>
-          <li>Process</li>
-          <li>
-            Pricing
-            <span class="offer-badge"> 10% Off </span>
-          </li>
-        </ul>
-
-        <button class="appoinment sub-heading">Book a call</button>
-      </nav>
-
-      <section class="hero-section heading">
-        <h1 class="heading first-heading hero-heading">
-          Branding that's
-          <br />
-          crazy g d
-        </h1>
-
-        <p class="sub-heading first-sub-heading">
-          We create brands that turn heads and drop jaws. Ready to stand out?
-        </p>
-        <button
-          class="appoinment sub-heading"
-          style="display: block; margin: auto; float: none"
-        >
-          Let's Talk
-        </button>
-
-        <div class="curved-wrapper">
-          <div class="image-track">
-            <!-- Repeat images for smooth loop -->
-            <img src="https://picsum.photos/800/500?random=1" alt="img1" />
-            <img src="https://picsum.photos/800/500?random=2" alt="img2" />
-            <img src="https://picsum.photos/800/500?random=3" alt="img3" />
-            <img src="https://picsum.photos/800/500?random=4" alt="img4" />
-            <img src="https://picsum.photos/800/500?random=5" alt="img5" />
-            <img src="https://picsum.photos/800/500?random=6" alt="img6" />
-            <img src="https://picsum.photos/800/500?random=7" alt="img7" />
-            <img src="https://picsum.photos/800/500?random=8" alt="img8" />
-            <img src="https://picsum.photos/800/500?random=9" alt="img9" />
-            <img src="https://picsum.photos/800/500?random=10" alt="img10" />
-9
-            <!-- Duplicate for seamless scroll -->
-            <img src="https://picsum.photos/800/500?random=1" alt="img1" />
-            <img src="https://picsum.photos/800/500?random=2" alt="img2" />
-            <img src="https://picsum.photos/800/500?random=3" alt="img3" />
-          </div>
-        </div>
-        <img src="./svg-viewer.svg" class="design1" />
-      </section>
-
-      <section class="grid-area">
-        <div class="area-1">
-          <div class="xl-badge sub-heading">* PROBLEM</div>
-          <div class="mid-heading-container">
-            <h1 class="heading first-heading">
-              Building a strong brand is
-              <strong class="highlighted-text">complicated</strong>
-            </h1>
-            <p class="sub-heading first-sub-heading">
-              How is it still so difficult to create the brand you actually want
-              in 2025?
-            </p>
-          </div>
-        </div>
-
-        <div class="area-2"></div>
-
-        <div class="area-3"></div>
-      </section>
-
-      <section class="highlight-container">
-        <img
-          src="./svg-viewer.svg"
-          alt="Design 1"
-          class="design1"
-          width="300"
-          height="300"
-        />
-        <h1 class="heading second-heading">
-          This is where
-          <img src="./oopslogo.svg" alt="logo" class="oopslogo" />
-          hhMyAds comes in
-        </h1>
-        <p class="sub-heading second-sub-heading">
-          We make boring things, interesting! Our design is built to scale,
-          adapt, and grow with you. And hey, we don’t ghost you after
-          delivery—count on us for ongoing tweaks and upgrades.
-        </p>
-        <img
-          src="./svg-viewer2.svg"
-          alt="Design 2"
-          class="design2"
-          width="300"
-          height="300"
-        />
-
-        <button class="second-button">BOOK A CALL</button>
-      </section>
-
-      <section class="gallery">
-        <div class="xl-badge sub-heading">* HOW IT WORKS</div>
-        <div class="mid-heading-container">
-          <h1 class="heading first-heading">
-            Work gets done.
-            <strong class="highlighted-text">Fast.</strong>
-          </h1>
-          <p class="sub-heading first-sub-heading">
-            It’s just how you’ve always wanted imagination to work.
-          </p>
-        </div>
-
-        <section class="scroll-wrapper">
-          <div class="card-container">
-            <div class="card card-1"></div>
-            <div class="card card-2"></div>
-            <div class="card card-3"></div>
-          </div>
-        </section>
-      </section>
-    </main>
-  </body>
+</body>
 </html>
