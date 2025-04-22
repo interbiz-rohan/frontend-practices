@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>10 Row Flexbox Layout</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      padding: 20px;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .box {
+      background-color: dodgerblue;
+      color: white;
+      padding: 20px;
+      height: 100px;
+      width: 100px;
+      text-align: center;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      transition: 0.3s;
+    }
+
+    /* Responsive Styles */
+    @media screen and (max-width: 768px) {
+      .box {
+        font-size: 1rem;
+        padding: 15px;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+
+      .container{
+        flex-direction: column;
+      }
+
+      .box {
+        width: unset;
+        font-size: 0.9rem;
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>10 Responsive Rows Using Flexbox</h2>
+  <div class="container">
+    <div class="box">Row 1</div>
+    <div class="box">Row 2</div>
+    <div class="box">Row 3</div>
+    <div class="box">Row 4</div>
+    <div class="box">Row 5</div>
+    <div class="box">Row 6</div>
+    <div class="box">Row 7</div>
+    <div class="box">Row 8</div>
+    <div class="box">Row 9</div>
+    <div class="box">Row 10</div>
+  </div>
+
+</body>
+</html>

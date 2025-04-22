@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Display Properties</title>
+
+    <style>
+      .box1 {
+        padding: 10px;
+        width: 300px;
+        height: 300px;
+        border: 1px solid black;
+      }
+
+      p{
+        margin: 0;
+      }
+
+      .para {
+        margin: 0;
+        padding-right: 10px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+}
+      
+
+      /* Fade effect at the bottom */
+      .box1::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2.5em;
+        background: linear-gradient(to bottom, transparent, white);
+        pointer-events: none;
+      }
+
+      .inline{
+        height: 200px;
+        width: 200px;
+        background-color: green;
+      }
+
+      .inlinetoblock{
+        display: block;
+        background-color: black;
+        height: 100px;
+      }
+
+      .inlineblock{
+        display: inline-block;
+        background-color: black;
+        width: 100px;
+        height: 200px;
+      }
+
+
+
+      /* chat gpt code for flex and inline flex  */
+
+      .wrapper {
+      border: 2px dashed red;
+      margin-bottom: 20px;
+      padding: 10px;
+    }
+
+    .block {
+      display: block;
+    }
+
+    .contents {
+      display: contents;
+    }
+
+    .child {
+      background-color: lightblue;
+      padding: 10px;
+      border: 1px solid blue;
+      margin: 5px;
+    }
+
+
+    /* chatgpt code for flex */
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    .flex-box, .inline-flex-box {
+      border: 2px dashed gray;
+      background-color: #f9f9f9;
+      padding: 10px;
+    }
+
+    .flex-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .inline-flex-box {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .item {
+      background-color: lightblue;
+      padding: 10px 15px;
+      margin: 5px;
+      border: 1px solid #333;
+    }
+     
+
+   /* for grid and inline grid*/
+   .grid-container, .inline-grid-container {
+      background-color: #f1f1f1;
+      border: 2px dashed gray;
+      padding: 10px;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .inline-grid-container {
+      display: inline-grid;
+      grid-template-columns: repeat(2, auto);
+      gap: 8px;
+    }
+
+    .grid-item {
+      background-color: lightcoral;
+      padding: 15px;
+      text-align: center;
+      border: 1px solid #333;
+    }
+
+    /* run in and list items */
+
+    .custom-list-item {
+      display: list-item;
+      margin-left: 20px;
+      font-size: 18px;
+      color: darkblue;
+    }
+
+    .run-in-container {
+      display: block;
+      background-color: #f0f0f0;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+
+    .run-in-text {
+      display: run-in;
+      background-color: lightyellow;
+      padding: 5px;
+    }
+
+    /* Tabular styling */
+
+    .table{
+        display: table;
+    }
+
+    .table, .inline-table {
+      border: 1px solid black;
+      margin-bottom: 20px;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    .table-row-group, .table-header-group, .table-footer-group {
+      background-color: #f2f2f2;
+    }
+
+    .table-caption {
+      text-align: center;
+      font-weight: bold;
+      font-size: 18px;
+      padding: 10px;
+    }
+
+    .table-row, .table-cell, .table-column {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .inline-table {
+      display: inline-table;
+      margin-right: 10px;
+    }
+
+    .table-row {
+      display: table-row;
+    }
+
+    .table-cell {
+      display: table-cell;
+    }
+
+    .table-column {
+      display: table-column;
+      background-color: lightyellow;
+    }
+
+    .table-column-group {
+      display: table-column-group;
+    }
+
+    </style>
+  </head>
+  <body>
+    <div class="box1">
+      <p class="para">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
+        aspernatur accusamus quis nulla placeat veniam molestias aut perferendis
+        dolor explicabo aliquid, culpa voluptatum ad harum omnis autem et, ipsam
+        nam, unde debitis qui. Quos velit, quis alias facilis consequuntur vel
+        aspernatur expedita voluptatem mollitia at eveniet praesentium
+        blanditiis quas esse aliquam cum repellat amet dolores eaque atque
+        delectus sed. Deserunt amet nihil quibusdam, harum a odit numquam modi
+        ducimus magni molestias nemo asperiores? Nulla quaerat blanditiis enim
+        nam eos beatae nihil amet quibusdam quisquam minima perspiciatis
+        nesciunt labore illum hic deleniti rem unde repudiandae ut, quo corrupti
+        praesentium itaque eveniet?
+      </p>
+    </div>
+      
+    <h3>span tag</h3>
+
+    <span class="inline">
+      height width didint work , only pading applies
+    </span>
+
+    <h3>Inline to Block</h3>
+    <span class="inlinetoblock">
+
+    </span>
+
+    <h3>Inline Block</h3>
+    <div class="inlineblock">
+     
+    </div>
+    <div class="inlineblock">
+     
+    </div>
+
+ <h2>display: block (Default)</h2>
+  <div class="wrapper block">
+    <div class="child">Child 1</div>
+    <div class="child">Child 2</div>
+  </div>
+
+  <h2>display: contents</h2>
+  <div class="wrapper contents">
+    <div class="child">Child 1</div>
+    <div class="child">Child 2</div>
+  </div>
+     
+  <div class="section">
+    <h2>1. Flex Container (display: flex)</h2>
+    <p>
+        This is some text.
+    <div class="flex-box">
+      <div class="item">Flex 1</div>
+      <div class="item">Flex 2</div>
+      <div class="item">Flex 3</div>
+    </div>
+    Text continues here.
+</p>
+  </div>
+
+  <div class="section">
+    <h2>2. Inline-Flex Container (display: inline-flex)</h2>
+    <p>
+      This is some text.
+      <span class="inline-flex-box">
+        <span class="item">Inline 1</span>
+        <span class="item">Inline 2</span>
+      </span>
+      Text continues here.
+    </p>
+  </div> 
+
+
+
+  <div class="section">
+    <h2>1. Grid Container (display: grid)</h2>
+    <div class="grid-container">
+      <div class="grid-item">Grid 1</div>
+      <div class="grid-item">Grid 2</div>
+      <div class="grid-item">Grid 3</div>
+      <div class="grid-item">Grid 4</div>
+      <div class="grid-item">Grid 5</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>2. Inline-Grid Container (display: inline-grid)</h2>
+    <p>
+      Some inline text before
+      <span class="inline-grid-container">
+        <span class="grid-item">Inline 1</span>
+        <span class="grid-item">Inline 2</span>
+        <span class="grid-item">Inline 3</span>
+      </span>
+      and some text after.
+    </p>
+  </div>
+
+  <div class="custom-list-item">
+    This item behaves like a <strong>&lt;li&gt;</strong> element with a bullet or numbering.
+  </div>
+
+
+  <!-- Run-in Example -->
+  <div class="run-in-container">
+    <p class="run-in-text">This is a run-in text</p> 
+    <p>This paragraph follows the run-in text and merges with it, showing the run-in behavior.</p>
+  </div>
+
+
+
+  <!-- Table data -->
+
+  <h1>Comparison of Table-Related Display Properties</h1>
+
+  <!-- Full Table Example (display: table) -->
+  <div class="table">
+    <div class="table-caption">Table (display: table)</div>
+    <div class="table-row-group">
+      <div class="table-row">
+        <div class="table-cell">Header 1</div>
+        <div class="table-cell">Header 2</div>
+        <div class="table-cell">Header 3</div>
+      </div>
+      <div class="table-row">
+        <div class="table-cell">Row 1, Col 1</div>
+        <div class="table-cell">Row 1, Col 2</div>
+        <div class="table-cell">Row 1, Col 3</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Inline Table Example (display: inline-table) -->
+  <div class="inline-table">
+    <div class="table-caption">Inline Table (display: inline-table)</div>
+    <div class="table-row-group">
+      <div class="table-row">
+        <div class="table-cell">Header 1</div>
+        <div class="table-cell">Header 2</div>
+      </div>
+      <div class="table-row">
+        <div class="table-cell">Row 1, Col 1</div>
+        <div class="table-cell">Row 1, Col 2</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table Row Group Example (display: table-row-group) -->
+  <div class="table-row-group">
+    <div class="table-row">
+      <div class="table-cell">Row Group Header 1</div>
+      <div class="table-cell">Row Group Header 2</div>
+    </div>
+    <div class="table-row">
+      <div class="table-cell">Row 1, Col 1</div>
+      <div class="table-cell">Row 1, Col 2</div>
+    </div>
+  </div>
+  <p><strong>Explanation:</strong> Behaves like a <code>&lt;tbody&gt;</code> element, grouping rows together.</p>
+
+  <!-- Table Header Group Example (display: table-header-group) -->
+  <div class="table-header-group">
+    <div class="table-row">
+      <div class="table-cell">Header 1</div>
+      <div class="table-cell">Header 2</div>
+    </div>
+  </div>
+  <p><strong>Explanation:</strong> Behaves like a <code>&lt;thead&gt;</code> element, typically used for the header row(s).</p>
+
+  <!-- Table Footer Group Example (display: table-footer-group) -->
+  <div class="table-footer-group">
+    <div class="table-row">
+      <div class="table-cell">Footer 1</div>
+      <div class="table-cell">Footer 2</div>
+    </div>
+  </div>
+  <p><strong>Explanation:</strong> Behaves like a <code>&lt;tfoot&gt;</code> element, typically used for the footer row(s).</p>
+
+  <!-- Table Column Group Example (display: table-column-group) -->
+  <div class="table-column-group">
+    <div class="table-column">
+      <div class="table-cell">Column 1</div>
+      <div class="table-cell">Column 2</div>
+    </div>
+  </div>
+  <p><strong>Explanation:</strong> Behaves like a <code>&lt;colgroup&gt;</code> element, used for grouping columns.</p>
+
+  <!-- Table Row Example (display: table-row) -->
+  <div class="table-row">
+    <div class="table-cell">Table Row (display: table-row)</div>
+    <div class="table-cell">Another Row</div>
+  </div>
+  <p><strong>Explanation:</strong> Behaves like a <code>&lt;tr&gt;</code> element, used for rows in a table.</p>
+
+  <!-- Table Cell Example (display: table-cell) -->
+  <div class="table-cell">
+    Table Cell (display: table-cell)
+  </div>
+  <p><strong>Explanation:</strong> Behaves like a <code>&lt;td&gt;</code> element, used for table cells.</p>
+
+  <!-- Table Column Example (display: table-column) -->
+  <div class="table-column">
+    Table Column (display: table-column)
+  </div>
+  <p><strong>Explanation:</strong> Behaves like a <code>&lt;col&gt;</code> element, for grouping columns.</p>
+
+  
+  </body>
+</html>

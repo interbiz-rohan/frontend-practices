@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head> </head>
+
+  <style>
+    .form {
+      max-width: 300px;
+      margin: auto;
+      margin-top: 50px;
+      padding: 20px 10px;
+      background: rgba(0, 0, 0, 0.4); /* Semi-transparent black */
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37); /* Deeper shadow for glossy feel */
+
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px); /* Safari */
+
+      align-items: end;
+      align-content: end;
+
+    }
+
+    .fieldset {
+      border: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .label {
+      font-family: "Franklin Gothic Medium", sans-serif;
+    }
+
+    .field {
+      padding: 5px;
+      border-radius: 5px;
+      border: 1px solid #9c9c9c;
+      color: grey;
+      font-family: "Franklin Gothic Medium", sans-serif;
+      letter-spacing: 2px;
+    }
+
+    .field::placeholder {
+      color: aqua;
+      opacity: 0.3;
+      letter-spacing: 2px;
+    }
+
+    .field:not(:placeholder-shown) {
+      border: 3px solid green;
+    }
+
+    input[type="image"] {
+      margin-left: auto;
+    }
+
+    .submit-container {
+      display: flex;
+      justify-content: flex-end;
+      padding-top: 20px;
+    }
+  </style>
+
+  <body>
+    <form class="form">
+      <fieldset class="fieldset">
+        <label class="label">Name</label>
+        <input
+          type="text"
+          class="field"
+          placeholder="Firstname"
+          minlength="3"
+          maxlength="10"
+        />
+      </fieldset>
+
+      <fieldset class="fieldset">
+        <label class="label">Email</label>
+        <input
+          type="email"
+          class="field"
+          placeholder="Personal Email"
+          minlength="5"
+        />
+      </fieldset>
+
+      <fieldset class="fieldset">
+        <label class="label">Password</label>
+        <input
+          type="password"
+          class="field"
+          placeholder="*******"
+          maxlength="10"
+        />
+      </fieldset>
+
+      <fieldset class="fieldset">
+        <label class="label">Phone Number</label>
+        <input
+          type="tel"
+          class="field"
+          placeholder="Enter number"
+          maxlength="10"
+        />
+      </fieldset>
+
+      <fieldset class="fieldset">
+        <label class="label">Rate Your Experience</label>
+        <span class="fieldContainer">
+          0
+          <input type="range" placeholder="Enter number" />
+          100
+        </span>
+      </fieldset>
+
+      <div class="submit-container">
+        <input
+          type="image"
+          title="Ok"
+          alt="👍"
+          src="../thumbup.png"
+          width="40"
+          height="40"
+        />
+      </div>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS Alignment Techniques</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    /* Horizontally center using margin auto */
+    .horizontal-center {
+      width: 50%;
+      margin: auto;
+      border: 2px solid green;
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* Vertically center using line-height */
+    .line-height-center {
+      height: 150px;
+      line-height: 150px;
+      text-align: center;
+      border: 2px solid blue;
+      margin-top: 20px;
+    }
+
+   
+
+    /* Flexbox Centering */
+    .flex-center {
+      height: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px solid orange;
+      margin-top: 20px;
+    }
+
+    /* Center using position + transform */
+    .transform-center {
+      height: 200px;
+      position: relative;
+      border: 2px solid purple;
+      margin-top: 20px;
+    }
+
+    .transform-center div {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Layout using -webkit-box */
+    .box-layout {
+      display: -webkit-box;
+      border: 2px dashed red;
+      padding: 15px;
+      margin-top: 20px;
+      height: 200px;
+    }
+
+    .box-layout div {
+      margin: auto;
+      background: #f2f2f2;
+      padding: 10px;
+      border: 1px solid #aaa;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h2>CSS Layout – Horizontal & Vertical Alignment</h2>
+
+  <!-- Horizontal Center -->
+  <div class="horizontal-center">
+    I am horizontally centered using <code>margin: auto</code>
+  </div>
+
+  <!-- Line-height Vertical Center -->
+  <div class="line-height-center">
+    <div>I am vertically centered using line-height</div>
+  </div>
+
+  <!-- Flexbox Center -->
+  <div class="flex-center">
+    I am centered using <code>flexbox</code>
+  </div>
+
+  <!-- Position + Transform Center -->
+  <div class="transform-center">
+    <div>I’m centered with <code>transform</code></div>
+  </div>
+
+  <!-- Webkit Box Alignment (Legacy) -->
+  <div class="box-layout">
+    <div>I’m aligned using <code>-webkit-box</code> layout</div>
+  </div>
+
+</body>
+</html>

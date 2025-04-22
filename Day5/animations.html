@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Transitions & Animations Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 30px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    /* COMMON BOX STYLE */
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: steelblue;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+ 
+    .transition-color {
+      transition: background-color 0.5s ease-in-out;
+    }
+
+    .transition-color:hover {
+      background-color: tomato;
+    }
+
+    .transition-move {
+      transition: transform 0.3s ease;
+    }
+
+    .transition-move:hover {
+      transform: translateX(50px);
+    }
+
+    .transition-multi {
+      transition: transform 0.3s ease, background-color 0.5s ease;
+    }
+
+    .transition-multi:hover {
+      transform: rotate(15deg) scale(1.2);
+      background-color: mediumseagreen;
+    }
+
+  
+    .animation-slide {
+      animation: slideIn 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(0) rotate(0deg); }
+      to { transform: translateX(100px) rotate(180deg); }
+    }
+
+    .animation-bounce {
+      animation: bounce 1s ease infinite alternate;
+    }
+
+    @keyframes bounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-30px); }
+    }
+
+    .animation-fade {
+      animation: fadeInOut 3s alternate ;
+    }
+
+    @keyframes fadeInOut {
+      0% { opacity: 0; }
+      50% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <h2>CSS Transitions & Animations Demo</h2>
+
+  <div class="container">
+    <div class="box transition-color">Color</div>
+    <div class="box transition-move">Move</div>
+    <div class="box transition-multi">Multi</div>
+
+    <div class="box animation-slide">Slide</div>
+    <div class="box animation-bounce">Bounce</div>
+    <div class="box animation-fade">Fade</div>
+  </div>
+
+</body>
+</html>

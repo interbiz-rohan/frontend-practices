@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <style>
+      @font-face {
+        font-family: "vast";
+        src: url(./VastagoGrotesk.otf);
+      }
+
+      @font-face {
+        font-family: "bric";
+        src: url(./BricolageGrotesque.ttf);
+      }
+
+      :root {
+        --secondary-color: #efece1;
+        /* background-color:cornsilk; */
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      main {
+        background-color: var(--secondary-color);
+        min-height: 100vh;
+        padding: 8px 40px;
+      }
+
+      nav {
+        height: 90px;
+        line-height: 90px; /* This centers inline content vertically */
+        background-color: #f7f7f7;
+        margin: 10px 0;
+        border-radius: 30px;
+        padding: 0 15px;
+        text-align: center;
+        position: relative;
+        white-space: nowrap;
+        border: none;
+        outline: none;
+        position: sticky;
+        top: 20px;
+        z-index: 99;
+        box-shadow: 1px 1px 10px #e2dfd2;
+      }
+
+      .logo-section {
+        vertical-align: middle;
+        float: left;
+      }
+
+      .logo-section img {
+        height: 40px;
+        vertical-align: middle;
+      }
+
+      ul {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0;
+        margin-left: 40px;
+        padding: 0;
+        list-style: none;
+      }
+
+      ul li {
+        display: inline-block;
+        margin-right: 20px;
+        letter-spacing: 0;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 1.5;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .heading {
+        font-family: vast, sans-serif;
+      }
+
+      .sub-heading {
+        font-family: bric, Arial, Helvetica, sans-serif;
+      }
+
+      .appoinment {
+        float: right;
+        transform: translateY(25%);
+        height: 60px;
+        background-color: orangered;
+        border: none;
+        color: white;
+        font-size: 1.4rem;
+        padding: 0 40px;
+        border-radius: 20px;
+        font-weight: bolder;
+        cursor: pointer;
+      }
+
+      .offer-badge {
+        position: absolute;
+        font-size: 12px;
+        right: -40px;
+        top: -5px;
+        background-color: tomato;
+        color: white;
+        padding: 2px 5px;
+        border-radius: 10px;
+      }
+
+      .hero-section {
+        background-color: white;
+        height: 500px;
+        line-height: 500px;
+        text-align: center;
+        font-size: 40px;
+        margin-top: 50px;
+      }
+
+      .gallery {
+        height: 500px;
+        background-color: white;
+        margin-top: 40px;
+      }
+
+      .flex-area {
+        height: 500px;
+        background-color: orangered;
+        margin-top: 40px;
+        border-radius: 40px;
+      }
+
+      /* Grid code  */
+
+      .grid-area {
+        margin-top: 40px;
+        display: grid;
+        /* grid-template-columns: 1fr 1fr; */
+        grid-template-areas:
+          "heading heading"
+          "card animation";
+        gap: 20px;
+
+      }
+
+      .area-1 {
+        text-align: center;
+        grid-area: heading;
+      }
+
+      .xl-badge {
+        display: inline-block;
+        padding: 10px 20px;
+        font-weight: 600;
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: 1px 1px #e2dfd2;
+        letter-spacing: 1.3px;
+      }
+
+      .mid-heading-container {
+        width: 700px;
+        margin: auto;
+        /* transform: translateX(-50%); */
+      }
+
+      .first-heading {
+        font-size: 4rem;
+        margin: 20px 0px;
+      }
+
+      .first-sub-heading {
+        font-size: 1.2rem;
+        color: grey;
+      }
+
+      .highlighted-text {
+        color: orangered;
+      }
+
+      .area-2 {
+        width: 500px;
+        height: 200px;
+        background-color: black;
+        grid-area: card;
+        justify-self: right;
+      }
+
+      .area-3 {
+        width: 500px;
+        height: 200px;
+        background-color: black;
+        grid-area: animation;
+        justify-self: left;
+      }
+
+      /* End of Grid code */
+      @media screen and (max-width: 1004px) {
+        .list {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <nav>
+        <a href="#" class="logo-section">
+          <img src="./Logo.svg" alt="Logo Image" />
+        </a>
+
+        <ul class="sub-heading list">
+          <li>Work</li>
+          <li>Capabilities</li>
+          <li>Process</li>
+          <li>
+            Pricing
+            <span class="offer-badge"> 10% Off </span>
+          </li>
+        </ul>
+
+        <button class="appoinment sub-heading">Book a call</button>
+      </nav>
+
+      <section class="hero-section heading">
+        <span>Will add animation and transition later</span>
+      </section>
+
+      <section class="grid-area">
+        <div class="area-1">
+          <div class="xl-badge sub-heading">* PROBLEM</div>
+          <div class="mid-heading-container">
+            <h1 class="heading first-heading">
+              Building a strong brand is
+              <strong class="highlighted-text">complicated</strong>
+            </h1>
+            <p class="sub-heading first-sub-heading">
+              How is it still so difficult to create the brand you actually want
+              in 2025?
+            </p>
+          </div>
+        </div>
+
+        <div class="area-2"></div>
+
+        <div class="area-3"></div>
+      </section>
+
+      <section class="flex-area">
+
+
+      </section>
+
+      <section class="gallery">
+        <h1>Gallery</h1>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CSS Gradient Examples</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f5f5f5;
+        padding: 20px;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+      }
+
+      .box {
+        height: 150px;
+        border-radius: 10px;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .gradient-1 {
+        background-image: linear-gradient(to right, #ff7e5f, #feb47b);
+      }
+
+      .gradient-2 {
+        background-image: linear-gradient(to bottom, #43cea2, #185a9d);
+      }
+
+      .gradient-3 {
+        background-image: linear-gradient(45deg, #ff6a00, #ee0979);
+      }
+
+      .gradient-4 {
+        background-image: linear-gradient(to left top, #00c6ff, #0072ff);
+      }
+
+      .gradient-5 {
+        background-image: linear-gradient(to bottom right, #8e2de2, #4a00e0);
+      }
+
+      .gradient-6 {
+        background-image: radial-gradient(circle, #ff9a9e, #fad0c4);
+        color: #333;
+      }
+
+      .gradient-7 {
+        background-image: radial-gradient(ellipse at center, #89f7fe, #66a6ff);
+      }
+
+      .gradient-8 {
+        background-image: radial-gradient(
+          farthest-corner at 40px 40px,
+          #fbc2eb,
+          #a6c1ee
+        );
+      }
+
+      .gradient-9 {
+        background-image: linear-gradient(
+          to right,
+          red 0%,
+          orange 25%,
+          yellow 50%,
+          green 75%,
+          blue 100%
+        );
+      }
+
+      .gradient-10 {
+        background-image: linear-gradient(to bottom, #232526, #9c9c9c, #fff);
+      }
+
+      .mix-11 {
+        background-image: linear-gradient(
+            to bottom left,
+            rgba(35, 37, 38, 0.7),
+            rgba(156, 156, 156, 0.7),
+            rgba(255, 255, 255, 0)
+          ),
+          radial-gradient(circle at top right, rgba(255,255,255, 0), #9c9c9c, #232526);
+      }
+    </style>
+  </head>
+  <body>
+    <h2>CSS Gradient Examples</h2>
+    <div class="container">
+      <div class="box gradient-1">Linear Right</div>
+      <div class="box gradient-2">Linear Bottom</div>
+      <div class="box gradient-3">Diagonal</div>
+      <div class="box gradient-4">Left Top</div>
+      <div class="box gradient-5">Bottom Right</div>
+      <div class="box gradient-6">Radial Circle</div>
+      <div class="box gradient-7">Radial Ellipse</div>
+      <div class="box gradient-8">Farthest Corner</div>
+      <div class="box gradient-9">Rainbow Stops</div>
+      <div class="box gradient-10">Subtle Gray</div>
+      <div class="box mix-11">Linear Radiant Gray</div>
+    </div>
+  </body>
+</html>

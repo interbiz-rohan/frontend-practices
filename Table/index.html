@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Schedule Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 10px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .inner-table {
+            /* width: 100%; */
+            margin: 0;
+        }
+        .inner-table td {
+            text-align: center;
+            padding: 5px;
+        }
+        .actions {
+            color: blue;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Details (Speakers, Talks, and Links)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>01/05/2018</td>
+                <td>
+                    <table class="inner-table">
+                        <tr>
+                            <td>Speaker Name 1</td>
+                            <td>Speaker Link (Twitter, etc)</td>
+                            <td>Talk Title 1</td>
+                        </tr>
+                        <tr>
+                            <td>Speaker Name 2</td>
+                            <td>Speaker Link (Twitter, etc)</td>
+                            <td>Talk Title 2</td>
+                        </tr>
+                    </table>
+                </td>
+                <td><a href="#" class="actions">Attendees</a></td>
+            </tr>
+            <tr>
+                <td>03/04/2018</td>
+                <td>
+                    <table class="inner-table">
+                        <tr>
+                            <td>Speaker Name 1</td>
+                            <td>Speaker Link (Twitter, etc)</td>
+                            <td>Talk Title 1</td>
+                        </tr>
+                    </table>
+                </td>
+                <td><a href="#" class="actions">Attendees</a></td>
+            </tr>
+            <tr>
+                <td>04/05/2018</td>
+                <td>
+                    <table class="inner-table">
+                        <tr>
+                            <td>Speaker Name 1</td>
+                            <td>Speaker Link (Twitter, etc)</td>
+                            <td>Talk Title 1</td>
+                        </tr>
+                        <tr>
+                            <td>Speaker Name 2</td>
+                            <td>Speaker Link (Twitter, etc)</td>
+                            <td>Talk Title 2</td>
+                        </tr>
+                        <tr>
+                            <td>Speaker Name 3</td>
+                            <td>Speaker Link (Twitter, etc)</td>
+                            <td>Talk Title 3</td>
+                        </tr>
+                    </table>
+                </td>
+                <td><a href="#" class="actions">Attendees</a></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

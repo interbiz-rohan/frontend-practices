@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Definition List</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        ul {
+            list-style-type: '-';
+        }
+
+        ul li ul {
+            list-style-type: disc;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
+        li ul {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>First Language
+            <ul>
+                <li>c++</li>
+                <li>java</li>
+                <li>javascript</li>
+                <dl>
+                    <dt>Python</dt>
+                    <dd>
+                        <dl>
+                            <dt>numpy</dt>
+                            <dt>pandas</dt>
+                            <dt>matplotlib</dt>
+                            <dt>seaborn</dt>
+                            <dt>scikit-learn</dt>
+                        </dl>
+                    </dd>
+                </dl>
+            </ul>
+        </li>
+        <li>DSA
+            <ul>
+                <li>Array</li>
+                <li>Linked List</li>
+                <li>stack</li>
+                <li>Queue</li>
+                <li>Trees</li>
+                <li>Graphs</li>
+            </ul>
+        </li>
+        <li>Web Technologies
+            <ul>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>Bootstrap</li>
+                <li>React Js</li>
+            </ul>
+        </li>
+    </ul>
+</body>
+
+</html>
