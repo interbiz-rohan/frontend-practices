@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lazy Loading Example</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .spacer {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f0f0f0;
+      font-size: 2rem;
+    }
+
+    img {
+      display: block;
+      margin: 50px auto;
+      width: 80%;
+      max-width: 600px;
+      height: auto;
+      border: 4px solid #ccc;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="spacer">Scroll Down 👇</div>
+
+  <img 
+    src="https://picsum.photos/id/237/800/500" 
+    alt="Dog" 
+    loading="lazy"
+  />
+
+  <div class="spacer">Keep Scrolling 👇</div>
+
+  <img 
+    src="https://picsum.photos/id/1015/800/500" 
+    alt="Nature" 
+    loading="lazy"
+  />
+
+  <div class="spacer">Almost There 👇</div>
+
+  <img 
+    src="https://picsum.photos/id/1005/800/500" 
+    alt="Mountains" 
+    loading="lazy"
+  />
+
+  <div class="spacer">End of Page 🔚</div>
+
+</body>
+</html>

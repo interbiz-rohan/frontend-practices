@@ -1,262 +1,134 @@
+
 <!DOCTYPE html>
-<html lang="en-US">
-  <head>
-    <style>
-      @font-face {
-        font-family: "vast";
-        src: url(./VastagoGrotesk.otf);
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Realistic Drop Tags</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 2.5rem;
+    }
+
+    .ground {
+      position: relative;
+      width: 100%;
+      height: calc(100vh - 100px);
+      overflow: hidden;
+    }
+
+    .tag {
+      position: absolute;
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-weight: 600;
+      white-space: nowrap;
+      color: black;
+      animation: dropBounce 2s ease-out forwards;
+      opacity: 0;
+    }
+
+    .pink { background: #ff69b4; }
+    .green { background: #d0ff00; }
+    .purple { background: #b072ff; }
+    .white { background: white; }
+    .cyan { background: #3ae3be; }
+    .yellow { background: #d6ff00; }
+
+    @keyframes dropBounce {
+      0% {
+        top: -100px;
+        opacity: 0;
       }
-
-      @font-face {
-        font-family: "bric";
-        src: url(./BricolageGrotesque.ttf);
+      60% {
+        top: calc(100% - 70px);
+        opacity: 1;
       }
-
-      :root {
-        --secondary-color: #efece1;
-        /* background-color:cornsilk; */
+      75% {
+        top: calc(100% - 100px);
       }
-
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
+      90% {
+        top: calc(100% - 80px);
       }
-
-      main {
-        background-color: var(--secondary-color);
-        min-height: 100vh;
-        padding: 8px 40px;
+      100% {
+        top: calc(100% - 70px);
+        opacity: 1;
       }
+    }
 
-      nav {
-        height: 90px;
-        line-height: 90px; /* This centers inline content vertically */
-        background-color: #f7f7f7;
-        margin: 10px 0;
-        border-radius: 30px;
-        padding: 0 15px;
-        text-align: center;
-        position: relative;
-        white-space: nowrap;
-        border: none;
-        outline: none;
-        position: sticky;
-        top: 20px;
-        z-index: 99;
-        box-shadow: 1px 1px 10px #e2dfd2;
-      }
+    .tag:hover {
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
 
-      .logo-section {
-        vertical-align: middle;
-        float: left;
-      }
+  <h1>The List Goes On...</h1>
 
-      .logo-section img {
-        height: 40px;
-        vertical-align: middle;
-      }
+  <div class="ground" id="ground">
+    <!-- Tags will be created with JS -->
+    <div class="tag purple">Banners & Posters</div>
+    <div class="tag white">Appstore Graphics</div>
+    <div class="tag green">UI UX Design</div>
+    <div class="tag pink">NFT Art</div>
+    <div class="tag green">Infographics</div>
+    <div class="tag purple">Graphic Design</div>
+    <div class="tag pink">Branding</div>
+    <div class="tag pink">Marketing</div>
+    <div class="tag white">Product Design</div>
+    <div class="tag yellow">Motion Design</div>
+    <div class="tag cyan">Framer Development</div>
+    <div class="tag cyan">Webflow Development</div>
+    <div class="tag cyan">T-shirt & Merch</div>
+    <div class="tag purple">Illustrations</div>
+    <div class="tag white">Website Design</div>
+  </div>
 
-      ul {
-        display: inline-block;
-        vertical-align: middle;
-        margin: 0;
-        margin-left: 40px;
-        padding: 0;
-        list-style: none;
-      }
+  <script>
+    const labels = [
+      { text: "Banners & Posters", color: "purple" },
+      { text: "Appstore Graphics", color: "white" },
+      { text: "UI UX Design", color: "green" },
+      { text: "NFT Art", color: "pink" },
+      { text: "Infographics", color: "green" },
+      { text: "Graphic Design", color: "purple" },
+      { text: "Branding", color: "pink" },
+      { text: "Marketing", color: "pink" },
+      { text: "Product Design", color: "white" },
+      { text: "Motion Design", color: "yellow" },
+      { text: "Framer Development", color: "cyan" },
+      { text: "Webflow Development", color: "cyan" },
+      { text: "T-shirt & Merch", color: "cyan" },
+      { text: "Illustrations", color: "purple" },
+      { text: "Website Design", color: "white" }
+    ];
 
-      ul li {
-        display: inline-block;
-        margin-right: 20px;
-        letter-spacing: 0;
-        padding: 0.5rem 1rem;
-        font-size: 1rem;
-        font-weight: 500;
-        line-height: 1.5;
-        cursor: pointer;
-        position: relative;
-      }
+    const ground = document.getElementById("ground");
 
-      .heading {
-        font-family: vast, sans-serif;
-      }
+    labels.forEach((label, i) => {
+      const tag = document.createElement("div");
+      tag.className = `tag ${label.color}`;
+      tag.innerText = label.text;
+      tag.style.left = `${Math.random() * 90}%`; // Random horizontal placement
+      tag.style.animationDelay = `${i * 0.2}s`;
+      ground.appendChild(tag);
+    });
+  </script>
 
-      .sub-heading {
-        font-family: bric, Arial, Helvetica, sans-serif;
-      }
-
-      .appoinment {
-        float: right;
-        transform: translateY(25%);
-        height: 60px;
-        background-color: orangered;
-        border: none;
-        color: white;
-        font-size: 1.4rem;
-        padding: 0 40px;
-        border-radius: 20px;
-        font-weight: bolder;
-        cursor: pointer;
-      }
-
-      .offer-badge {
-        position: absolute;
-        font-size: 12px;
-        right: -40px;
-        top: -5px;
-        background-color: tomato;
-        color: white;
-        padding: 2px 5px;
-        border-radius: 10px;
-      }
-
-      .hero-section {
-        background-color: white;
-        height: 500px;
-        line-height: 500px;
-        text-align: center;
-        font-size: 40px;
-        margin-top: 50px;
-      }
-
-      .gallery {
-        height: 500px;
-        background-color: white;
-        margin-top: 40px;
-      }
-
-      .flex-area {
-        height: 500px;
-        background-color: orangered;
-        margin-top: 40px;
-        border-radius: 40px;
-      }
-
-      /* Grid code  */
-
-      .grid-area {
-        margin-top: 40px;
-        display: grid;
-        /* grid-template-columns: 1fr 1fr; */
-        grid-template-areas:
-          "heading heading"
-          "card animation";
-        gap: 20px;
-
-      }
-
-      .area-1 {
-        text-align: center;
-        grid-area: heading;
-      }
-
-      .xl-badge {
-        display: inline-block;
-        padding: 10px 20px;
-        font-weight: 600;
-        background-color: white;
-        border-radius: 20px;
-        box-shadow: 1px 1px #e2dfd2;
-        letter-spacing: 1.3px;
-      }
-
-      .mid-heading-container {
-        width: 700px;
-        margin: auto;
-        /* transform: translateX(-50%); */
-      }
-
-      .first-heading {
-        font-size: 4rem;
-        margin: 20px 0px;
-      }
-
-      .first-sub-heading {
-        font-size: 1.2rem;
-        color: grey;
-      }
-
-      .highlighted-text {
-        color: orangered;
-      }
-
-      .area-2 {
-        width: 500px;
-        height: 200px;
-        background-color: black;
-        grid-area: card;
-        justify-self: right;
-      }
-
-      .area-3 {
-        width: 500px;
-        height: 200px;
-        background-color: black;
-        grid-area: animation;
-        justify-self: left;
-      }
-
-      /* End of Grid code */
-      @media screen and (max-width: 1004px) {
-        .list {
-          display: none;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <main>
-      <nav>
-        <a href="#" class="logo-section">
-          <img src="./Logo.svg" alt="Logo Image" />
-        </a>
-
-        <ul class="sub-heading list">
-          <li>Work</li>
-          <li>Capabilities</li>
-          <li>Process</li>
-          <li>
-            Pricing
-            <span class="offer-badge"> 10% Off </span>
-          </li>
-        </ul>
-
-        <button class="appoinment sub-heading">Book a call</button>
-      </nav>
-
-      <section class="hero-section heading">
-        <span>Will add animation and transition later</span>
-      </section>
-
-      <section class="grid-area">
-        <div class="area-1">
-          <div class="xl-badge sub-heading">* PROBLEM</div>
-          <div class="mid-heading-container">
-            <h1 class="heading first-heading">
-              Building a strong brand is
-              <strong class="highlighted-text">complicated</strong>
-            </h1>
-            <p class="sub-heading first-sub-heading">
-              How is it still so difficult to create the brand you actually want
-              in 2025?
-            </p>
-          </div>
-        </div>
-
-        <div class="area-2"></div>
-
-        <div class="area-3"></div>
-      </section>
-
-      <section class="flex-area">
-
-
-      </section>
-
-      <section class="gallery">
-        <h1>Gallery</h1>
-      </section>
-    </main>
-  </body>
+</body>
 </html>
+
