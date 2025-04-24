@@ -1,5 +1,45 @@
 
+
 <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Realistic Drop Tags</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 2.5rem;
+    }
+
+    .ground {
+      position: relative;
+      width: 100%;
+      height: calc(100vh - 100px);
+      overflow: hidden;
+    }
+
+    .tag {
+      position: absolute;
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-weight: 600;
+      white-space: nowrap;
+      color: black;
+      animation: dropBounce 2s ease-out forwards;
+      opacity: 0;
+    }
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -46,7 +86,17 @@
     .white { background: white; }
     .cyan { background: #3ae3be; }
     .yellow { background: #d6ff00; }
+    .pink { background: #ff69b4; }
+    .green { background: #d0ff00; }
+    .purple { background: #b072ff; }
+    .white { background: white; }
+    .cyan { background: #3ae3be; }
+    .yellow { background: #d6ff00; }
 
+    @keyframes dropBounce {
+      0% {
+        top: -100px;
+        opacity: 0;
     @keyframes dropBounce {
       0% {
         top: -100px;
@@ -58,7 +108,19 @@
       }
       75% {
         top: calc(100% - 100px);
+      60% {
+        top: calc(100% - 70px);
+        opacity: 1;
       }
+      75% {
+        top: calc(100% - 100px);
+      }
+      90% {
+        top: calc(100% - 80px);
+      }
+      100% {
+        top: calc(100% - 70px);
+        opacity: 1;
       90% {
         top: calc(100% - 80px);
       }
@@ -81,11 +143,7 @@
 
   <div class="ground" id="ground">
     <!-- Tags will be created with JS -->
-    <div class="tag purple">Banners & Posters</div>
-    <div class="tag white">Appstore Graphics</div>
     <div class="tag green">UI UX Design</div>
-    <div class="tag pink">NFT Art</div>
-    <div class="tag green">Infographics</div>
     <div class="tag purple">Graphic Design</div>
     <div class="tag pink">Branding</div>
     <div class="tag pink">Marketing</div>
@@ -93,18 +151,14 @@
     <div class="tag yellow">Motion Design</div>
     <div class="tag cyan">Framer Development</div>
     <div class="tag cyan">Webflow Development</div>
-    <div class="tag cyan">T-shirt & Merch</div>
     <div class="tag purple">Illustrations</div>
     <div class="tag white">Website Design</div>
+    <div class="tag white">Tech Support</div>
   </div>
 
   <script>
     const labels = [
-      { text: "Banners & Posters", color: "purple" },
-      { text: "Appstore Graphics", color: "white" },
       { text: "UI UX Design", color: "green" },
-      { text: "NFT Art", color: "pink" },
-      { text: "Infographics", color: "green" },
       { text: "Graphic Design", color: "purple" },
       { text: "Branding", color: "pink" },
       { text: "Marketing", color: "pink" },
@@ -112,9 +166,9 @@
       { text: "Motion Design", color: "yellow" },
       { text: "Framer Development", color: "cyan" },
       { text: "Webflow Development", color: "cyan" },
-      { text: "T-shirt & Merch", color: "cyan" },
       { text: "Illustrations", color: "purple" },
-      { text: "Website Design", color: "white" }
+      { text: "Website Design", color: "white" },
+      { text: "Tech Support", color: "white" }
     ];
 
     const ground = document.getElementById("ground");
@@ -131,4 +185,3 @@
 
 </body>
 </html>
-
