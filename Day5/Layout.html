@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,45 +38,6 @@
       animation: dropBounce 2s ease-out forwards;
       opacity: 0;
     }
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Realistic Drop Tags</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #000;
-      color: white;
-      font-family: 'Poppins', sans-serif;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    h1 {
-      text-align: center;
-      margin-top: 40px;
-      font-size: 2.5rem;
-    }
-
-    .ground {
-      position: relative;
-      width: 100%;
-      height: calc(100vh - 100px);
-      overflow: hidden;
-    }
-
-    .tag {
-      position: absolute;
-      padding: 12px 20px;
-      border-radius: 999px;
-      font-weight: 600;
-      white-space: nowrap;
-      color: black;
-      animation: dropBounce 2s ease-out forwards;
-      opacity: 0;
-    }
 
     .pink { background: #ff69b4; }
     .green { background: #d0ff00; }
@@ -93,10 +52,7 @@
     .cyan { background: #3ae3be; }
     .yellow { background: #d6ff00; }
 
-    @keyframes dropBounce {
-      0% {
-        top: -100px;
-        opacity: 0;
+
     @keyframes dropBounce {
       0% {
         top: -100px;
@@ -108,6 +64,7 @@
       }
       75% {
         top: calc(100% - 100px);
+      }
       60% {
         top: calc(100% - 70px);
         opacity: 1;
@@ -121,6 +78,7 @@
       100% {
         top: calc(100% - 70px);
         opacity: 1;
+      }
       90% {
         top: calc(100% - 80px);
       }
