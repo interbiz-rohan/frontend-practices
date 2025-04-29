@@ -47,7 +47,7 @@ console.log("\n--- Arrow Function and 'new' keyword ---");
 // Regular function can be used as constructor
 function RegularConstructor(name) {
   this.name = name;
-}
+}       
 
 const obj1 = new RegularConstructor("Ravi");
 console.log("Created with regular function:", obj1);

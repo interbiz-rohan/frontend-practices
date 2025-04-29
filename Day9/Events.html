@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DOM Relationships Example</title>
+  <style>
+    .box {
+      border: 2px solid steelblue;
+      padding: 10px;
+      margin: 10px;
+    }
+    .highlight {
+      background-color: yellow;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="parent" class="box">
+    <div class="child">Child 1</div>
+    <div class="child" id="target">Child 2 (Target)</div>
+    <div class="child">Child 3</div>
+  </div>
+
+  <button onclick="inspectDOM()">Inspect DOM</button>
+
+  <script>
+    function inspectDOM() {
+      const target = document.getElementsByClassName("child");
+      console.log(target)
+      console.log(target.children.closest(".child"));
+
+      Array.from(target).forEach((value)=>value?console.log(value):console.log(""))
+    //   // 🔹 Parent element
+    //   const parent = target.parentElement;
+    //   parent.style.border = "2px dashed red";
+    //   console.log("Parent:", parent);
+
+    //   // 🔹 Children of parent
+    //   const children = parent.children;
+    //   console.log("Children of parent:", target.innerText);
+
+    //   // Highlight all children
+    //   for (let child of children) {
+    //     child.style.border = "1px solid green";
+    //   }
+
+    //   // 🔹 Next sibling
+    //   const nextSibling = target.nextElementSibling;
+    //   if (nextSibling) {
+    //     nextSibling.classList.add("highlight");
+    //     console.log("Next sibling:", nextSibling.innerText);
+    //   } else {
+    //     console.log("No next sibling found.");
+    //   }
+    }
+  </script>
+
+</body>
+</html>

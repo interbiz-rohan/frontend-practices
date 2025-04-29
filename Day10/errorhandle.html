@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Try-Catch-Finally-Throw Example</title>
+</head>
+<body>
+
+<script>
+// Complete Try-Catch-Finally-Throw Example
+
+// 1. Basic Try-Catch
+try {
+  console.log("Basic try block executing...");
+  let x = 10;
+  let y = x / 2;
+  console.log("Result:", y);
+} catch (err) {
+  console.error("Should not come here!");
+} finally {
+  console.log("Basic try-catch finally block executed.\n");
+}
+
+// 2. Runtime Error Handling
+try {
+  console.log("Runtime error block executing...");
+  let user = undefined;
+  console.log(user.name); // Runtime error
+} catch (err) {
+  console.error("Caught runtime error:", err.message);
+} finally {
+  console.log("Runtime error finally block executed.\n");
+}
+
+// 3. Throwing Custom Error
+function validateAge(age) {
+  if (age < 0) {
+    throw new Error("Age cannot be negative!");
+  }
+  return true;
+}
+
+try {
+  console.log("Custom throw block executing...");
+  validateAge(-5); // Will throw
+} catch (err) {
+  console.error("Caught custom thrown error:", err.message);
+} finally {
+  console.log("Custom throw finally block executed.\n");
+}
+
+// 4. Try-Catch inside Functions
+function divide(a, b) {
+  try {
+    if (b === 0) {
+      throw new Error("Division by zero not allowed.");
+    }
+    return a / b;
+  } catch (error) {
+    console.error("Error inside function:", error.message);
+    return null; // safe fallback
+  } finally {
+    console.log("Division function cleanup.\n");
+  }
+}
+
+console.log("Divide 10 / 2 =", divide(10, 2)); // Ok
+console.log("Divide 10 / 0 =", divide(10, 0)); // Error handled
+
+// 5. Catch Specific Error Types
+try {
+  console.log("Specific error catching...");
+  JSON.parse("{ bad json }"); // Will throw SyntaxError
+} catch (err) {
+  if (err instanceof SyntaxError) {
+    console.error("SyntaxError caught:", err.message);
+  } else {
+    console.error("Other error caught:", err.message);
+  }
+} finally {
+  console.log("Specific error finally block executed.\n");
+}
+
+// 6. Throw inside Catch (rethrowing error)
+try {
+  console.log("Rethrow error block executing...");
+  try {
+    let obj = undefined;
+    console.log(obj.prop); // cause error
+  } catch (err) {
+    console.warn("Rethrowing error...");
+    throw err; // rethrow the same error
+  }
+} catch (e) {
+  console.error("Rethrown error caught at higher level:", e.message);
+} finally {
+  console.log("Rethrow error finally block executed.\n");
+}
+
+console.log("END of program");
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mouse and Keyboard Events</title>
+  <style>
+    #box {
+      width: 300px;
+      height: 200px;
+      background-color: lightblue;
+      margin: 20px;
+      padding: 10px;
+      border: 2px solid #333;
+    }
+  </style>
+</head>
+<body>
+  <h2>Event Demo</h2>
+
+  <div id="box">Hover, click or right-click me</div>
+
+  <input type="text" id="inputBox" placeholder="Type here..." />
+
+  <script>
+    const box = document.getElementById("box");
+    const input = document.getElementById("inputBox");
+
+    // --- Mouse Events ---
+    box.addEventListener("click", () => {
+      console.log("Mouse Event: Click");
+    });
+
+    box.addEventListener("dblclick", () => {
+      console.log("Mouse Event: Double Click");
+    });
+
+    box.addEventListener("contextmenu", (e) => {
+      e.preventDefault();
+      console.log("Mouse Event: Right Click (Context Menu)");
+    });
+
+    box.addEventListener("mousedown", () => {
+      console.log("Mouse Event: Mouse Down");
+    });
+
+    box.addEventListener("mouseup", () => {
+      console.log("Mouse Event: Mouse Up");
+    });
+
+    box.addEventListener("mousemove", (event) => {
+      console.log("Mouse Event: Mouse Move",event.clientX);
+    });
+
+    box.addEventListener("mouseenter", () => {
+      console.log("Mouse Event: Mouse Enter (No Bubble)");
+    });
+
+    box.addEventListener("mouseleave", () => {
+      console.log("Mouse Event: Mouse Leave (No Bubble)");
+    });
+
+    box.addEventListener("mouseover", (event) => {
+      console.log("Mouse Event: Mouse Over (Bubbles)",event.target);
+    });
+
+    box.addEventListener("mouseout", () => {
+      console.log("Mouse Event: Mouse Out (Bubbles)",event.bubbles);
+    });
+
+    // --- Keyboard Events ---
+    input.addEventListener("keydown", (e) => {
+      console.log("Keyboard Event: Key Down -", e.key);
+    });
+
+    input.addEventListener("keyup", (e) => {
+      console.log("Keyboard Event: Key Up -", e.key);
+    });
+
+    input.addEventListener("keypress", (e) => {
+      console.log("Keyboard Event: Key Pressed -", e.key);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Bubbling Example</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+    .outer {
+      padding: 30px;
+      background-color: lightcoral;
+    }
+    .middle {
+      padding: 30px;
+      background-color: lightseagreen;
+    }
+    .inner {
+      padding: 30px;
+      background-color: lightgoldenrodyellow;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="outer">
+    Outer Div
+    <div class="middle">
+      Middle Div
+      <div class="inner">
+        Inner Div (Click me)
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const outer = document.querySelector('.outer');
+    const middle = document.querySelector('.middle');
+    const inner = document.querySelector('.inner');
+
+    outer.addEventListener('click', function () {
+      console.log('Outer DIV clicked');
+    });
+
+    middle.addEventListener('click', function () {
+      console.log('Middle DIV clicked');
+    });
+
+    inner.addEventListener('click', function () {
+      console.log('Inner DIV clicked');
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DOM Selection Example</title>
+</head>
+<body>
+
+  <h1 class="maintitle">Main Title</h1>
+
+  <div class="container">
+    <p class="text">Paragraph One</p>
+    <p class="text">Paragraph Two</p>
+    <p class="text">Paragraph Three</p>
+  </div>
+
+  <ul>
+    <li class="list-item">Item 1</li>
+    <li class="list-item">Item 2</li>
+    <li class="list-item">Item 3</li>
+  </ul>
+
+  <script>
+
+    const title = document.getElementsByClassName("maintitle");
+    console.log(title[0].style)
+    title[0].id="Container"
+    console.log("getElementById:", title[0].innerHTML);
+
+    const textParagraphs = document.getElementsByClassName("text");
+    console.log("getElementsByClassName:");
+    for (let p of textParagraphs) {
+      console.log(p.textContent);
+    }
+
+    const allParagraphs = document.getElementsByTagName("p");
+    console.log("getElementsByTagName (all <p>):", allParagraphs.length);
+
+    const firstItem = document.querySelector(".list-item");
+    console.log("querySelector:", firstItem.textContent);
+
+    const allItems = document.querySelectorAll(".list-item");
+    console.log("querySelectorAll:");
+    allItems.forEach(item => console.log(item.textContent));
+  </script>
+
+</body>
+</html>

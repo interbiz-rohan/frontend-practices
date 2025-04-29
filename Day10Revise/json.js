@@ -17,7 +17,7 @@ const user = {
   id: Symbol('id')
 };
 
-console.log("Original JS Object:", user);
+console.log("Original JS Object:",JSON.stringify(user));
 
 // 2. JSON Overview
 

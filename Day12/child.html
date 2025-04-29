@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>children vs childNodes</title>
+</head>
+<body>
+
+  <div id="container">
+    Text before
+    <p>Paragraph 1</p>
+    <!-- This is a comment -->
+    <span>Span 1</span>
+    Text after
+  </div>
+
+  <script>
+    const container = document.getElementById("container");
+
+    console.log("childNodes:");
+    console.log(container.childNodes[0]);
+
+    console.log("children:",container.children[0]);
+    Array.from(container.children).forEach((child, index) => {
+      console.log(`Child ${index}:`, child, `| Tag: ${child.tagName}`);
+    });
+  </script>
+
+</body>
+</html>

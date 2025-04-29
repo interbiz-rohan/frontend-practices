@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DOM Relationships Example</title>
+  <style>
+    .box {
+      border: 2px solid steelblue;
+      padding: 10px;
+      margin: 10px;
+    }
+    .highlight {
+      background-color: yellow;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="parent" class="box">
+    <div class="child">Child 1</div>
+    <div class="child" id="target">Child 2 (Target)</div>
+    <div class="child">Child 3</div>
+  </div>
+
+  <button id="action">Inspect DOM</button>
+
+  <script>
+     document.getElementById("parent").addEventListener("click",function(e){
+     console.log("parent call")
+   })
+   document.getElementById("target").addEventListener("click",function(e){
+    e.preventDefault()
+     console.log("Child call")
+   })
+  </script>
+
+</body>
+</html>

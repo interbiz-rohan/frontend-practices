@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Delegation Example</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+    .outer {
+      padding: 30px;
+      background-color: lightcoral;
+    }
+    .middle {
+      padding: 30px;
+      background-color: lightseagreen;
+    }
+    .inner {
+      padding: 30px;
+      background-color: lightgoldenrodyellow;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="outer">
+    Outer Div
+    <div class="middle">
+      Middle Div
+      <div class="inner">
+        Inner Div (Click me)
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const outer = document.querySelector('.outer');
+    console.log(event.target.classList)
+    outer.addEventListener('click', function (event) {
+      // Check which element was actually clicked using event.target
+      if (event.target.classList.contains('inner')) {
+        console.log('Inner div clicked via delegation!');
+      } else if (event.target.classList.contains('middle')) {
+        console.log('Middle div clicked via delegation!');
+      } else if (event.target.classList.contains('outer')) {
+        console.log('Outer div clicked via delegation!');
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DOMContentLoaded vs window.onload</title>
+  <style>
+    #status {
+      font-size: 18px;
+      margin-top: 20px;
+    }
+    img {
+      width: 300px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Event Demo: DOMContentLoaded vs window.onload</h1>
+  <img id="img" src="https://images.unsplash.com/photo-1517054612019-1bf855127c43?ixlib=rb-0.3.5" alt="Demo Image">
+  <div id="status">Waiting for events...</div>
+
+  <script>
+    // DOMContentLoaded: Runs as soon as HTML is parsed
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("status").innerText = "🔥 DOMContentLoaded fired!";
+      console.log("DOM fully parsed");
+    });
+
+    // window.onload: Runs after entire page (including image) is loaded
+    window.onload = function () {
+      document.getElementById("status").innerText += "\n✅ window.onload fired!";
+      console.log("Window fully loaded (images, styles, etc.)");
+    };
+  </script>
+
+</body>
+</html>

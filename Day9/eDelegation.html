@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Delegation Example</title>
+  <style>
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      padding: 10px;
+      background: #f0f0f0;
+      margin: 5px 0;
+      cursor: pointer;
+    }
+    li:hover {
+      background: #cce7ff;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Click any item:</h2>
+  <ul id="itemList">
+    <li data-id="1">Item 1</li>
+    <li data-id="2">Item 2</li>
+    <li data-id="3">Item 3</li>
+    <li data-id="4">Item 4</li>
+  </ul>
+
+  <script>
+    const list = document.getElementById("itemList");
+
+    list.addEventListener("click", function(event) {
+      // Delegated event handling: check if the clicked target is a <li>
+      if (event.target && event.target.tagName === "LI") {
+        const clickedItem = event.target;
+        const itemId = clickedItem.dataset.id;
+        console.log(event.target,event.currentTarget)
+        console.log(`You clicked on ${clickedItem.textContent} (ID: ${itemId})`);
+        console.log(this)
+        // Bonus: visual feedback
+        clickedItem.style.backgroundColor = "#ffd966";
+      }
+    });
+  </script>
+
+</body>
+</html>

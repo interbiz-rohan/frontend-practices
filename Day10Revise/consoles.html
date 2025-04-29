@@ -9,19 +9,19 @@
 <script>
 // ================================
 // console.log()
-console.log("1️console.log(): Normal log message");
+console.log("1console.log(): Normal log message");
 
 // ================================
 // console.info()
-console.info("2️console.info(): Informational message");
+console.info("2console.info(): Informational message");
 
 // ================================
 // console.warn()
-console.warn("3️console.warn(): Warning message");
+console.warn("3console.warn(): Warning message");
 
 // ================================
 // console.error()
-console.error("4️console.error(): Error message");
+console.error("4console.error(): Error message");
 
 // ================================
 // console.table()
@@ -34,7 +34,7 @@ console.table(users);
 // ================================
 // console.assert()
 const isAdult = false;
-console.assert(isAdult, "5️Assertion Failed: User is not adult");
+console.assert(isAdult, "5Assertion Failed: User is not adult");
 
 // ================================
 // console.count()
@@ -47,33 +47,35 @@ greet("Neha");
 
 // ================================
 // console.group() and console.groupEnd()
-console.group("6️User Details");
+console.group("6User Details");
 console.log("Name: Ravi");
 console.log("Age: 25");
 console.groupEnd();
 
 // ================================
 // console.groupCollapsed()
-console.groupCollapsed("7️Collapsed Group");
+console.groupCollapsed("7Collapsed Group");
 console.log("Hidden details inside collapsed group");
 console.groupEnd();
 
 // ================================
 // console.time() and console.timeEnd()
-console.time("8️Time taken by for loop");
+console.time("8Time taken by for loop");
 for (let i = 0; i < 100000; i++) { }  // some dummy loop
-console.timeEnd("8️Time taken by for loop");
+console.timeEnd("8Time taken by for loop");
 
 // ================================
 // console.trace()
 function first() {
   second();
 }
+
 function second() {
   third();
 }
+
 function third() {
-  console.trace("9️Trace Example");
+  console.trace("Trace Example");
 }
 first();
 

@@ -100,11 +100,25 @@ class Account {
   }
 }
 
+class employeeAcc extends Account{
+
+  childmethod(){
+    this.showInterest();
+  }
+}
+
 const acc = new Account("Ravi");
 acc.deposit(1000);
 acc.showInterest();
-// console.log(acc.#balance); // Private field cannot be accessed outside
 
+Account.prototype.changeOwner=function(name){
+  this.owner=name;
+}
+
+
+
+// console.log(acc.#balance); // Private field cannot be accessed outside
+new employeeAcc().childmethod()
 // 6. Static Methods
 
 console.log("\n--- Static Methods ---");

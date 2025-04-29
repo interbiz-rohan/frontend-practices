@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Form Events Demo</title>
+    <style>
+      body {
+        font-family: Arial;
+        padding: 20px;
+      }
+      input:invalid {
+        border: 2px solid red;
+      }
+      .output {
+        margin-top: 20px;
+        background: #f0f0f0;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>User Registration Form</h2>
+
+    <form id="userForm">
+      <label>
+        Name: <input type="text" name="name" required minlength="3" /> </label
+      ><br /><br />
+
+      <label for="email">
+        Email: <input type="email" name="email" required /> </label
+      ><br /><br />
+
+      <label> Age: <input type="number" name="age" min="1" max="120" /> </label
+      ><br /><br />
+
+      <button type="submit">Submit</button>
+      <button type="reset">Reset</button>
+    </form>
+
+    <div class="output" id="output"></div>
+
+    <script>
+      const form = document.getElementById("userForm");
+      const output = document.getElementById("output");
+
+      console.log(form);
+
+      // Input event
+      form.addEventListener("input", (e) => {
+        console.log(`Typing in ${e.target.name}: ${e.target.value}`);
+      });
+
+      // Change event
+      form.addEventListener("change", (e) => {
+        console.log(`Field changed: ${e.target.name} = ${e.target.value}`);
+      });
+
+      // Focus and blur
+      form.querySelectorAll("input").forEach((input) => {
+        input.addEventListener("focus", () =>
+          console.log(`${input.name} focused`)
+        );
+        input.addEventListener("blur", () =>
+          console.log(`${input.name} blurred`)
+        );
+      });
+
+      // Submit event
+      form.addEventListener("submit", (e) => {
+        e.preventDefault(); // Prevent real submission
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+        console.log(data);
+        formData.forEach((val, key) => data[key]=val);
+
+        output.innerHTML = `<strong>Submitted JSON:</strong><pre>${JSON.stringify(
+          data,
+          null,
+          2
+        )}</pre>`;
+        console.log("Form Submitted: ", data);
+      });
+
+      // Reset event
+      form.addEventListener("reset", () => {
+        output.innerHTML = "";
+        console.log("Form Reset");
+      });
+    </script>
+  </body>
+</html>
