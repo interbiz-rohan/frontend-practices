@@ -16,7 +16,7 @@
             margin: 0;
             background-color: #000;
             font-family: Arial, sans-serif;
-            box-sizing:content-box;
+            box-sizing: content-box;
         }
 
         .grid-area {
@@ -132,23 +132,24 @@
 
         @media screen and (max-width: 1100px) {
             .grid-area {
-            display: grid;
-            grid-template-areas:
-                "header header"
-                "video video"
-                "work work"
-                "para para"
-                "footer footer";
+                display: grid;
+                grid-template-areas:
+                    "header header"
+                    "video video"
+                    "work work"
+                    "para para"
+                    "footer footer";
             }
         }
 
 
         @media screen and (max-width: 630px) {
-            .video-area{
+            .video-area {
                 min-width: 300px;
                 min-height: 200px;
 
             }
+
             .video-container {
                 text-align: center;
                 width: 100%;
@@ -165,9 +166,8 @@
         <nav class="header"></nav>
 
         <section class="video-area">
-            <video width="50%" height="auto" class="video-container" autoplay muted loop playsinline>
+            <video id="soonVideo" class="video-container" autoplay muted loop playsinline preload="auto">
                 <source src="./soon.mp4" type="video/mp4">
-                Your browser does not support the video tag.
             </video>
         </section>
 
@@ -180,14 +180,14 @@
 
         <section class="paragraph-area">
             <pre class="para-1">
-We’re launching soon – crafted by top UI/UX minds, 
-digital growth pros, and design legends.
-From stunning visuals to smart strategy, 
-it’s all in the works.
+                We’re launching soon – crafted by top UI/UX minds, 
+                digital growth pros, and design legends.
+                From stunning visuals to smart strategy, 
+                it’s all in the works.
 
-The countdown’s on.
-Have a question? Let’s connect:
-📩 moonscube@gmail.com
+                The countdown’s on.
+                Have a question? Let’s connect:
+                📩 moonscube@gmail.com
             </pre>
         </section>
 
@@ -196,6 +196,18 @@ Have a question? Let’s connect:
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
     <script>
+
+        window.addEventListener('load', function () {
+            const video = document.getElementById('soonVideo');
+            video.muted = true;
+            video.playsInline = true;
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.then(_ => { }).catch(error => {
+                    console.log('Autoplay blocked:', error);
+                });
+            }
+        });
         const { Engine, Render, World, Bodies, Body, Events } = Matter;
 
         const engine = Engine.create();
@@ -205,15 +217,23 @@ Have a question? Let’s connect:
         const canvas = document.getElementById("world");
 
         const labels = [
-            "UI UX Design",
             "Branding",
-            "Product Design",
-            "Motion Design",
-            "Framer Development",
-            "Webflow Development",
-            "Illustrations",
-            "Website Design",
-            "Tech Support"
+            "Content",
+            "Media",
+            "Social",
+            "powerpack",
+            "Fintech AI Solutions",
+            "AI Fraud Detection",
+            "Blockchain Fintech",
+            "Chatbots in Banking",
+            "NLP in Finance",
+            "Credit Scoring Algorithms",
+            "Digital Transformation",
+            "Edge Computing",
+            "Cloud Computing",
+            "Internet of Things",
+            "Software Development",
+            "Multimodal AI"
         ];
 
         canvas.width = ground.clientWidth;
