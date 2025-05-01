@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #000;
+    color: #fff;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "graph graph history" 
+                         "graph graph history"
+                        "convertor convertor convertor";
+    gap: 30px;
+}
+
+section {
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+.graph-section{
+    grid-area: graph;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.graph-container{
+    width: 100%;
+    margin: 20px 0;
+}
+
+.history-section {
+    grid-area: history;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.history-container {
+    width: 100%;
+    margin: 20px 0;
+}
+
+
+.converter-section {
+    grid-area: convertor;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.converter-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 400px;
+}
+
+input, select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #333;
+    background-color: #2a2a2a;
+    color: #fff;
+}
+
+input {
+    flex: 1;
+}
+
+select {
+    width: 100px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+@media (min-width: 768px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .converter-section {
+        grid-column: span 2;
+    }
+}
+
+@media (min-width: 1024px) {
+  
+    
+    .converter-section {
+        grid-column: span 3;
+    }
+} 
