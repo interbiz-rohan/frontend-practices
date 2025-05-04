@@ -1,0 +1,35 @@
+:root {
+    --primary-color: #000;
+    --secondary-color: #fff;
+    --fade-one: #9c9c9c;
+    --fade-two: #5c5c5c;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+}
+
+main {
+    width: 100vw;
+    min-height: 100vh;
+    background-color: var(--primary-color);
+}
+
+.convertor-container{
+    width: 100%;
+    min-height: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+
+.history-section{
+    width: 100%;
+    min-height: 200px;
+    border-radius: 10px;
+    padding: 20px;
+}
