@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AJAX with XMLHttpRequest</title>
+  </head>
+  <body>
+    <h1>User Data</h1>
+    <button onclick="loadUser()">Load User</button>
+    <div id="result"></div>
+
+    <script>
+      function loadUser() {
+        const xhr = new XMLHttpRequest(); // Step 1: Create XHR object
+
+        xhr.open("GET", "user.json"); // Step 2: Configure request (async = true)
+        
+        // Step 2: Set request headers (must be after open, before send)
+
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.setRequestHeader("Accept", "application/json");
+
+        // xhr.setRequestHeader("Authorization", "Bearer YOUR_ACCESS_TOKEN");
+
+        xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+
+        xhr.setRequestHeader("Cache-Control", "no-cache");
+
+        xhr.setRequestHeader("X-App-Version", "1.0");
+
+        xhr.onload = function () {
+          console.log(xhr);
+          if (xhr.DONE == 4 && xhr.status === 200) {
+            // Step 3: Check if done and successful
+            console.log(JSON.parse(xhr.response));
+
+            const user = JSON.parse(xhr.responseText); // Step 4: Parse JSON
+            document.getElementById("result").innerHTML = `
+            <p><strong>Name:</strong> ${user.name}</p>
+            <p><strong>Email:</strong> ${user.email}</p>
+          `;
+          }
+        };
+
+        xhr.send(); // Step 5: Send the request
+
+        console.log("Does it print first if xmlHttp is asynchronised");
+      }
+    </script>
+  </body>
+</html>

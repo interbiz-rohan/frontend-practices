@@ -1,0 +1,78 @@
+.graph-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#comparisonGraph {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.current-rate {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    top: 20px;
+    left: 20px;
+    backdrop-filter: blur(4px);
+}
+
+.current-rate .rate-value {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+.time-range-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+    justify-content: right;
+}
+
+.time-range-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: color 0.3s;
+}
+
+.time-range-btn:hover, .time-range-btn.active {
+    color: var(--text-primary);
+}
+
+.time-range-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 2px;
+    background-color: var(--accent-color);
+    border-radius: 2px;
+}
+
+@media (max-width: 480px) {
+    .graph-container {
+        height: 250px;
+    }
+
+    .time-range-buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+} 

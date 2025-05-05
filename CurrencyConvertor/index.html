@@ -1,35 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Currency Converter</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/history.css" />
+    <link rel="stylesheet" href="css/converter.css" />
+    <link rel="stylesheet" href="css/graph.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  </head>
+  <body>
     <div class="container">
-        <!-- Section 1: Currency Comparison Graph -->
-        <section class="graph-section">
-            <h2>Currency Comparison</h2>
-            <div class="graph-container">
-                <canvas id="comparisonGraph"></canvas>
-            </div>
-        </section>
+      <!-- Section 1: Currency Comparison Graph -->
+      <section class="graph-section">
+        <div class="current-rate">
+          <span id="currency-pair">USD/INR</span>
+          <span class="rate-value" id="current-rate-value">82.50</span>
+        </div>
+        <div class="time-range-buttons">
+          <button class="time-range-btn" data-range="1D">1D</button>
+          <button class="time-range-btn active" data-range="1W">1W</button>
+          <button class="time-range-btn" data-range="1M">1M</button>
+          <button class="time-range-btn" data-range="3M">3M</button>
+          <button class="time-range-btn" data-range="1Y">1Y</button>
+        </div>
+        <div class="graph-container">
+          <div class="loading-overlay">
+            <div class="loader"></div>
+            <div class="loading-text">Loading data...</div>
+          </div>
+          <canvas id="comparisonGraph"></canvas>
+        </div>
+      </section>
 
-        <!-- Section 2: Historical Data -->
-        <section class="history-section">
-            <h2>Historical Data</h2>
-            <div class="history-container">
-                <canvas id="historyGraph"></canvas>
-            </div>
-        </section>
+      <!-- Section 2: Historical Data -->
+      <section class="history-section">
+        <div class="history-header-container">
+          <div>
+          <h2 class="history-heading">History</h2>
+          <h6 class="history-subheading">Recent conversions</h6>
+        </div>
+          <a onclick="clearHistory()">Clear</a>
+        </div>
 
-        <!-- Section 3: Live Converter -->
-        <section class="converter-section">
-           
-        </section>
+        <div class="history-container" id="history-parent"></div>
+      </section>
+
+      <section class="converter-section">
+        <div class="converter-container">
+          <div class="convert-card">
+            <h2 class="converter-heading">I Have</h2>
+            <div class="currency-input-wrapper">
+              <div class="select-container">
+                <div class="custom-select" id="from-container">
+                  <div class="select-selected" id="from-selected">
+                    <img
+                      src="https://flagcdn.com/48x36/us.png"
+                      alt="USD"
+                      class="flag-img"
+                    />
+                    <span>USD - US Dollar</span>
+                  </div>
+                  <div class="select-items select-hide" id="from-items">
+                    <!-- Items will be populated by Dropdown.js -->
+                  </div>
+                </div>
+              </div>
+              <input
+                type="number"
+                class="amount-input"
+                id="from-amount"
+                placeholder="Enter amount"
+                value="0"
+              />
+            </div>
+          </div>
+          <div class="buttons-card">
+            <div class="convert-button-container">
+              <button class="convert-button" id="convert-button">
+                <span class="button-text">Convert</span>
+                <div class="button-loader">
+                  <div class="loader"></div>
+                </div>
+              </button>
+            </div>
+            <div class="swap-button">
+              <button id="swap-currencies">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <!-- Left arrow -->
+                  <path
+                    d="M6 10L2 12L6 14"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <!-- Right arrow -->
+                  <path
+                    d="M18 10L22 12L18 14"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <!-- Horizontal line -->
+                  <path
+                    d="M2 12H22"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="convert-card">
+            <h2 class="converter-heading">I Want</h2>
+            <div class="currency-input-wrapper">
+              <div class="select-container">
+                <div class="custom-select" id="to-container">
+                  <div class="select-selected" id="to-selected">
+                    <img
+                      src="https://flagcdn.com/48x36/in.png"
+                      alt="INR"
+                      class="flag-img"
+                    />
+                    <span>INR - Indian Rupee</span>
+                  </div>
+                  <div class="select-items select-hide" id="to-items">
+                    <!-- Items will be populated by Dropdown.js -->
+                  </div>
+                </div>
+              </div>
+              <input
+                type="number"
+                class="amount-input"
+                id="to-amount"
+                placeholder="Converted amount"
+                value="0"
+                readonly
+              />
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
-    <script src="script.js"></script>
-</body>
-</html> 
+   
+    
+    <!-- Load application scripts -->
+    <script src="js/script.js"></script>
+    <script src="js/Dropdown.js"></script>
+    <script  src="js/config.js"></script>
+    <script src="js/Converter.js"></script>
+    <script src="js/history.js"></script>
+    <script src="js/graph.js"></script>
+  </body>
+</html>

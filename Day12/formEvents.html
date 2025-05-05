@@ -81,12 +81,14 @@
         )}</pre>`;
         console.log("Form Submitted: ", data);
       });
-
+      
+      form.reset()
+      
       // Reset event
-      form.addEventListener("reset", () => {
-        output.innerHTML = "";
-        console.log("Form Reset");
-      });
+      // form.addEventListener("reset", () => {
+      //   output.innerHTML = "";
+      //   console.log("Form Reset");
+      // });
     </script>
   </body>
 </html>

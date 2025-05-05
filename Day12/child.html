@@ -18,9 +18,9 @@
     const container = document.getElementById("container");
 
     console.log("childNodes:");
-    console.log(container.childNodes[0]);
+    console.log(container.childNodes);
 
-    console.log("children:",container.children[0]);
+    console.log("children:",container.children);
     Array.from(container.children).forEach((child, index) => {
       console.log(`Child ${index}:`, child, `| Tag: ${child.tagName}`);
     });
