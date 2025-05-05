@@ -30,7 +30,7 @@
 
         xhr.onload = function () {
           console.log(xhr);
-          if (xhr.DONE == 4 && xhr.status === 200) {
+          if (xhr.DONE == 4 && xhr.status === 200) { 
             // Step 3: Check if done and successful
             console.log(JSON.parse(xhr.response));
 

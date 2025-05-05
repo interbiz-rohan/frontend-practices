@@ -1,0 +1,49 @@
+.history-container{
+    padding: 10px;
+    width: 100%;
+    min-height: 200px;
+    border-radius: 10px;
+}
+
+
+.history-card{
+    max-width: 400px;
+    min-width: 300px;
+    min-height: 80px;
+    border: 1px solid grey;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    align-items: center;
+}
+
+.card-element{
+    text-align: center;
+}
+
+.currency-symbol{
+    font-size: 18px;
+    line-height: 18px;
+    font-weight: 500;
+}
+
+.currency-amount{
+    font-size: 18px;
+    font-weight: 500;
+}
+
+
+.card-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap:20px;
+}
+
+.clear-history{
+    background-color: transparent;
+    border: 0px;
+    font-size: 18px;
+    font-weight: 500;
+    color: red;
+}

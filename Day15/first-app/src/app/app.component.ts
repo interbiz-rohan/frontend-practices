@@ -1,12 +1,51 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { UserListComponent } from './user/user-list/user-list.component';
+import { HelloComponent } from './hello/hello.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  standalone: true,
+  imports: [UserListComponent, HelloComponent],
+  template: `
+    <div class="app-container">
+      <h1>Angular Demo Application</h1>
+      
+      <div class="section">
+        <h2>Hello Component Demo</h2>
+        <app-hello></app-hello>
+      </div>
+
+      <div class="section">
+        <h2>User Management System</h2>
+        <app-user-list></app-user-list>
+      </div>
+    </div>
+  `,
+  styles: [`
+    .app-container {
+      padding: 20px;
+      text-align: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 30px;
+    }
+    .section {
+      margin: 40px 0;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #1976d2;
+      margin-bottom: 20px;
+    }
+  `]
 })
 export class AppComponent {
-  title = 'first-app';
+  title = 'angular-demo';
 }
+ 

@@ -101,3 +101,23 @@ const nestedTuple: [objType, [string, objType[], [[objType[]]]]] = [
     [[[{ name: "Rohan", age: 12 }]]],
   ],
 ];
+
+function merge<T, U>(obj1: U, obj2: T): T {
+    return { ...obj1, ...obj2 };
+}
+
+
+  
+  const result = merge<{name:string},{age:number}>( { age: 30 },{ name: "Alice" });
+  // result has type: { name: string; age: number; }
+  console.log(result); 
+
+
+  const CanFly = (Base) => class extends Base {
+    fly() {
+      console.log("Flying!");
+    }
+  };
+  
+  class Bird {}
+  class FlyingBird extends CanFly(Bird) {}
