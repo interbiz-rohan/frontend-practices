@@ -1,0 +1,21 @@
+.app-container {
+    padding: 20px;
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  h1 {
+    color: #333;
+    margin-bottom: 30px;
+  }
+  .section {
+    margin: 40px 0;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  h2 {
+    color: #1976d2;
+    margin-bottom: 20px;
+  }

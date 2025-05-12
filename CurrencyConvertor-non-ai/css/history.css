@@ -1,49 +1,221 @@
-.history-container{
-    padding: 10px;
-    width: 100%;
-    min-height: 200px;
-    border-radius: 10px;
+.history-section {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
+.history-container {
+    background-color: var(--secondary-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px var(--shadow-color);
+    padding: 1.5rem;
+}
 
-.history-card{
-    max-width: 400px;
-    min-width: 300px;
-    min-height: 80px;
-    border: 1px solid grey;
-    border-radius: 10px;
+.history-header {
     display: flex;
     justify-content: space-between;
-    padding: 15px;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.history-actions {
+    display: flex;
+    gap: 1rem;
     align-items: center;
 }
 
-.card-element{
-    text-align: center;
+.clear-history {
+    padding: 0.5rem 1rem;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
-.currency-symbol{
+.clear-history:hover {
+    background-color: transparent;
+    color: black;
+    border: 1px solid (--accent-color);
+}
+
+.collapse-history {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.collapse-history:hover {
+    color: var(--accent-color);
+}
+
+.collapse-icon {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+}
+
+.collapse-icon.collapsed {
+    transform: rotate(-180deg);
+}
+
+.history-content {
+    max-height: 300px;
+    overflow-y: auto;
+    transition: max-height 0.3s ease;
+}
+
+.history-content.collapsed {
+    max-height: 0;
+    overflow: hidden;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: flex-start;
+    padding-top:5px;
+}
+
+.history-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 1rem;
+    min-height: 80px;
+    min-width: 300px;
+    max-width: 400px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+}
+
+.history-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    border-color: var(--accent-color);
+}
+
+.card-content {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-element {
+    text-align: center;
+    min-width: 100px;
+    padding: 0.5rem;
+    background-color: var(--secondary-color);
+    border-radius: 6px;
+}
+
+.currency-symbol {
     font-size: 18px;
     line-height: 18px;
     font-weight: 500;
+    color: var(--accent-color);
 }
 
-.currency-amount{
+.currency-amount {
     font-size: 18px;
     font-weight: 500;
+    margin-top: 0.25rem;
+    color: var(--text-color);
 }
 
-
-.card-container{
-    display: flex;
-    flex-wrap: wrap;
-    gap:20px;
+.splitter {
+    color: var(--text-color);
+    font-size: 20px;
+    opacity: 0.7;
+    padding: 0 0.5rem;
 }
 
-.clear-history{
-    background-color: transparent;
-    border: 0px;
-    font-size: 18px;
-    font-weight: 500;
-    color: red;
+.card-timestamp {
+    font-size: 14px;
+    color: var(--text-color);
+    opacity: 0.7;
+    text-align: right;
+    border-top: 1px solid var(--border-color);
+    padding-top: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+/* Custom scrollbar styles */
+.history-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.history-content::-webkit-scrollbar-track {
+    background: var(--secondary-color);
+    border-radius: 4px;
+}
+
+.history-content::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 4px;
+}
+
+.history-content::-webkit-scrollbar-thumb:hover {
+    background: var(--hover-color);
+}
+
+@media screen and (max-width: 768px) {
+    .history-section {
+        padding: 1rem;
+    }
+
+    .history-container {
+        padding: 1rem;
+    }
+
+    .history-content {
+        max-height: 300px;
+    }
+
+    .history-card {
+        min-width: 250px;
+        max-width: 350px;
+    }
+
+    .card-element {
+        min-width: 80px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .history-content {
+        max-height: 250px;
+    }
+
+    .history-card {
+        min-width: 100%;
+        max-width: 100%;
+    }
+
+    .card-content {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .card-element {
+        min-width: 100%;
+    }
+
+    .splitter {
+        transform: rotate(90deg);
+        margin: -0.5rem 0;
+    }
 }

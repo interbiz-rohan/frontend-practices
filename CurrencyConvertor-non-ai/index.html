@@ -26,7 +26,9 @@
                 <h2 class="select-item-title">USD - Dollar - $</h2>
               </div>
             </div>
-            <div class="select-items hide-dropdown"></div>
+            <div class="select-items hide-dropdown">
+              <input type="text" class="search-input" placeholder="Search currency...">
+            </div>
           </div>
           <input
             type="text"
@@ -42,6 +44,11 @@
           <div class="loading-spinner"></div>
           <p style="text-align: center">Loading...</p>
         </div>
+        <button class="swap-button" onclick="swapCurrencies()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 16V4M7 4L3 8M7 4L11 8M17 8v12M17 20l4-4M17 20l-4-4"/>
+          </svg>
+        </button>
         <div class="convertor-card">
           <h2 class="heading">I Want</h2>
           <br />
@@ -55,7 +62,9 @@
                 <h2 class="select-item-title">INR - Rupee - ₹</h2>
               </div>
             </div>
-            <div class="select-items hide-dropdown"></div>
+            <div class="select-items hide-dropdown">
+              <input type="text" class="search-input" placeholder="Search currency...">
+            </div>
           </div>
           <input
             type="text"
@@ -70,15 +79,23 @@
 
       <section class="history-section">
         <div class="history-container">
-          <div style="display: flex; justify-content: space-between">
+          <div class="history-header">
             <h2 class="heading">History</h2>
-            <button class="clear-history" onclick="clearHistory()">
-              Clear
-            </button>
+            <div class="history-actions">
+              <button class="clear-history" onclick="clearHistory()">
+                Clear
+              </button>
+              <button class="collapse-history" onclick="toggleHistory()">
+                <svg class="collapse-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 9l6 6 6-6"/>
+                </svg>
+              </button>
+            </div>
           </div>
-          <br />
-          <div class="card-container" id="histories">
-            <p style="text-align: center">No history found</p>
+          <div class="history-content">
+            <div class="card-container" id="histories">
+              <p style="text-align: center">No history found</p>
+            </div>
           </div>
         </div>
       </section>

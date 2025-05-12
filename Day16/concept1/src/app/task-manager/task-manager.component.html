@@ -1,0 +1,134 @@
+<div class="directive-demo">
+  <h2>Angular Directives Demo</h2>
+
+  <!-- Property Binding -->
+  <section class="demo-section">
+    <h3>Property Binding</h3>
+    <div class="demo-content">
+      <p [style.color]="'blue'">Text with style binding</p>
+      <p [class.highlight]="true">Text with class binding</p>
+      <img [src]="'assets/angular.png'" [alt]="'Angular logo'" width="50">
+      <p [attr.data-test]="'test-value'">Text with attribute binding</p>
+    </div>
+  </section>
+
+  <!-- Event Binding -->
+  <section class="demo-section">
+    <h3>Event Binding</h3>
+    <div class="demo-content">
+      <p>Click count: {{ clickCount }}</p>
+      <button (click)="onClick()">Increment Count</button>
+      <button (dblclick)="onClick()">Double Click Me</button>
+      <button (mouseenter)="onClick()">Hover Me</button>
+    </div>
+  </section>
+
+  <!-- Two-way Binding -->
+  <section class="demo-section">
+    <h3>Two-way Binding (NgModel)</h3>
+    <div class="demo-content">
+      <input [(ngModel)]="username" placeholder="Enter your name">
+      <p>Hello, {{ username || 'Guest' }}!</p>
+    </div>
+  </section>
+
+  <!-- NgIf -->
+  <section class="demo-section">
+    <h3>NgIf Directive</h3>
+    <div class="demo-content">
+      <div *ngIf="true">This text is always shown</div>
+      <div *ngIf="false">This text is never shown</div>
+      <div *ngIf="username">Welcome back, {{ username }}!</div>
+    </div>
+  </section>
+
+  <!-- NgFor -->
+  <section class="demo-section">
+    <h3>NgFor Directive</h3>
+    <div class="demo-content">
+      <ul>
+        <li *ngFor="let item of items; let i = index; let even = even"
+            [class.even]="even">
+          {{ i + 1 }}. {{ item.name }} - {{ item.status }}
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- NgSwitch -->
+  <section class="demo-section">
+    <h3>NgSwitch Directive</h3>
+    <div class="demo-content">
+      <select [(ngModel)]="currentRole">
+        <option value="admin">Admin</option>
+        <option value="user">User</option>
+        <option value="guest">Guest</option>
+      </select>
+
+      <div [ngSwitch]="currentRole" class="role-display">
+        <p *ngSwitchCase="'admin'" class="role admin">Admin Access</p>
+        <p *ngSwitchCase="'user'" class="role user">User Access</p>
+        <p *ngSwitchCase="'guest'" class="role guest">Guest Access</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NgClass -->
+  <section class="demo-section">
+    <h3>NgClass Directive</h3>
+    <div class="demo-content">
+      <div [ngClass]="{
+        'highlight': true,
+        'active': isActive,
+        'disabled': isDisabled
+      }">
+        This div has dynamic classes
+      </div>
+      <button (click)="isActive = !isActive">Toggle Active</button>
+      <button (click)="isDisabled = !isDisabled">Toggle Disabled</button>
+    </div>
+  </section>
+
+  <!-- NgStyle -->
+  <section class="demo-section">
+    <h3>NgStyle Directive</h3>
+    <div class="demo-content">
+      <div [ngStyle]="{
+        'color': textColor,
+        'font-size.px': fontSize,
+        'font-weight': 'bold'
+      }">
+        This text has dynamic styles
+      </div>
+      <button (click)="textColor = textColor === 'red' ? 'blue' : 'red'">
+        Change Color
+      </button>
+      <button (click)="fontSize = fontSize + 2">
+        Increase Size
+      </button>
+    </div>
+  </section>
+
+  <!-- Task List Example -->
+  <section class="demo-section">
+    <h3>Task List Example</h3>
+    <div class="demo-content">
+      <div class="task-form">
+        <input [(ngModel)]="newTaskTitle" 
+               placeholder="Enter task title"
+               (keyup.enter)="addTask()">
+        <button (click)="addTask()">Add Task</button>
+      </div>
+
+      <div class="task-list">
+        <div *ngFor="let task of tasks" class="task-item">
+          <span>{{ task.title }}</span>
+          <button (click)="deleteTask(task.id)" class="delete-btn">Delete</button>
+        </div>
+        <p *ngIf="tasks.length === 0" class="empty-message">
+          No tasks yet. Add some tasks above!
+        </p>
+      </div>
+    </div>
+  </section>
+</div> 

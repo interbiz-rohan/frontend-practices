@@ -8,6 +8,7 @@
     border-radius: 12px;
     box-shadow: 0 4px 6px var(--shadow-color);
     transition: transform 0.2s ease;
+    flex: 1;
 }
 
 .convertor-card:hover {
@@ -48,6 +49,21 @@
     padding: 1rem;
     box-shadow: 0 4px 6px var(--shadow-color);
     z-index: 1000;
+}
+
+.search-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--accent-color);
 }
 
 .country-item {
@@ -134,6 +150,98 @@ input:disabled {
     100%{
         transform: rotate(360deg);
     }
-    
+}
+
+.convertor-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.swap-button {
+    position: relative;
+    transform: rotate(90deg);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: transform 0.3s ease;
+    z-index: 10;
+    margin: 0 -20px;
+}
+
+.swap-button:hover {
+    transform: scale(1.1) rotate(90deg);
+}
+
+.swap-button svg {
+    width: 20px;
+    height: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .convertor-container {
+        flex-direction: row;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .convertor-card {
+        min-width: 300px;
+        padding: 1.5rem;
+    }
+
+    .swap-button {
+        width: 36px;
+        height: 36px;
+        margin: 0 -18px;
+    }
+
+    .swap-button svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .convertor-container {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 1rem;
+    }
+
+    .convertor-card {
+        min-width: 100%;
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .swap-button {
+        width: 32px;
+        height: 32px;
+        margin: -16px 0;
+        transform: rotate(0deg);
+    }
+
+    .swap-button:hover {
+        transform: scale(1.1) rotate(0deg);
+    }
+
+    .swap-button svg {
+        width: 16px;
+        height: 16px;
+    }
 }
 

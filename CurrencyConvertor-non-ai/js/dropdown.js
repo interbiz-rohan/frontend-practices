@@ -1,19 +1,16 @@
-
 let timer
 
-
 async function intializeDropdown(targetId) {
-
     const parentElement = document.getElementById(targetId);
     const dropdownElement = parentElement.getElementsByClassName("select-items")
 
-
     if (dropdownElement.length) {
-
         const items = Array.from(dropdownElement)[0];
+        const searchInput = items.querySelector('.search-input');
         const countryList = await fetch('./js/country.json');
         const data = await countryList.json();
 
+        const countryItems = [];
         for (var i = 0; i < data.length; i++) {
             const item = document.createElement('div')
             item.className = "country-item"
@@ -24,17 +21,43 @@ async function intializeDropdown(targetId) {
             <h2 class="select-item-title"> ${data[i].currency.code} - ${data[i].name} - ${data[i].currency.name} - ${data[i].currency.symbol} </h2>
             `
             const item2 = document.createElement('hr')
-
+            countryItems.push({element: item, divider: item2});
             items.appendChild(item);
             items.appendChild(item2);
         }
-        parentElement.addEventListener("click", () => items.classList.toggle("hide-dropdown"))
+
+        searchInput.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        searchInput.addEventListener('input', (e) => {
+            e.stopPropagation();
+            const searchTerm = e.target.value.toLowerCase();
+            countryItems.forEach(({element, divider}) => {
+                const text = element.textContent.toLowerCase();
+                const matches = text.includes(searchTerm);
+                element.style.display = matches ? 'flex' : 'none';
+                divider.style.display = matches ? 'block' : 'none';
+            });
+        });
+
+        parentElement.addEventListener("click", (e) => {
+            e.stopPropagation();
+            items.classList.toggle("hide-dropdown");
+            if (!items.classList.contains("hide-dropdown")) {
+                searchInput.focus();
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!parentElement.contains(e.target)) {
+                items.classList.add("hide-dropdown");
+            }
+        });
     }
 }
 
-
 function setSelected(event, id) {
-
     if (id == "from-select") {
         fromCountry = event.currentTarget.getElementsByTagName("img")?.[0].alt;
     } else {
@@ -46,9 +69,9 @@ function setSelected(event, id) {
         event.currentTarget.innerHTML +
         `</div>`
         ;
+
+        fetchCurrency();
 }
-
-
 
 function AddInputEvents() {
     const inputElement = document.getElementById("from-input");
@@ -62,7 +85,6 @@ function AddInputEvents() {
     })
 }
 
-
 function debounce(callback, delay) {
     clearTimeout(timer)
     timer = setTimeout(() => {
@@ -70,30 +92,44 @@ function debounce(callback, delay) {
     }, delay)
 }
 
-
 async function fetchCurrency() {
-    showLoading(true)
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Accept', 'application/json');
-    headers.append('Access-Control-Allow-Credentials', 'true');
-
     try {
+        showLoading(true);
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');
+        headers.append('Access-Control-Allow-Credentials', 'true');
+
         const response = await fetch(`https://v6.exchangerate-api.com/v6/0ae478925550c310735e1012/latest/${fromCountry}`,
             {headers: headers}
         );
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         const data = await response.json();
         
-        
-    const calculatedValue= (data.conversion_rates[toCountry] * amount).toFixed(2);
-    document.getElementById("to-input").value =calculatedValue
-    addHistory( {symbol:fromCountry,amount:amount},{symbol:toCountry,amount:calculatedValue});
-    } catch (error) {
-        window.alert("Error fetching currency data");
-    }
-    showLoading(false)
-}
+        if (!data.conversion_rates || !data.conversion_rates[toCountry]) {
+            throw new Error('Invalid currency conversion data received');
+        }
 
+        const calculatedValue = (data.conversion_rates[toCountry] * amount).toFixed(2);
+        document.getElementById("to-input").value = calculatedValue;
+        addHistory(
+            {symbol: fromCountry, amount: amount},
+            {symbol: toCountry, amount: calculatedValue}
+        );
+    } catch (error) {
+        console.error('Currency conversion error:', error);
+        let errorMessage = 'An error occurred while converting currencies. ';
+        
+        alert(errorMessage);
+        document.getElementById("to-input").value = '';
+    } finally {
+        showLoading(false);
+    }
+}
 
 function showLoading(value){
     const loadingContainer = document.getElementById("loading-container");
