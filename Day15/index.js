@@ -11,11 +11,14 @@ let bigValue = 9007199254740991n;
 let hobbies = ["coding", "reading"];
 let tupleExample = ["score", 100];
 var Role;
+
 (function (Role) {
     Role["USER"] = "User";
     Role["ADMIN"] = "Admin";
 })(Role || (Role = {}));
+
 let myRole = Role.ADMIN;
+
 let person = { name: "Alice", age: 30 };
 // Advanced Types
 let data = "info";
@@ -29,6 +32,7 @@ let user = {
     name: "John",
     address: { street: "123 Main", city: "New York" },
 };
+
 const superUser = {
     id: 2,
     name: "Admin",

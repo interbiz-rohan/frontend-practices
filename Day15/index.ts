@@ -15,6 +15,7 @@ enum Role {
   USER = "User",
   ADMIN = "Admin",
 }
+
 let myRole: Role = Role.ADMIN;
 
 let person: { name: string; age: number } = { name: "Alice", age: 30 };
