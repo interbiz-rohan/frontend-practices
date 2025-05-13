@@ -1,15 +1,45 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <ng-container *ngFor="let field of config">
-    <div>
-      <label [for]="field.name">{{ field.label }}</label>
-      <input
-        [type]="field.type"
-        [formControlName]="field.name"
-        [id]="field.name"
-        [placeholder]="field.placeholder"
-      />
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <fieldset formGroupName="account">
+    <label>Username:</label>
+    <input formControlName="username">
+    <div *ngIf="form.get('account.username')?.errors?.['usernameTaken']">Username taken</div>
+    <div *ngIf="form.get('account.username')?.errors?.['required']">Username required</div>
+
+    <label>Email:</label>
+    <input formControlName="email">
+    <div *ngIf="form.get('account.email')?.errors?.['email']">Invalid email</div>
+  </fieldset>
+
+  <label>Password:</label>
+  <input type="password" formControlName="password">
+  <div *ngIf="form.get('password')?.errors?.['passwordInvalid']">Password must contain uppercase letter, lowercase letter, number, underscore and be at least 8 characters long</div>
+
+  <label>Confirm Password:</label>
+  <input type="password" formControlName="confirmPassword">
+  <div *ngIf="form.errors?.['passwordsMismatch']">Passwords do not match</div>
+
+  <fieldset formGroupName="address">
+    <label>Type:</label>
+    <select formControlName="type">
+      <option value="digital">Digital</option>
+      <option value="physical">Physical</option>
+    </select>
+    <input placeholder="Street" formControlName="street">
+    <input placeholder="City" formControlName="city">
+  </fieldset>
+
+  <label>Hobbies:</label>
+  <div formArrayName="hobbies">
+    <div *ngFor="let hobby of hobbies.controls; let i = index">
+      <input [formControlName]="i">
+      <button type="button" (click)="removeHobby(i)">Remove</button>
     </div>
-  </ng-container>
-  <ng-content></ng-content>
-  <button type="submit">Submit</button>
+    <button type="button" (click)="addHobby()">Add Hobby</button>
+  </div>
+
+  <label>
+    <input type="checkbox" formControlName="agree"> Agree to terms
+  </label>
+
+  <button type="submit" [disabled]="form.invalid">Submit</button>
 </form>
