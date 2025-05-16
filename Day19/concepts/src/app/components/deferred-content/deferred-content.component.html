@@ -1,0 +1,100 @@
+<div class="container">
+
+  <section class="demo-section">
+    <h2>1. Control Flow Syntax</h2>
+    
+    @if (selectedUser) {
+      <div class="user-card">
+        <h3>Selected User</h3>
+        <p>Name: {{ selectedUser.name }}</p>
+        <p>Role: {{ selectedUser.role }}</p>
+        @if (selectedUser.isActive) {
+          <span class="status active">Active</span>
+        } @else {
+          <span class="status inactive">Inactive</span>
+        }
+      </div>
+    } @else {
+      <p class="no-selection">No user selected</p>
+    }
+  </section>
+
+  <section class="demo-section">
+    <h2>2. For Loop Syntax</h2>
+    <div class="user-list">
+      @for (user of users; track user.id) {
+        <div class="user-item" (click)="selectUser(user)">
+          <span class="name">{{ user.name }}</span>
+          <span class="role">{{ user.role }}</span>
+          @if (user.isActive) {
+            <span class="status active">Active</span>
+          } @else {
+            <span class="status inactive">Inactive</span>
+          }
+        </div>
+      } @empty {
+        <p>No users found</p>
+      }
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <h2>3. Defer Block with Placeholder</h2>
+    <button (click)="toggleHeavyContent()">
+      {{ showHeavyContent ? 'Hide' : 'Show' }} Heavy Content
+    </button>
+
+    @defer (when showHeavyContent) {
+      <div class="heavy-content">
+        <h3>Heavy Content Loaded</h3>
+        <p>This content was loaded lazily when the button was clicked.</p>
+        <ul>
+          @for (user of users; track user.id) {
+            <li>{{ user.name }} - {{ user.role }}</li>
+          }
+        </ul>
+      </div>
+    } @placeholder {
+      <div class="placeholder">
+        <p>Click the button above to load heavy content</p>
+      </div>
+    }
+  </section>
+
+  <section class="demo-section">
+    <h2>4. Defer Block with Loading & Error States</h2>
+    <button (click)="simulateError()">Simulate Error</button>
+
+    @defer (when !isLoading) {
+      <div class="content">
+        <h3>Content Loaded Successfully</h3>
+        <p>This content was loaded after the initial delay.</p>
+      </div>
+    } @loading {
+      <div class="loading">
+        <p>Loading content...</p>
+        <div class="spinner"></div>
+      </div>
+    } @error {
+      <div class="error">
+        <p>Error loading content!</p>
+        <button (click)="hasError = false">Retry</button>
+      </div>
+    }
+  </section>
+
+  <section class="demo-section">
+    <h2>5. Defer on Interaction</h2>
+    @defer (on interaction) {
+      <div class="interactive-content">
+        <h3>Interactive Content</h3>
+        <p>This content was loaded when you interacted with this section.</p>
+        <button>Click me!</button>
+      </div>
+    } @placeholder {
+      <div class="placeholder">
+        <p>Hover or click anywhere in this section to load content</p>
+      </div>
+    }
+  </section>
+</div> 

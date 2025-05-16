@@ -1,0 +1,54 @@
+<div class="item-list">
+  <h2>Item List</h2>
+  
+  <div class="add-item">
+    <input #newItem type="text" placeholder="Add new item">
+    <button (click)="addItem(newItem.value); newItem.value=''">Add</button>
+  </div>
+
+  <div class="filter-section">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Search items..." (input)="filterItems()">
+    <select [(ngModel)]="sortOrder" (change)="sortItems()">
+      <option value="asc">Sort A-Z</option>
+      <option value="desc">Sort Z-A</option>
+    </select>
+  </div>
+
+  <!-- Edit Form -->
+  <div class="edit-form" *ngIf="selectedItem">
+    <h3>Edit Item</h3>
+    <div class="form-group">
+      <input [(ngModel)]="editForm.name" placeholder="Item name">
+      <select [(ngModel)]="editForm.category">
+        <option *ngFor="let category of categories" [value]="category">
+          {{category}}
+        </option>
+      </select>
+      <div class="form-actions">
+        <button class="save-btn" (click)="saveEdit()">Save</button>
+        <button class="cancel-btn" (click)="cancelEdit()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="items-container">
+    <ul>
+      <li *ngFor="let item of filteredItems; let i = index" [class.selected]="selectedItem === item">
+        <div class="item-content">
+          <span class="item-text">{{ item.name }}</span>
+          <span class="item-category">{{ item.category }}</span>
+          <span class="item-date">{{ item.createdAt | date:'short' }}</span>
+        </div>
+        <div class="item-actions">
+          <button class="edit-btn" (click)="editItem(item.id)">Edit</button>
+          <button class="delete-btn" (click)="removeItem(item.id)">Delete</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="stats">
+    <p>Total Items: {{ items.length }}</p>
+    <p>Filtered Items: {{ filteredItems.length }}</p>
+  </div>
+</div> 

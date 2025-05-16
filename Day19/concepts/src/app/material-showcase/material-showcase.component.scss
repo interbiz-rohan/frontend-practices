@@ -1,0 +1,51 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.component-card {
+  margin-bottom: 20px;
+}
+
+mat-card-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+table {
+  width: 100%;
+}
+
+mat-slider {
+  width: 100%;
+}
+
+mat-button-toggle-group {
+  margin-bottom: 16px;
+}
+
+mat-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+mat-list {
+  width: 100%;
+}
+
+mat-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+} 

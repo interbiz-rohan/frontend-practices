@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './template-form.component.html',
   styleUrl: './template-form.component.css'
 })
+
 export class TemplateFormComponent {
   user = {
     name: '',
@@ -16,7 +17,7 @@ export class TemplateFormComponent {
     password: ''
   };
 
-  onSubmit() {
+  onSubmit(value) {
     console.log('Form submitted:', this.user);
   }
 } 
