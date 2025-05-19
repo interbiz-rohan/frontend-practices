@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="search-container">
+    <input 
+      type="text" 
+      [value]="searchTerm"
+      (input)="onSearch($event)"
+      placeholder="Search products..."
+      class="search-input"
+    >
+  </div>
+
+  <div class="filters">
+    <button 
+      *ngFor="let category of categories"
+      (click)="onFilter(category)"
+      [class.active]="currentFilter === category"
+      class="filter-btn"
+    >
+      {{category}}
+    </button>
+  </div>
+
+  <div class="products-grid">
+    <div *ngFor="let product of products" class="product-card">
+      <h3>{{product.name}}</h3>
+      <p class="price">${{product.price}}</p>
+      <p class="category">{{product.category}}</p>
+      <p class="stock">In Stock: {{product.stock}}</p>
+      <button (click)="addToCart(product)" class="add-btn">
+        Add to Cart
+      </button>
+    </div>
+  </div>
+</div> 
