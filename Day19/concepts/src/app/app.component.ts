@@ -273,11 +273,16 @@ import { MatTreeModule } from '@angular/material/tree';
               <td mat-cell *matCellDef="let element"> {{element.position}} </td>
             </ng-container>
 
+            
             <ng-container matColumnDef="name">
               <th mat-header-cell *matHeaderCellDef> Name </th>
               <td mat-cell *matCellDef="let element"> {{element.name}} </td>
             </ng-container>
-
+            
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
             <ng-container matColumnDef="weight">
               <th mat-header-cell *matHeaderCellDef> Weight </th>
               <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
