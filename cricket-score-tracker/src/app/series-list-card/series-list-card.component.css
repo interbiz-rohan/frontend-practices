@@ -133,12 +133,14 @@
 
 .match-item {
   margin: 15px 0;
-  padding: 0;
+  padding: 10px 20px;
   background-color: transparent;
   border-radius: 0;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap:10px;
+  border-radius: 10px;
 }
 
 .match-item:last-child {
@@ -154,4 +156,13 @@
 .match-result {
   font-size: 0.9em;
   color: #555;
+}
+
+.active{
+   background-color: rgba(
+       150,
+       150,
+       150,
+       0.4
+     );
 }

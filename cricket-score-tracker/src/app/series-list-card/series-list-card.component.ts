@@ -1,52 +1,65 @@
-import { Component } from '@angular/core';
+import { Component, signal, computed, effect, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AppService } from '../services/app.service';
 
 @Component({
   selector: 'app-series-list-card',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './series-list-card.component.html',
-  styleUrl: './series-list-card.component.css'
+  styleUrl: './series-list-card.component.css',
 })
 export class SeriesListCardComponent {
+  series = signal<Array<any>>([]);
+  matchData = signal<any>({});
+  selectedMatch: string | null = null;
 
-  series = [
-    {
-      id: 1,
-      name: 'IPL Series',
-      matches: [
-        { id: 101, team1: 'Chennai Super Kings', team2: 'Delhi Capitals', result: 'Chennai won by 6 runs' },
-        { id: 102, team1: 'Chennai Super Kings', team2: 'Delhi Capitals', result: 'Chennai won by 6 runs' },
-        { id: 103, team1: 'Chennai Super Kings', team2: 'Delhi Capitals', result: 'Chennai won by 6 runs' },
-      ],
-      showMatches: false
-    },
-    {
-      id: 2,
-      name: 'Srilanka Test Series',
-      matches: [
-        { id: 201, team1: 'Sri Lanka', team2: 'India', result: 'Match Drawn' },
-        { id: 202, team1: 'Sri Lanka', team2: 'India', result: 'India won by an inning' },
-      ],
-      showMatches: false
-    }
-  ];
+  activeSeries = computed(() => {
+    return this.series().filter((s) => s.showMatches);
+  });
 
-  selectedSeries = this.series[0];
-  isListOpen: boolean = false;
+  totalMatches = computed(() => {
+    return this.series().reduce((total, series) => {
+      const matchCount = series.matchList?.length || 0;
+      return total + matchCount;
+    }, 0);
+  });
 
-  selectSeries(selectedSery: any): void {
-    this.series.forEach(s => {
-      if (s.id === selectedSery.id) {
-        s.showMatches = !s.showMatches;
-      } else {
-        s.showMatches = false;
+  constructor(private appService: AppService) {
+    this.appService.series$.subscribe((seriesData) => {
+      if (seriesData) {
+        this.series.set(seriesData);
       }
+    });
+
+    this.appService.selectedMatch$.subscribe((observer) => {
+      this.selectedMatch = observer;
+    });
+
+    this.appService.currentMatchData$.subscribe((observe) => {
+      console.log(observe);
+      this.matchData.set(observe);
     });
   }
 
-  toggleList(): void {
-    this.isListOpen = !this.isListOpen;
+  selectSeries(id: string) {
+    const updatedSeries = this.series().map((s) => {
+      if (s.id === id) {
+        if (!s.matchList || s.matchList.length === 0) {
+          this.appService.setSelectedSeries(id);
+        }
+        return { ...s, showMatches: !s.showMatches };
+      }
+      return s;
+    });
+    this.series.set(updatedSeries);
   }
 
+  selectMatch(id: string) {
+    this.appService.setSelectedMatch(id);
+  }
+
+  
+
+  
 }

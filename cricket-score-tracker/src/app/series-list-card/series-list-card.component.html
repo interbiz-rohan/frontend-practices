@@ -1,30 +1,34 @@
 <div class="series-list-container">
   <div class="match-summary">
-    <div class="match-title">Ind Vs Aus</div>
+    <div class="match-title">{{matchData()?.teamInfo?.[0]?.shortname}} Vs {{matchData()?.teamInfo?.[1]?.shortname}}</div>
     <div class="score-info">
-      <span class="runs">100</span>
+      <span class="runs">{{matchData()?.score?.[0]?.r}}</span>
       <span class="run-text">Run</span>
       <span class="separator">/</span>
-      <span class="overs">12.4</span>
+      <span class="overs">{{matchData()?.score?.[0]?.o}}</span>
       <span class="over-text">Over</span>
     </div>
   </div>
 
   <div class="series-items-container">
-    <div class="series-item-accordion" *ngFor="let s of series">
-      <div class="series-accordion-header" (click)="selectSeries(s)">
+    <div class="series-item-accordion" *ngFor="let s of series()">
+      <div class="series-accordion-header" (click)="selectSeries(s.id)">
         <span class="series-name">{{ s.name }}</span>
         <span class="toggle-arrow">{{ s.showMatches ? "▲" : "▼" }}</span>
       </div>
       <div class="match-list-accordion" *ngIf="s.showMatches">
-        <div class="match-item" *ngFor="let match of s.matches">
-          <div class="team-info">{{ match.team1 }}</div>
-          <div class="team-info">
-            <span>vs</span>
-            <div class="match-result">{{ match.result }}</div>
+        <div *ngFor="let match of s.matchList">
+          <div class="match-item" [class.active]="selectedMatch==match.id" (click)="selectMatch(match.id)">
+            <div class="team-info">{{ match.teams?.[0] }}</div>
+            <div class="team-info">
+              <span>vs</span>
+              <div class="match-result">{{ match.status }}</div>
+            </div>
+            <div class="team-info">{{ match.teams?.[1] }}</div>
           </div>
-          <div class="team-info">{{ match.team2 }}</div>
+          <hr />
         </div>
+        <hr />
       </div>
     </div>
   </div>

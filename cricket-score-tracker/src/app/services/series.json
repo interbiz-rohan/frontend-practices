@@ -1,0 +1,278 @@
+  [
+      {
+        "id": "d854d3d2-9260-455e-a0e6-21e3906e83f8",
+        "name": "England tour of Ireland, 2025",
+        "startDate": "2025-09-17",
+        "endDate": "Sep 21",
+        "odi": 3,
+        "t20": 0,
+        "test": 0,
+        "squads": 0,
+        "matches": 3
+      },
+      {
+        "id": "f5dee348-f6f6-4d0d-b4f1-b78bbea2aca1",
+        "name": "South Africa tour of England, 2025",
+        "startDate": "2025-09-02",
+        "endDate": "Sep 14",
+        "odi": 3,
+        "t20": 3,
+        "test": 0,
+        "squads": 0,
+        "matches": 6
+      },
+      {
+        "id": "40100bbd-49c9-40e5-87d5-92866692b620",
+        "name": "India Women tour of England, 2025",
+        "startDate": "2025-06-28",
+        "endDate": "Jul 22",
+        "odi": 3,
+        "t20": 5,
+        "test": 0,
+        "squads": 0,
+        "matches": 8
+      },
+      {
+        "id": "8f227d30-17ca-4b64-9896-90fb2521f78f",
+        "name": "India tour of England, 2025",
+        "startDate": "2025-06-13",
+        "endDate": "Aug 04",
+        "odi": 0,
+        "t20": 0,
+        "test": 5,
+        "squads": 0,
+        "matches": 6
+      },
+      {
+        "id": "e74332ae-5fee-4a43-814a-88ead6909e35",
+        "name": "ICC World Test Championship Final 2025",
+        "startDate": "2025-06-11",
+        "endDate": "Jun 15",
+        "odi": 0,
+        "t20": 0,
+        "test": 1,
+        "squads": 0,
+        "matches": 1
+      },
+      {
+        "id": "f9e434f8-9aed-406b-88dd-15578c8a8427",
+        "name": "West Indies tour of England, 2025",
+        "startDate": "2025-05-29",
+        "endDate": "Jun 10",
+        "odi": 3,
+        "t20": 3,
+        "test": 0,
+        "squads": 0,
+        "matches": 6
+      },
+      {
+        "id": "e832643d-e205-4590-b816-f5bf13a6887a",
+        "name": "Bangladesh tour of Pakistan, 2025",
+        "startDate": "2025-05-25",
+        "endDate": "Jun 03",
+        "odi": 0,
+        "t20": 5,
+        "test": 0,
+        "squads": 1,
+        "matches": 5
+      },
+      {
+        "id": "94111d98-0f1f-470f-88b6-e55e737d7be3",
+        "name": "West Indies Women tour of England, 2025",
+        "startDate": "2025-05-21",
+        "endDate": "Jun 06",
+        "odi": 3,
+        "t20": 3,
+        "test": 0,
+        "squads": 2,
+        "matches": 6
+      },
+      {
+        "id": "01e2078d-d00d-43b7-8909-7e6e8f792005",
+        "name": "West Indies tour of Ireland, 2025",
+        "startDate": "2025-05-21",
+        "endDate": "Jun 15",
+        "odi": 3,
+        "t20": 3,
+        "test": 0,
+        "squads": 2,
+        "matches": 6
+      },
+      {
+        "id": "0a96adb4-3d19-4e1f-b5a1-0fbee0416af1",
+        "name": "South Africa A tour of West Indies, 2025",
+        "startDate": "2025-05-21",
+        "endDate": "Jun 11",
+        "odi": 3,
+        "t20": 0,
+        "test": 2,
+        "squads": 2,
+        "matches": 5
+      },
+      {
+        "id": "3b37257a-1c4a-46d3-8eef-b0d9cd6f8bc2",
+        "name": "Slovenia tour of Austria 2025",
+        "startDate": "2025-05-17",
+        "endDate": "May 18",
+        "odi": 0,
+        "t20": 4,
+        "test": 0,
+        "squads": 2,
+        "matches": 4
+      },
+      {
+        "id": "41ba7146-03d8-4aaf-a5d9-a7690c852658",
+        "name": "Bangladesh tour of UAE, 2025",
+        "startDate": "2025-05-17",
+        "endDate": "May 19",
+        "odi": 0,
+        "t20": 2,
+        "test": 0,
+        "squads": 2,
+        "matches": 3
+      },
+      {
+        "id": "604b7771-1437-48d4-8de8-5fc1a407629f",
+        "name": "Zimbabwe tour of England, 2025",
+        "startDate": "May 15",
+        "endDate": "May 25",
+        "odi": 0,
+        "t20": 0,
+        "test": 1,
+        "squads": 2,
+        "matches": 0
+      },
+      {
+        "id": "9334b089-75cf-40c7-b000-43ecfa5d9f36",
+        "name": "Bulgaria Women tour of Estonia, 2025",
+        "startDate": "2025-05-15",
+        "endDate": "May 16",
+        "odi": 0,
+        "t20": 3,
+        "test": 0,
+        "squads": 2,
+        "matches": 3
+      },
+      {
+        "id": "c20d0b43-3cb1-4fa7-90f7-352828531f17",
+        "name": "Cook Islands tour of Japan, 2025",
+        "startDate": "2025-05-13",
+        "endDate": "May 14",
+        "odi": 0,
+        "t20": 2,
+        "test": 0,
+        "squads": 2,
+        "matches": 2
+      },
+      {
+        "id": "7124ea9a-d213-4d0e-8f21-5392fb244eb3",
+        "name": "Germany Women tour of Greece, 2025",
+        "startDate": "2025-05-10",
+        "endDate": "May 11",
+        "odi": 0,
+        "t20": 4,
+        "test": 0,
+        "squads": 2,
+        "matches": 4
+      },
+      {
+        "id": "d98be13e-3b73-4858-99f3-b58c7131704b",
+        "name": "ICC Womens T20 World Cup Asia Qualifier 2025",
+        "startDate": "2025-05-09",
+        "endDate": "May 20",
+        "odi": 0,
+        "t20": 21,
+        "test": 0,
+        "squads": 9,
+        "matches": 21
+      },
+      {
+        "id": "d7f39636-282f-4b75-81da-1570aa9734e6",
+        "name": "Japan T20I Tri-Series, 2025",
+        "startDate": "2025-05-07",
+        "endDate": "May 11",
+        "odi": 0,
+        "t20": 7,
+        "test": 0,
+        "squads": 3,
+        "matches": 7
+      },
+      {
+        "id": "70e6d8dc-bb33-4be5-bae9-e288af1e871d",
+        "name": "Estonia tour of Malta, 2025",
+        "startDate": "2025-05-06",
+        "endDate": "May 07",
+        "odi": 0,
+        "t20": 3,
+        "test": 0,
+        "squads": 2,
+        "matches": 3
+      },
+      {
+        "id": "84fc9a06-b5b4-42eb-aab5-3ca3b6d54e15",
+        "name": "Croatia Women tour of Malta, 2025",
+        "startDate": "2025-05-05",
+        "endDate": "May 05",
+        "odi": 0,
+        "t20": 2,
+        "test": 0,
+        "squads": 2,
+        "matches": 2
+      },
+      {
+        "id": "b7c8e7f5-a9df-47eb-a7b8-1525ccdfb2bc",
+        "name": "New Zealand A tour to Bangladesh, 2025",
+        "startDate": "2025-05-05",
+        "endDate": "May 24",
+        "odi": 3,
+        "t20": 0,
+        "test": 2,
+        "squads": 2,
+        "matches": 5
+      },
+      {
+        "id": "8a5172a9-28af-4c51-99bc-fc1ccebda96d",
+        "name": "Womens T20I Quadrangular Series in Thailand 2025",
+        "startDate": "2025-05-03",
+        "endDate": "May 06",
+        "odi": 0,
+        "t20": 6,
+        "test": 0,
+        "squads": 4,
+        "matches": 6
+      },
+      {
+        "id": "e23ca9b9-e7bc-4081-84d7-997682e0fb73",
+        "name": "Womens T20I Quadrangular Series in Thailand 2025",
+        "startDate": "2025-05-02",
+        "endDate": "May 06",
+        "odi": 0,
+        "t20": 6,
+        "test": 0,
+        "squads": 0,
+        "matches": 5
+      },
+      {
+        "id": "550dfaa2-66dd-48e6-8a68-83a410221d7d",
+        "name": "Cyprus Women tour of Czech Republic, 2025",
+        "startDate": "2025-05-02",
+        "endDate": "May 04",
+        "odi": 0,
+        "t20": 5,
+        "test": 0,
+        "squads": 2,
+        "matches": 5
+      },
+      {
+        "id": "e65792aa-6e4d-4c7d-8df5-534dd8160ec9",
+        "name": "Bahrain Women tour of Oman, 2025",
+        "startDate": "2025-05-02",
+        "endDate": "May 05",
+        "odi": 0,
+        "t20": 3,
+        "test": 0,
+        "squads": 2,
+        "matches": 3
+      }
+    ]
+  
