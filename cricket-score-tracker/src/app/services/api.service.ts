@@ -8,7 +8,7 @@ import { Observable } from "rxjs";
 export class ApiService {
 
   private apiUrl = 'https://api.cricapi.com/v1';
-  private apiKey = 'f7e229ff-5f36-483d-8c47-5e2a028ae189';
+  private apiKey = '22cee765-6249-4f97-ab41-7bb5332a0df6';
 
   constructor(private http: HttpClient) { }
 
@@ -24,7 +24,7 @@ export class ApiService {
   }
 
   getSelectedMatchData(id:any): Observable<any> {
-    const url = `${this.apiUrl}/match_scorecard?apikey=${this.apiKey}&id=347e27a7-5e40-428f-8afb-adfae1d5d3dd`;
+    const url = `${this.apiUrl}/match_scorecard?apikey=${this.apiKey}&id=${id}`;
     return this.http.get<any>(url);
   }
 }

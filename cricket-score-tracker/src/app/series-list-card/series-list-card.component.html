@@ -1,11 +1,11 @@
 <div class="series-list-container">
   <div class="match-summary">
-    <div class="match-title">{{matchData()?.teamInfo?.[0]?.shortname}} Vs {{matchData()?.teamInfo?.[1]?.shortname}}</div>
+    <div class="match-title">{{matchData()?.teamInfo?.[0]?.shortname  ?? "--"}} Vs {{matchData()?.teamInfo?.[1]?.shortname ?? "--"}}</div>
     <div class="score-info">
-      <span class="runs">{{matchData()?.score?.[0]?.r}}</span>
+      <span class="runs">{{matchData()?.score?.[0]?.r ?? "--"}}</span>
       <span class="run-text">Run</span>
       <span class="separator">/</span>
-      <span class="overs">{{matchData()?.score?.[0]?.o}}</span>
+      <span class="overs">{{matchData()?.score?.[0]?.o ?? "--"}}</span>
       <span class="over-text">Over</span>
     </div>
   </div>

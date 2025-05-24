@@ -2,12 +2,17 @@
   <h2 class="heading">Scorecard</h2>
   <br />
   <div class="tabs">
-    <button class="tab" [class.active]="activeTeam === 'Australia'" (click)="selectTeam('Australia')">Australia</button>
-    <button class="tab" [class.active]="activeTeam === 'India'" (click)="selectTeam('India')">India</button>
+    <button 
+      *ngFor="let team of matchData()?.teams" 
+      class="tab" 
+      [class.active]="selectedTeam() === team" 
+      (click)="selectTeam(team)">
+      {{ team }}
+    </button>
   </div>
 
   <div class="scroller">
-    <div class="batting-section" >
+    <div class="batting-section">
       <table>
         <thead>
           <tr>
@@ -20,195 +25,55 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr *ngFor="let batsman of getCurrentInning()?.batting">
             <td>
               <div class="player-info">
-                <span class="player-name">David Warner</span>
-                <span class="player-role">Batter & bowler</span>
+                <span class="player-name">{{ batsman.batsman.name }}</span>
+                <span class="player-role">{{ batsman['dismissal-text'] || 'not out' }}</span>
               </div>
             </td>
-            <td>41</td>
-            <td>30</td>
-            <td>2</td>
-            <td>4</td>
-            <td>78.87</td>
-          </tr>
-          <tr>
-            <td>
-              <div class="player-info">
-                <span class="player-name">David Warner</span>
-                <span class="player-role">Batter & bowler</span>
-              </div>
-            </td>
-            <td>41</td>
-            <td>30</td>
-            <td>2</td>
-            <td>4</td>
-            <td>78.87</td>
-          </tr>
-          <tr>
-            <td>
-              <div class="player-info">
-                <span class="player-name">David Warner</span>
-                <span class="player-role">Batter & bowler</span>
-              </div>
-            </td>
-            <td>41</td>
-            <td>30</td>
-            <td>2</td>
-            <td>4</td>
-            <td>78.87</td>
-          </tr>
-          <tr>
-            <td>
-              <div class="player-info">
-                <span class="player-name">David Warner</span>
-                <span class="player-role">Batter & bowler</span>
-              </div>
-            </td>
-            <td>41</td>
-            <td>30</td>
-            <td>2</td>
-            <td>4</td>
-            <td>78.87</td>
-          </tr>
-          <tr>
-            <td>
-              <div class="player-info">
-                <span class="player-name">David Warner</span>
-                <span class="player-role">Batter & bowler</span>
-              </div>
-            </td>
-            <td>41</td>
-            <td>30</td>
-            <td>2</td>
-            <td>4</td>
-            <td>78.87</td>
-          </tr>
-          <tr>
-            <td>
-              <div class="player-info">
-                <span class="player-name">David Warner</span>
-                <span class="player-role">Batter & bowler</span>
-              </div>
-            </td>
-            <td>41</td>
-            <td>30</td>
-            <td>2</td>
-            <td>4</td>
-            <td>78.87</td>
+            <td>{{ batsman.r }}</td>
+            <td>{{ batsman.b }}</td>
+            <td>{{ batsman['6s'] }}</td>
+            <td>{{ batsman['4s'] }}</td>
+            <td>{{ batsman.sr }}</td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <div class="bowling-section" >
-        <table>
-          <thead>
-            <tr>
-              <th><span>Bowling</span> <span class="arrow">▲</span></th>
-              <th>O</th>
-              <th>M</th>
-              <th>R</th>
-              <th>W</th>
-              <th>NB</th>
-              <th>WD</th>
-              <th>ECO</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <div class="player-info">
-                  <span class="player-name">David Warner</span>
-                  <span class="player-role">Batter & bowler</span>
-                </div>
-              </td>
-              <td>41</td>
-              <td>30</td>
-              <td>2</td>
-              <td>4</td>
-              <td>78.87</td>
-              <td>41</td>
-              <td>30</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="player-info">
-                  <span class="player-name">David Warner</span>
-                  <span class="player-role">Batter & bowler</span>
-                </div>
-              </td>
-              <td>41</td>
-              <td>30</td>
-              <td>2</td>
-              <td>4</td>
-              <td>78.87</td>
-              <td>41</td>
-              <td>30</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="player-info">
-                  <span class="player-name">David Warner</span>
-                  <span class="player-role">Batter & bowler</span>
-                </div>
-              </td>
-              <td>41</td>
-              <td>30</td>
-              <td>2</td>
-              <td>4</td>
-              <td>78.87</td>
-              <td>41</td>
-              <td>30</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="player-info">
-                  <span class="player-name">David Warner</span>
-                  <span class="player-role">Batter & bowler</span>
-                </div>
-              </td>
-              <td>41</td>
-              <td>30</td>
-              <td>2</td>
-              <td>4</td>
-              <td>78.87</td>
-              <td>41</td>
-              <td>30</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="player-info">
-                  <span class="player-name">David Warner</span>
-                  <span class="player-role">Batter & bowler</span>
-                </div>
-              </td>
-              <td>41</td>
-              <td>30</td>
-              <td>2</td>
-              <td>4</td>
-              <td>78.87</td>
-              <td>41</td>
-              <td>30</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="player-info">
-                  <span class="player-name">David Warner</span>
-                  <span class="player-role">Batter & bowler</span>
-                </div>
-              </td>
-              <td>41</td>
-              <td>30</td>
-              <td>2</td>
-              <td>4</td>
-              <td>78.87</td>
-              <td>41</td>
-              <td>30</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="bowling-section">
+      <table>
+        <thead>
+          <tr>
+            <th><span>Bowling</span> <span class="arrow">▲</span></th>
+            <th>O</th>
+            <th>M</th>
+            <th>R</th>
+            <th>W</th>
+            <th>NB</th>
+            <th>WD</th>
+            <th>ECO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let bowler of getCurrentInning()?.bowling">
+            <td>
+              <div class="player-info">
+                <span class="player-name">{{ bowler.bowler.name }}</span>
+                <span class="player-role">Bowler</span>
+              </div>
+            </td>
+            <td>{{ bowler.o }}</td>
+            <td>{{ bowler.m }}</td>
+            <td>{{ bowler.r }}</td>
+            <td>{{ bowler.w }}</td>
+            <td>{{ bowler.nb }}</td>
+            <td>{{ bowler.wd }}</td>
+            <td>{{ bowler.eco }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

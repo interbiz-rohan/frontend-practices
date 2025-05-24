@@ -3,11 +3,12 @@ import { RouterOutlet } from '@angular/router';
 import { ScorecardCardComponent } from './scorecard-card/scorecard-card.component';
 import { SeriesListCardComponent } from './series-list-card/series-list-card.component';
 import { CurrentBattingBowlingCardComponent } from './current-batting-bowling-card/current-batting-bowling-card.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [  ScorecardCardComponent, SeriesListCardComponent, CurrentBattingBowlingCardComponent],
+  imports: [  ScorecardCardComponent, SeriesListCardComponent, CurrentBattingBowlingCardComponent , LoadingComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

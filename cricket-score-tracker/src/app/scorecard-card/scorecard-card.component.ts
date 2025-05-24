@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, computed, Signal, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AppService } from '../services/app.service';
 
 @Component({
   selector: 'app-scorecard-card',
@@ -10,10 +11,27 @@ import { CommonModule } from '@angular/common';
 })
 export class ScorecardCardComponent {
 
-  activeTeam: string = 'Australia';
+  matchData = signal<any>({});
+  selectedTeam = signal<string>('');
+
+
+  constructor(private appService: AppService) {
+    this.appService.currentMatchData$.subscribe((observe) => {
+      console.log(observe);
+      this.matchData.set(observe);
+      this.selectedTeam.set(this.matchData().teams[0])
+    });
+  }
 
   selectTeam(team: string): void {
-    this.activeTeam = team;
+    this.selectedTeam.set(team);
+  }
+
+  getCurrentInning() {
+    if (!this.matchData()?.scorecard) return null;
+    return this.matchData().scorecard.find((inning: any) => 
+      inning.inning.includes(this.selectedTeam())
+    );
   }
 
 }
