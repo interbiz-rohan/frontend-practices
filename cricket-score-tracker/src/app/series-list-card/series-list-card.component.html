@@ -1,34 +1,40 @@
 <div class="series-list-container">
-  <div class="match-summary">
-    <div class="match-title">{{matchData()?.teamInfo?.[0]?.shortname  ?? "--"}} Vs {{matchData()?.teamInfo?.[1]?.shortname ?? "--"}}</div>
-    <div class="score-info">
-      <span class="runs">{{matchData()?.score?.[0]?.r ?? "--"}}</span>
-      <span class="run-text">Run</span>
-      <span class="separator">/</span>
-      <span class="overs">{{matchData()?.score?.[0]?.o ?? "--"}}</span>
-      <span class="over-text">Over</span>
-    </div>
+  <div class="search-container">
+    <input 
+      type="text" 
+      class="search-input" 
+      placeholder="Search series..." 
+      (input)="onSearch($event)"
+    />
   </div>
 
   <div class="series-items-container">
-    <div class="series-item-accordion" *ngFor="let s of series()">
-      <div class="series-accordion-header" (click)="selectSeries(s.id)">
-        <span class="series-name">{{ s.name }}</span>
-        <span class="toggle-arrow">{{ s.showMatches ? "▲" : "▼" }}</span>
-      </div>
-      <div class="match-list-accordion" *ngIf="s.showMatches">
-        <div *ngFor="let match of s.matchList">
-          <div class="match-item" [class.active]="selectedMatch==match.id" (click)="selectMatch(match.id)">
-            <div class="team-info">{{ match.teams?.[0] }}</div>
-            <div class="team-info">
-              <span>vs</span>
-              <div class="match-result">{{ match.status }}</div>
+    <button class="show-series-btn" (click)="toggleSeriesList()">
+      {{ isSeriesListExpanded() ? 'Hide Series List' : 'Show All Series' }}
+    </button>
+    <div class="series-list" [class.expanded]="isSeriesListExpanded()">
+      <div class="series-item-accordion" *ngFor="let s of series()">
+        <div class="series-accordion-header" (click)="selectSeries(s.id)">
+          <span class="series-name">{{ s.name }}</span>
+          <div class="selected-match" *ngIf="getSelectedMatchInSeries()(s)">
+            {{ getSelectedMatchInSeries()(s)?.teamInfo?.[0]?.shortname }} vs {{ getSelectedMatchInSeries()(s)?.teamInfo?.[1]?.shortname ?? '--' }}
+          </div>
+          <span class="toggle-arrow">{{ s.showMatches ? "▲" : "▼" }}</span>
+        </div>
+        <div class="match-list-accordion" *ngIf="s.showMatches">
+          <div *ngFor="let match of s.matchList">
+            <div class="match-item" [class.active]="selectedMatch() === match.id" (click)="selectMatch(match.id)">
+              <div class="team-info">{{ match.teams[0] }}</div>
+              <div class="team-info">
+                <span>vs</span>
+                <div class="match-result">{{ match.status }}</div>
+              </div>
+              <div class="team-info">{{ match.teams[1] }}</div>
             </div>
-            <div class="team-info">{{ match.teams?.[1] }}</div>
+            <hr />
           </div>
           <hr />
         </div>
-        <hr />
       </div>
     </div>
   </div>

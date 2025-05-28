@@ -1,6 +1,8 @@
-import { Component, signal, computed, effect, OnDestroy } from '@angular/core';
+import { Component, signal, computed, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppService } from '../services/app.service';
+import { Series, Match } from '../interfaces/cricket.interface';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-series-list-card',
@@ -9,10 +11,12 @@ import { AppService } from '../services/app.service';
   templateUrl: './series-list-card.component.html',
   styleUrl: './series-list-card.component.css',
 })
-export class SeriesListCardComponent {
-  series = signal<Array<any>>([]);
-  matchData = signal<any>({});
-  selectedMatch: string | null = null;
+export class SeriesListCardComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
+  series = signal<Series[]>([]);
+  matchData = signal<Match | null>(null);
+  selectedMatch = signal<string | null>(null);
+  isSeriesListExpanded = signal<boolean>(true);
 
   activeSeries = computed(() => {
     return this.series().filter((s) => s.showMatches);
@@ -25,21 +29,20 @@ export class SeriesListCardComponent {
     }, 0);
   });
 
-  constructor(private appService: AppService) {
-    this.appService.series$.subscribe((seriesData) => {
-      if (seriesData) {
-        this.series.set(seriesData);
-      }
-    });
+  getSelectedMatchInSeries = computed(() => (series: Series): Match | null => {
+    if (!series.matchList || !this.selectedMatch()) return null;
+    return series.matchList.find(match => match.id === this.selectedMatch()) || null;
+  });
 
-    this.appService.selectedMatch$.subscribe((observer) => {
-      this.selectedMatch = observer;
-    });
+  constructor(private appService: AppService) {}
 
-    this.appService.currentMatchData$.subscribe((observe) => {
-      console.log(observe);
-      this.matchData.set(observe);
-    });
+  onSearch(event: Event) {
+    const searchTerm = (event.target as HTMLInputElement).value;
+    this.appService.searchSeries(searchTerm);
+  }
+
+  toggleSeriesList() {
+    this.isSeriesListExpanded.update(value => !value);
   }
 
   selectSeries(id: string) {
@@ -55,11 +58,35 @@ export class SeriesListCardComponent {
     this.series.set(updatedSeries);
   }
 
-  selectMatch(id: string) {
-    this.appService.setSelectedMatch(id);
+  ngOnInit(): void {
+    this.appService.series$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((seriesData) => {
+        if (seriesData) {
+          this.series.set(seriesData);
+        }
+      });
+
+    this.appService.selectedMatch$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((observer) => {
+        this.selectedMatch.set(observer);
+      });
+
+    this.appService.currentMatchData$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((observe) => {
+        this.matchData.set(observe);
+      });
   }
 
-  
+  selectMatch(id: string) {
+    this.appService.setSelectedMatch(id);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
-  
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }

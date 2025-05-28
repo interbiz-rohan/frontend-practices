@@ -1,73 +1,44 @@
 // write here
 
 import { effect, Injectable, signal } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { ApiService } from './api.service';
-import { tap, finalize } from 'rxjs/operators';
-
-export interface Match {
-  id: string;
-  teams: string[];
-  result: string;
-  status: string;
-}
-
-export interface Series {
-  id: string;
-  name: string;
-  showMatches: boolean;
-  matchList: Match[];
-}
-
-interface ScorecardData {}
-
-interface CurrentMatchData {}
-
-interface AppState {
-  series: Array<any>;
-  selectedSeries: Series | null;
-  scorecardData: ScorecardData | null;
-  currentMatchData: CurrentMatchData | null;
-  activeScorecardTeam: string;
-}
+import { tap, finalize, debounceTime, switchMap, distinctUntilChanged } from 'rxjs/operators';
+import { ApiResponse, Series, Match } from '../interfaces/cricket.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
-  private _series = new BehaviorSubject<any[]>([]);
+  private searchSubject = new Subject<string>();
+  private _series = new BehaviorSubject<Series[]>([]);
   private _selectedSeries = new BehaviorSubject<string | null>(null);
   private _selectedMatch = new BehaviorSubject<string | null>(null);
-  private _scorecardData = new BehaviorSubject<ScorecardData | null>(null);
-  private _currentMatchData = new BehaviorSubject<any>(null);
+  private _currentMatchData = new BehaviorSubject<Match | null>(null);
   private _activeScorecardTeam = new BehaviorSubject<string>('Australia');
 
-  // Loading state signal
   isLoading = signal<boolean>(true);
 
-  series$: Observable<any[]> = this._series.asObservable();
-  selectedSeries$: Observable<string | null> =
-    this._selectedSeries.asObservable();
-  selectedMatch$: Observable<string | null> =
-    this._selectedMatch.asObservable(); 
-  scorecardData$: Observable<ScorecardData | null> =
-    this._scorecardData.asObservable();
-  currentMatchData$: Observable<any> = this._currentMatchData.asObservable();
-  activeScorecardTeam$: Observable<string> =
-    this._activeScorecardTeam.asObservable();
-
-  
+  series$: Observable<Series[]> = this._series.asObservable();
+  selectedSeries$: Observable<string | null> = this._selectedSeries.asObservable();
+  selectedMatch$: Observable<string | null> = this._selectedMatch.asObservable();
+  currentMatchData$: Observable<Match | null> = this._currentMatchData.asObservable();
+  activeScorecardTeam$: Observable<string> = this._activeScorecardTeam.asObservable();
 
   constructor(private apiService: ApiService) {
     console.log('api hits here');
     this.fetchInitialSeries();
-    // this.loadInitialData();
-    effect(()=>{
-       console.log("Loader -",this.isLoading())
+    this.setupSearchSubscription();
+    effect(() => {
+      console.log("Loader -", this.isLoading())
     });
   }
 
-  setSeries(series: any[]): void {
+  searchSeries(searchTerm: string) {
+    this.searchSubject.next(searchTerm);
+  }
+
+  setSeries(series: Series[]): void {
     this._series.next(series);
   }
 
@@ -76,9 +47,9 @@ export class AppService {
     this.fetchMatchBySeriesId(id);
   }
 
-  setSelectedMatch(id: string){
-    this._selectedMatch.next(id)
-    this.fetchMatchData(id)
+  setSelectedMatch(id: string) {
+    this._selectedMatch.next(id);
+    this.fetchMatchData(id);
   }
 
   fetchInitialSeries(): void {
@@ -92,7 +63,7 @@ export class AppService {
       .subscribe(
         (response) => {
           if (response && response.data) {
-            const seriesWithToggle = response.data.map((s: any) => ({
+            const seriesWithToggle = response.data.map((s) => ({
               ...s,
               showMatches: false,
               matchList: [],
@@ -137,7 +108,7 @@ export class AppService {
       });
   }
 
-  fetchMatchData(id: any) {
+  fetchMatchData(id: string) {
     this.isLoading.set(true);
     this.apiService
       .getSelectedMatchData(id)
@@ -149,40 +120,33 @@ export class AppService {
       });
   }
 
-  // Intialze from json
-
-  // private loadInitialData() {
-  //   import('./series.json')
-  //     .then((module) => {
-  //       console.log('Loaded series data:', module);
-  //       const data = module.default;
-  //       if (Array.isArray(data)) {
-  //         const seriesData = data.map((series) => ({
-  //           ...series,
-  //           showMatches: false,
-  //           matchList: [],
-  //         }));
-  //         this._series.next(seriesData);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error loading series data:', error);
-  //       this.fetchInitialSeries();
-  //     });
-
-  //   import('./matchList.json').then((module) => {
-  //     const data = module.default;
-  //     let updatedSeries:Array<any>=[];
-  //     this._series.subscribe((observer) => {
-  //        updatedSeries = observer.map((value) => {
-  //         if (value.id === '3b37257a-1c4a-46d3-8eef-b0d9cd6f8bc2')
-  //           return { ...value, matchList: data };
-  //         else return value;
-  //       });
-  //     });
-
-  //     this._series.next(updatedSeries);
-
-  //   });
-  // }
+  private setupSearchSubscription() {
+    this.searchSubject.pipe(
+      debounceTime(800),
+      distinctUntilChanged(),
+      switchMap(searchTerm => {
+        console.log("-----------")
+        return this.apiService.searchSeries(searchTerm).pipe(
+          finalize(() => this.isLoading.set(false))
+        );
+      })
+    ).subscribe(
+      (response) => {
+        if (response && response.data) {
+          const seriesWithToggle = response.data.map((s: Series) => ({
+            ...s,
+            showMatches: false,
+            matchList: [],
+          }));
+          this.setSeries(seriesWithToggle);
+        } else {
+          // alert("Failure - " + response.reason);
+        }
+      },
+      (error) => {
+        console.error('Error searching series:', error);
+        this.isLoading.set(false);
+      }
+    );
+  }
 }

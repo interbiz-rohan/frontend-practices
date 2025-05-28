@@ -7,8 +7,9 @@
   min-height: 100vh;
   background-repeat: no-repeat;
   padding: 0 20px;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .list-section,
@@ -26,6 +27,7 @@
     flex-direction: row;
     align-items: flex-start;
     padding: 5px ;
+    justify-content: flex-start;
   }
 
   .list-section {
