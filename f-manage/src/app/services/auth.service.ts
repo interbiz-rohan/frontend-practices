@@ -1,26 +1,21 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
-
-export interface User {
-  id: string;
-  email: string;
-  name: string;
-  role: string;
-}
+import { BehaviorSubject, Observable, from, map, tap, catchError, of } from 'rxjs';
+import { IndexedDBService } from './indexed-db.service';
+import { User } from './indexed-db.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private currentUserSubject = new BehaviorSubject<User | null>(null);
-  public currentUser = new Observable<User | null>();
+  private currentUserSubject: BehaviorSubject<User | null>;
+  public currentUser: Observable<User | null>;
 
-  constructor(private router: Router) {
-    const storedUser = sessionStorage.getItem('currentUser');
-    this.currentUserSubject.next(
-      storedUser ? JSON.parse(storedUser) : null
-    );
+  constructor(
+    private router: Router,
+    private indexedDBService: IndexedDBService
+  ) {
+    this.currentUserSubject = new BehaviorSubject<User | null>(null);
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
@@ -28,39 +23,38 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
-  login(email: string, password: string): boolean {
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const user = users.find((u: any) => 
-      u.email === email && 
-      u.password === password
+  login(email: string, password: string): Observable<boolean> {
+    return this.indexedDBService.getUserByEmail(email).pipe(
+      map(user => {
+        if (user && user.password === password) {
+          this.currentUserSubject.next(user);
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          return true;
+        }
+        return false;
+      }),
+      catchError(error => {
+        console.error('Login error:', error);
+        return of(false);
+      })
     );
-
-    if (user) {
-      const userData: User = {
-        id: user.id,
-        email: user.email,
-        name: user.name,
-        role: user.role
-      };
-      
-      sessionStorage.setItem('currentUser', JSON.stringify(userData));
-      this.currentUserSubject.next(userData);
-      return true;
-    }
-    return false;
   }
 
   logout() {
-    sessionStorage.removeItem('currentUser');
+    localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
     this.router.navigate(['/login']);
   }
 
   isAuthenticated(): boolean {
+    const user = localStorage.getItem('currentUser');
+    if (user && !this.currentUserValue) {
+      this.currentUserSubject.next(JSON.parse(user));
+    }
     return !!this.currentUserValue;
   }
 
-  hasRole(role: string): boolean {
-    return this.currentUserValue?.role === role;
+  isAdmin(): boolean {
+    return this.currentUserValue?.role === 'admin';
   }
 } 
