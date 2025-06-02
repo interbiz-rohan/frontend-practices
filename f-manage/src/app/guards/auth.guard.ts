@@ -12,17 +12,30 @@ export class AuthGuard implements CanActivate {
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (this.authService.isAuthenticated()) {
-      console.log()
-      const requiredRole = route.data['role'];
-      if (requiredRole && !this.authService.hasRole(requiredRole)) {
-        this.router.navigate(['/dashboard']);
-        return false;
-      }
-      return true;
+    if (!this.authService.isAuthenticated()) {
+      this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+      return false;
     }
+    return true;
+  }
+}
 
-    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
-    return false;
+@Injectable({
+  providedIn: 'root'
+})
+export class LoginGuard implements CanActivate {
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) { }
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    console.log(this.authService.isAuthenticated())
+
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['/files']);
+      return false;
+    }
+    return true;
   }
 } 

@@ -1,0 +1,49 @@
+<div class="login-container">
+  <div class="login-form-section">
+      <div class="form-container">
+          <h2>Login</h2>
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                  <label for="email">Email</label>
+                  <input 
+                      type="email" 
+                      id="email" 
+                      formControlName="email"
+                      placeholder="Example@email.com"
+                      [ngClass]="{'is-invalid': submitted && f['email'].errors}">
+                  <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                      <div *ngIf="f['email'].errors['required']">Email is required</div>
+                      <div *ngIf="f['email'].errors['email']">Please enter a valid email</div>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label for="password">Password</label>
+                  <input 
+                      type="password" 
+                      id="password" 
+                      formControlName="password"
+                      placeholder="At least 8 characters"
+                      [ngClass]="{'is-invalid': submitted && f['password'].errors}">
+                  <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                      <div *ngIf="f['password'].errors['required']">Password is required</div>
+                      <div *ngIf="f['password'].errors['minlength']">Password must be at least 8 characters</div>
+                  </div>
+              </div>
+              <div *ngIf="error" class="alert alert-danger">
+                  {{ error }}
+              </div>
+              <button type="submit" [disabled]="loading">
+                  <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+                  Sign in
+              </button>
+          </form>
+      </div>
+      <p class="copyright">&copy; 2023 ALL RIGHTS RESERVED</p>
+  </div>
+  <div class="login-image-section">
+      <img src="assets/images/bg-curve.webp" alt="Background image" class="background-image">
+      <div class="logo-overlay">
+          <img src="assets/logos/bg-logo.PNG" alt="F-Manage Logo" class="logo">
+      </div>
+  </div>
+</div>    

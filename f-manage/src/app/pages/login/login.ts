@@ -8,14 +8,14 @@ import { AuthService } from '../../services/auth.service';
   selector: 'app-login',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  templateUrl: './login.html',
+  styleUrls: ['./login.scss']
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   loading = false;
   submitted = false;
-  errorMessage = '';
+  error = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    this.errorMessage = '';
+    this.error = '';
 
     if (this.loginForm.invalid) {
       return;
@@ -42,11 +42,20 @@ export class LoginComponent implements OnInit {
 
     this.loading = true;
 
-    if (this.authService.login(this.f['email'].value, this.f['password'].value)) {
-      this.router.navigate(['/dashboard']);
-    } else {
-      this.errorMessage = 'Invalid email or password';
-      this.loading = false;
-    }
-  }
+    this.authService.login(this.f['email'].value, this.f['password'].value).subscribe({
+      next: (success) => {
+        if (success) {
+          this.router.navigate(['/dashboard']);
+        } else {
+          this.error = 'Invalid email or password';
+        }
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error('Login error:', err);
+        this.error = 'An error occurred during login';
+        this.loading = false;
+      }
+    });
+  } 
 } 
