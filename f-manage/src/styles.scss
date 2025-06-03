@@ -4,7 +4,7 @@
     --secondary-color: #fff;
     --tertiary-color: #f5f5f5;
     --accent-color: #6A5ACD;
-    --border-color: #cccccc;
+    --border-color: #e7e7e7;
     --error-color: #dc3545;
     --error-bg: #f8d7da;
     --error-border: #f5c6cb;
@@ -25,7 +25,7 @@
 }
 
 body {
-    background-color: var(--tertiary-color);
+    background-color: var( --secondary-color);
     font-family: 'Instrument Sans', sans-serif;
 }
 

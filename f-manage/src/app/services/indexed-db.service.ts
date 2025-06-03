@@ -13,7 +13,7 @@ interface FManageDB extends DBSchema {
   files: {
     key: string;
     value: File;
-    indexes: { 'by-user': string };
+    indexes: { 'by-user': string, 'by-overview': string };
   };
 }
 
@@ -37,7 +37,9 @@ export interface File {
   type: string;
   size: string;
   url: string;
+  data?: Blob;
   user_id: string;
+  overview: string;
   created_on?: Date;
   updated_on?: Date;
 }
@@ -67,6 +69,7 @@ export class IndexedDBService {
           if (!db.objectStoreNames.contains('files')) {
             const fileStore = db.createObjectStore('files', { keyPath: 'id', autoIncrement: true });
             fileStore.createIndex('by-user', 'user_id');
+            fileStore.createIndex('by-overview', 'overview', { unique: false });
           }
         }
       });

@@ -11,7 +11,7 @@
 
 .files-content {
     padding: 2rem;
-    max-width: 1200px;
+    // max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -123,4 +123,103 @@ th {
 .page-btn:disabled {
     background-color: var(--border-color);
     cursor: not-allowed;
+}
+
+.files-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.tabs {
+    display: flex;
+}
+
+.tabs button {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    color: var(--text-secondary);
+    padding: 8px 20px;
+    font-weight: 500;
+    font-family: "Inter", sans-serif;
+    cursor: pointer;
+    outline: none;
+    transition: background 0.2s, color 0.2s;
+    font-size: 1rem;
+}
+
+.tabs button:first-child{
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+
+.tabs button:last-child{
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.tabs button.active {
+    background: #007aff;
+    color: #fff;
+    border-bottom: 2px solid #007aff;
+}
+
+
+
+.type-select {
+    padding: 12px 12px;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+    background: #fff;
+    font-size: 15px;
+    min-width: 150px;
+}
+
+.search-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-group input {
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+    font-size: 15px;
+    background: #fff;
+}
+
+.search-icon {
+    position: absolute;
+    right: -25px;
+    font-size: 16px;
+    color: #888;
+    pointer-events: none;
+}
+
+.upload-btn {
+    margin-left: auto;
+    background: #111;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 22px;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.upload-btn:hover {
+    background: #222;
+}
+
+.plus-icon {
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 4px;
 }

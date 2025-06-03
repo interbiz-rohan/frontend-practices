@@ -1,22 +1,33 @@
 <div class="files-container">
   <app-header></app-header>
-
+  <app-upload-file-modal *ngIf="showUploadModal()" (closed)="showUploadModal.set(false)" (uploaded)="loadFiles()"></app-upload-file-modal>
   <div class="files-content">
-    <div class="filters">
-      <input 
-        type="text" 
-        [(ngModel)]="searchTerm" 
-        placeholder="Search files..."
-        (input)="loadFiles()">
-      
-      <select 
-        [(ngModel)]="selectedType" 
-        (change)="loadFiles()">
-        <option value="">All Types</option>
-        <option *ngFor="let type of fileTypes" [value]="type">
-          {{type}}
-        </option>
+    <div class="files-toolbar">
+      <div class="tabs">
+        <button 
+          *ngFor="let tab of ['All', 'Video', 'Image', 'Doc']"
+          [ngClass]="{active: selectedTab === tab}"
+          (click)="selectTab(tab)">
+          {{ tab }}
+        </button>
+      </div>
+      <select class="type-select" [(ngModel)]="selectedType" (change)="loadFiles()">
+        <option value="">All</option>
+        <option *ngFor="let type of fileTypes" [value]="type">{{ type }}</option>
       </select>
+      <div class="search-group">
+        <input 
+          class="search-input"
+          type="text" 
+          [(ngModel)]="searchTerm" 
+          placeholder="Search by date"
+          (input)="loadFiles()"
+        />
+        <span class="search-icon">&#128269;</span>
+      </div>
+      <button class="upload-btn" (click)="onUploadFile()">
+        <span class="plus-icon">+</span> Upload File
+      </button>
     </div>
 
     <app-custom-table

@@ -74,20 +74,32 @@ export class CustomTableComponent {
     return Math.ceil(this.totalItems / this.pageSize);
   }
 
-  getPageNumbers(): number[] {
-    const pages: number[] = [];
-    const maxPages = 5;
-    let startPage = Math.max(1, this.currentPage - Math.floor(maxPages / 2));
-    let endPage = Math.min(this.totalPages, startPage + maxPages - 1);
+  get paginationPages(): (number | string)[] {
+    const pages: (number | string)[] = [];
+    const total = this.totalPages;
+    const current = this.currentPage;
 
-    if (endPage - startPage + 1 < maxPages) {
-      startPage = Math.max(1, endPage - maxPages + 1);
+    if (total <= 7) {
+      for (let i = 1; i <= total; i++) pages.push(i);
+    } else {
+      pages.push(1);
+      if (current > 4) pages.push('...');
+      for (let i = Math.max(2, current - 2); i <= Math.min(total - 1, current + 2); i++) {
+        pages.push(i);
+      }
+      if (current < total - 3) pages.push('...');
+      pages.push(total);
     }
-
-    for (let i = startPage; i <= endPage; i++) {
-      pages.push(i);
-    }
-
     return pages;
+  }
+
+  goToPage(page: number) {
+    if (page < 1 || page > this.totalPages || page === this.currentPage) return;
+    this.onPageChange({ pageIndex: page - 1, pageSize: this.pageSize, length: this.totalItems });
+  }
+
+  onPageSizeChange(event: Event) {
+    const newSize = +(event.target as HTMLSelectElement).value;
+    this.pageChange.emit({ pageIndex: 0, pageSize: newSize, length: this.totalItems });
   }
 }

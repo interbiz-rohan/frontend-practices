@@ -1,0 +1,36 @@
+
+<div class="modal-backdrop" (click)="close()"></div>
+<div class="upload-modal">
+  <div 
+    class="drop-area"
+    (click)="fileInput.click()"
+    (dragover)="onDragOver($event)"
+    (drop)="onDrop($event)"
+  >
+    <input #fileInput type="file" hidden (change)="onFileSelected($event)" />
+    <div class="cloud-icon">
+      <svg width="60" height="60" fill="#1976d2" viewBox="0 0 24 24"><path d="M19.35 10.04A7.49 7.49 0 0 0 5 8c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM16 13h-3v4h-2v-4H8l4-4 4 4z"/></svg>
+    </div>
+    <div class="drop-text">Browse Files to upload</div>
+  </div>
+  <div class="file-preview" *ngIf="selectedFile">
+    <span class="file-icon">📄</span>
+    <span class="file-name">{{ selectedFile.name }}</span>
+    <button class="delete-btn" (click)="removeFile()">
+      <span>&#128465;</span>
+    </button>
+  </div>
+  <input
+    type="text"
+    class="overview-input"
+    placeholder="Add a short overview (optional)"
+    [(ngModel)]="overview"
+  />
+  <button 
+    class="submit-btn" 
+    [disabled]="!selectedFile"
+    (click)="onSubmit()"
+  >
+    Submit
+  </button>
+</div>

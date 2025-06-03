@@ -9,7 +9,7 @@
       <th mat-header-cell *matHeaderCellDef [style.width]="column.width" [class]="column.customClass">
         {{ column.label }}
       </th>
-      <td mat-cell *matCellDef="let element" [class]="column.customClass">
+      <td mat-cell *matCellDef="let element" [style.width]="column.width" [class]="column.customClass">
         <ng-container [ngSwitch]="column.type">
           <span *ngSwitchCase="'date'">{{ element[column.key] | date }}</span>
           <span *ngSwitchCase="'number'">{{ element[column.key] | number }}</span>
@@ -22,12 +22,10 @@
     <ng-container matColumnDef="actions" *ngIf="actions.length > 0">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let element">
-        <button mat-button
-                *ngFor="let action of actions"
-                [class]="action.class"
-                (click)="onActionClick(action.action, element)">
+        <button mat-button *ngFor="let action of actions" [class]="action.class"
+          (click)="onActionClick(action.action, element)">
           <mat-icon *ngIf="action.icon">{{ action.icon }}</mat-icon>
-          {{ action.label }}
+          <!-- {{ action.label }} -->
         </button>
       </td>
     </ng-container>
@@ -41,12 +39,28 @@
     </tr>
   </table>
 
-  <mat-paginator
-    [length]="totalItems"
-    [pageSize]="pageSize"
-    [pageIndex]="currentPage - 1"
-    [pageSizeOptions]="[5, 10, 25, 100]"
-    (page)="onPageChange($event)"
-    aria-label="Select page">
-  </mat-paginator>
+  <div class="custom-pagination">
+    <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1" class="nav-btn">← Prev</button>
+    <ng-container *ngFor="let page of paginationPages">
+      <button *ngIf="page !== '...'; else ellipsis" (click)="goToPage(currentPage - 1)"
+        [class.active]="page === currentPage" class="page-btn">
+        {{ page }}
+        <div *ngIf="page === currentPage" class="active-underline"></div>
+      </button>
+      <ng-template #ellipsis>
+        <span class="ellipsis">...</span>
+      </ng-template>
+    </ng-container>
+    <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages" class="nav-btn">Next →</button>
+
+    <!-- Rows per page select box -->
+
+    <div class="rows-per-page-box">
+      <span>Rows :</span>
+      <select [value]="pageSize" (change)="onPageSizeChange($event)">
+        <option *ngFor="let size of [5, 10, 25, 100]" [value]="size">{{ size }}</option>
+      </select>
+    </div>
+
+  </div>
 </div>
