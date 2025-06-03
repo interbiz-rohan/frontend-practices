@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.f['email'].value, this.f['password'].value).subscribe({
       next: (success) => {
         if (success) {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/files']);
         } else {
           this.error = 'Invalid email or password';
         }

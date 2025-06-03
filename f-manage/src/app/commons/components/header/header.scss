@@ -33,14 +33,14 @@
   .nav-links {
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: 50px;
   
     .nav-link {
       color: #fff;
       font-weight: 700;
-      font-family: 'Montserrat', serif;
       text-decoration: none;
       font-size: 1.1rem;
+      letter-spacing: 1px;
       position: relative;
       transition: color 0.2s;
   

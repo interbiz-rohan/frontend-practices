@@ -1,0 +1,34 @@
+<div class="files-container">
+  <app-header></app-header>
+
+  <div class="files-content">
+    <div class="filters">
+      <input 
+        type="text" 
+        [(ngModel)]="searchTerm" 
+        placeholder="Search files..."
+        (input)="loadFiles()">
+      
+      <select 
+        [(ngModel)]="selectedType" 
+        (change)="loadFiles()">
+        <option value="">All Types</option>
+        <option *ngFor="let type of fileTypes" [value]="type">
+          {{type}}
+        </option>
+      </select>
+    </div>
+
+    <app-custom-table
+      [columns]="columns"
+      [data]="files"
+      [totalItems]="totalItems"
+      [currentPage]="currentPage"
+      [pageSize]="pageSize"
+      [actions]="actions"
+      [loading]="loading"
+      (pageChange)="onPageChange($event)"
+      (actionClick)="onActionClick($event)">
+    </app-custom-table>
+  </div>
+</div>

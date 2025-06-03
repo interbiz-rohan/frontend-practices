@@ -12,7 +12,7 @@ export const routes: Routes = [
   },
   {
     path: 'files',
-    loadComponent: () => import('./pages/files/files.component').then(m => m.FilesCompoenent),
+    loadComponent: () => import('./pages/files/files').then(m => m.FilesCompoenent),
     canActivate: [AuthGuard]
   },
   {

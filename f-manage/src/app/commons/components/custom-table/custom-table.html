@@ -1,0 +1,52 @@
+<div class="table-container">
+  <div *ngIf="loading" class="loading-overlay">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+
+  <table mat-table [dataSource]="data">
+    <!-- Dynamic Columns -->
+    <ng-container *ngFor="let column of columns" [matColumnDef]="column.key">
+      <th mat-header-cell *matHeaderCellDef [style.width]="column.width" [class]="column.customClass">
+        {{ column.label }}
+      </th>
+      <td mat-cell *matCellDef="let element" [class]="column.customClass">
+        <ng-container [ngSwitch]="column.type">
+          <span *ngSwitchCase="'date'">{{ element[column.key] | date }}</span>
+          <span *ngSwitchCase="'number'">{{ element[column.key] | number }}</span>
+          <span *ngSwitchDefault>{{ element[column.key] }}</span>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions" *ngIf="actions.length > 0">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-button
+                *ngFor="let action of actions"
+                [class]="action.class"
+                (click)="onActionClick(action.action, element)">
+          <mat-icon *ngIf="action.icon">{{ action.icon }}</mat-icon>
+          {{ action.label }}
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr *matNoDataRow>
+      <td [attr.colspan]="displayedColumns.length" class="empty-cell">
+        {{ emptyMessage }}
+      </td>
+    </tr>
+  </table>
+
+  <mat-paginator
+    [length]="totalItems"
+    [pageSize]="pageSize"
+    [pageIndex]="currentPage - 1"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    (page)="onPageChange($event)"
+    aria-label="Select page">
+  </mat-paginator>
+</div>

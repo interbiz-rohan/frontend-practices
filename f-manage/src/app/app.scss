@@ -1,0 +1,31 @@
+// Global styles are now in src/styles.scss
+
+:root{
+    --primary-color: #000;
+    --secondary-color: #fff;
+    --tertiary-color: #f5f5f5;
+    --accent-color: #6A5ACD;
+    --border-color: #cccccc;
+    --error-color: #dc3545;
+    --error-bg: #f8d7da;
+    --error-border: #f5c6cb;
+    --error-text: #721c24;
+    --button-primary: #007bff;
+    --button-hover: #0056b3;
+    --text-secondary: #666666;
+    --success-color: #28a745;
+    --table-border: #ddd;
+    --table-header-bg: #f8f9fa;
+}
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--tertiary-color);
+    font-family: 'Instrument Sans', sans-serif;
+}

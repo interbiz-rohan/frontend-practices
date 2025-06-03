@@ -1,0 +1,64 @@
+.table-container {
+  position: relative;
+  margin: 1rem 0;
+}
+
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+table {
+  width: 100%;
+}
+
+.empty-cell {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-secondary);
+}
+
+.mat-mdc-row {
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+}
+
+.mat-mdc-cell {
+  padding: 0 16px;
+}
+
+.mat-mdc-header-cell {
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+button[mat-button] {
+  min-width: 0;
+  padding: 0 8px;
+  margin: 0 4px;
+
+  &.download {
+    color: var(--success-color);
+  }
+
+  &.delete {
+    color: var(--error-color);
+  }
+
+  mat-icon {
+    margin-right: 4px;
+  }
+}
+
+.mat-mdc-paginator {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+} 
