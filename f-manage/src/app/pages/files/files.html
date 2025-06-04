@@ -11,17 +11,17 @@
           {{ tab }}
         </button>
       </div>
-      <select class="type-select" [(ngModel)]="selectedType" (change)="loadFiles()">
+      <select class="type-select" [value]="selectedType()" (change)="onTypeChange($event)">
         <option value="">All</option>
-        <option *ngFor="let type of fileTypes" [value]="type">{{ type }}</option>
+        <option *ngFor="let type of fileTypes()" [value]="type">{{ type }}</option>
       </select>
       <div class="search-group">
         <input 
           class="search-input"
           type="text" 
-          [(ngModel)]="searchTerm" 
+          [value]="searchTerm()"
+          (input)="onSearchChange($event)"
           placeholder="Search by date"
-          (input)="loadFiles()"
         />
         <span class="search-icon">&#128269;</span>
       </div>
@@ -32,12 +32,12 @@
 
     <app-custom-table
       [columns]="columns"
-      [data]="files"
-      [totalItems]="totalItems"
-      [currentPage]="currentPage"
-      [pageSize]="pageSize"
+      [data]="paginatedFiles()"
+      [totalItems]="totalItems()"
+      [currentPage]="currentPage()"
+      [pageSize]="pageSize()"
       [actions]="actions"
-      [loading]="loading"
+      [loading]="loading()"
       (pageChange)="onPageChange($event)"
       (actionClick)="onActionClick($event)">
     </app-custom-table>

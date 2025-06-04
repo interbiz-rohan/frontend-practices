@@ -15,7 +15,7 @@ export const initialUsers: Omit<User, 'id' | 'created_at' | 'updated_at'>[] = [
   },
   {
     email: ['user@fmanage.com'],
-    password: 'user123',
+    password: 'user12345',
     name: 'Regular User',
     role: 'user' as const,
     date_of_birth: '1995-05-15',

@@ -42,7 +42,7 @@
   <div class="custom-pagination">
     <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1" class="nav-btn">← Prev</button>
     <ng-container *ngFor="let page of paginationPages">
-      <button *ngIf="page !== '...'; else ellipsis" (click)="goToPage(currentPage - 1)"
+      <button *ngIf="page !== '...'; else ellipsis" (click)="typeof page === 'number' && goToPage(page)"
         [class.active]="page === currentPage" class="page-btn">
         {{ page }}
         <div *ngIf="page === currentPage" class="active-underline"></div>

@@ -136,8 +136,10 @@ export class IndexedDBService {
   }
 
   getFilesByUser(userId: string): Observable<File[]> {
+    console.log('userId', userId);
     return this.ensureDB().pipe(
-      switchMap(() => from(this.db!.getAllFromIndex('files', 'by-user', userId)))
+      switchMap(() => from(this.db!.getAllFromIndex('files', 'by-user', userId))),
+      tap((files: File[]) => console.log('Retrieved files:', files))
     );
   }
 

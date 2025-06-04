@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, Input, Output, EventEmitter, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
@@ -37,47 +37,32 @@ export interface TableAction {
   ]
 })
 export class CustomTableComponent {
-  @Input() columns: TableColumn[] = [];
-  @Input() data: any[] = [];
-  @Input() totalItems: number = 0;
-  @Input() currentPage: number = 1;
-  @Input() pageSize: number = 10;
-  @Input() actions: TableAction[] = [];
-  @Input() loading: boolean = false;
-  @Input() emptyMessage: string = 'No data available';
+  // Input signals
+  private _columns = signal<TableColumn[]>([]);
+  private _data = signal<any[]>([]);
+  private _totalItems = signal<number>(0);
+  private _currentPage = signal<number>(1);
+  private _pageSize = signal<number>(5);
+  private _actions = signal<TableAction[]>([]);
+  private _loading = signal<boolean>(false);
+  private _emptyMessage = signal<string>('No data available');
 
-  @Output() pageChange = new EventEmitter<PageEvent>();
-  @Output() actionClick = new EventEmitter<{action: string, item: any}>();
-
-  displayedColumns: string[] = [];
-
-  ngOnChanges() {
-    this.updateDisplayedColumns();
-  }
-
-  private updateDisplayedColumns() {
-    this.displayedColumns = [
-      ...this.columns.map(col => col.key),
-      ...(this.actions.length > 0 ? ['actions'] : [])
+  // Computed values
+  get displayedColumns() {
+    return [
+      ...this._columns().map(col => col.key),
+      ...(this._actions().length > 0 ? ['actions'] : [])
     ];
   }
 
-  onPageChange(event: PageEvent) {
-    this.pageChange.emit(event);
+  get totalPages() {
+    return Math.ceil(this._totalItems() / this._pageSize());
   }
 
-  onActionClick(action: string, item: any): void {
-    this.actionClick.emit({ action, item });
-  }
-
-  get totalPages(): number {
-    return Math.ceil(this.totalItems / this.pageSize);
-  }
-
-  get paginationPages(): (number | string)[] {
+  get paginationPages() {
     const pages: (number | string)[] = [];
     const total = this.totalPages;
-    const current = this.currentPage;
+    const current = this._currentPage();
 
     if (total <= 7) {
       for (let i = 1; i <= total; i++) pages.push(i);
@@ -93,13 +78,45 @@ export class CustomTableComponent {
     return pages;
   }
 
+  // Input setters
+  @Input() set columns(value: TableColumn[]) { this._columns.set(value); }
+  @Input() set data(value: any[]) { this._data.set(value); }
+  @Input() set totalItems(value: number) { this._totalItems.set(value); }
+  @Input() set currentPage(value: number) { this._currentPage.set(value); }
+  @Input() set pageSize(value: number) { this._pageSize.set(value); }
+  @Input() set actions(value: TableAction[]) { this._actions.set(value); }
+  @Input() set loading(value: boolean) { this._loading.set(value); }
+  @Input() set emptyMessage(value: string) { this._emptyMessage.set(value); }
+
+  // Outputs
+  @Output() pageChange = new EventEmitter<PageEvent>();
+  @Output() actionClick = new EventEmitter<{action: string, item: any}>();
+
+  // Getters for template
+  get data() { return this._data(); }
+  get loading() { return this._loading(); }
+  get emptyMessage() { return this._emptyMessage(); }
+  get currentPage() { return this._currentPage(); }
+  get pageSize() { return this._pageSize(); }
+  get actions() { return this._actions(); }
+  get columns() { return this._columns(); }
+
   goToPage(page: number) {
-    if (page < 1 || page > this.totalPages || page === this.currentPage) return;
-    this.onPageChange({ pageIndex: page - 1, pageSize: this.pageSize, length: this.totalItems });
+    if (page < 1 || page > this.totalPages || page === this._currentPage()) return;
+    this.onPageChange({ pageIndex: page - 1, pageSize: this._pageSize(), length: this._totalItems() });
   }
 
   onPageSizeChange(event: Event) {
     const newSize = +(event.target as HTMLSelectElement).value;
-    this.pageChange.emit({ pageIndex: 0, pageSize: newSize, length: this.totalItems });
+    this._currentPage.set(1);
+    this.pageChange.emit({ pageIndex: 0, pageSize: newSize, length: this._totalItems() });
+  }
+
+  onActionClick(action: string, item: any): void {
+    this.actionClick.emit({ action, item });
+  }
+
+  onPageChange(event: PageEvent) {
+    this.pageChange.emit(event);
   }
 }
