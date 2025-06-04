@@ -5,10 +5,10 @@
     <div class="files-toolbar">
       <div class="tabs">
         <button 
-          *ngFor="let tab of ['All', 'Video', 'Image', 'Doc']"
-          [ngClass]="{active: selectedTab === tab}"
-          (click)="selectTab(tab)">
-          {{ tab }}
+          *ngFor="let category of FILE_CATEGORIES"
+          [ngClass]="{active: selectedCategory() === category}"
+          (click)="selectTab(category)">
+          {{ category }}
         </button>
       </div>
       <select class="type-select" [value]="selectedType()" (change)="onTypeChange($event)">
@@ -18,12 +18,12 @@
       <div class="search-group">
         <input 
           class="search-input"
-          type="text" 
-          [value]="searchTerm()"
-          (input)="onSearchChange($event)"
+          type="date" 
+          [value]="searchDate()"
+          (change)="onDateChange($event)"
           placeholder="Search by date"
         />
-        <span class="search-icon">&#128269;</span>
+        <i class="fas fa-search search-icon"></i>
       </div>
       <button class="upload-btn" (click)="onUploadFile()">
         <span class="plus-icon">+</span> Upload File

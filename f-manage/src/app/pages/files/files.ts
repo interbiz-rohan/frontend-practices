@@ -7,6 +7,7 @@ import { CustomTableComponent, TableColumn, TableAction } from '../../commons/co
 import { IndexedDBService, File } from '../../services/indexed-db.service';
 import { UploadFileModal } from './components/upload/upload';
 import { PageEvent } from '@angular/material/paginator';
+import { FileCategory, FILE_CATEGORIES, filterFilesByCategory, getMimeType } from '../../commons/utils/file.utils';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,8 +24,13 @@ export class FilesCompoenent implements OnInit {
   pageSize = signal<number>(5);
   loading = signal<boolean>(false);
   searchTerm = signal<string>('');
+  searchDate = signal<string>('');
   selectedType = signal<string>('');
   showUploadModal = signal<boolean>(false);
+  selectedCategory = signal<FileCategory>('All');
+
+  // Constants
+  readonly FILE_CATEGORIES = FILE_CATEGORIES;
 
   // Computed values
   paginatedFiles = computed(() => {
@@ -101,11 +107,24 @@ export class FilesCompoenent implements OnInit {
   applyFilters() {
     let filtered = this.files();
     
+    // Apply category filter
+    filtered = filterFilesByCategory(filtered, this.selectedCategory());
+    
     // Apply search filter
     if (this.searchTerm()) {
       filtered = filtered.filter(file => 
         file.name.toLowerCase().includes(this.searchTerm().toLowerCase())
       );
+    }
+
+    // Apply date filter
+    if (this.searchDate()) {
+      const searchDate = new Date(this.searchDate());
+      filtered = filtered.filter(file => {
+        if (!file.created_on) return false;
+        const fileDate = new Date(file.created_on);
+        return fileDate.toDateString() === searchDate.toDateString();
+      });
     }
 
     // Apply type filter
@@ -126,6 +145,13 @@ export class FilesCompoenent implements OnInit {
   onTypeChange(event: Event) {
     const select = event.target as HTMLSelectElement;
     this.selectedType.set(select.value);
+    this.currentPage.set(1);
+    this.applyFilters();
+  }
+
+  onDateChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.searchDate.set(input.value);
     this.currentPage.set(1);
     this.applyFilters();
   }
@@ -151,21 +177,8 @@ export class FilesCompoenent implements OnInit {
       console.error('No file data available');
       return;
     }
-    const mimeTypes: { [key: string]: string } = {
-      'pdf': 'application/pdf',
-      'docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-      'doc': 'application/msword',
-      'xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-      'xls': 'application/vnd.ms-excel',
-      'jpg': 'image/jpeg',
-      'jpeg': 'image/jpeg',
-      'png': 'image/png',
-      'gif': 'image/gif',
-      'txt': 'text/plain',
-      'csv': 'text/csv'
-    };
-
-    const mimeType = mimeTypes[file.type.toLowerCase()] || 'application/octet-stream';
+    
+    const mimeType = getMimeType(file.type);
     const blob = new Blob([file.data], { type: mimeType });
     const url = window.URL.createObjectURL(blob);
     
@@ -197,9 +210,10 @@ export class FilesCompoenent implements OnInit {
     this.authService.logout();
   }
 
-  selectTab(tab: string) {
-    this.selectedTab = tab;
-    this.loadFiles();
+  selectTab(category: FileCategory) {
+    this.selectedCategory.set(category);
+    this.currentPage.set(1);
+    this.applyFilters();
   }
 
   onUploadFile() {

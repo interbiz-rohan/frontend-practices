@@ -92,7 +92,6 @@ export class CustomTableComponent {
   @Output() pageChange = new EventEmitter<PageEvent>();
   @Output() actionClick = new EventEmitter<{action: string, item: any}>();
 
-  // Getters for template
   get data() { return this._data(); }
   get loading() { return this._loading(); }
   get emptyMessage() { return this._emptyMessage(); }

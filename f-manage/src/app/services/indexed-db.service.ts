@@ -154,4 +154,28 @@ export class IndexedDBService {
       switchMap(() => from(this.db!.delete('files', fileId)))
     );
   }
+
+  getUserById(id: string): Observable<User | null> {
+    return this.ensureDB().pipe(
+      switchMap(() => from(this.db!.get('users', id))),
+      map(user => user || null)
+    );
+  }
+
+  updateUser(id: string, data: Partial<User>): Observable<User> {
+    return this.ensureDB().pipe(
+      switchMap(() => from(this.db!.get('users', id))),
+      switchMap(existingUser => {
+        if (!existingUser) throw new Error('User not found');
+        const updatedUser = { ...existingUser, ...data, updated_at: new Date() };
+        return from(this.db!.put('users', updatedUser)).pipe(
+          map(() => updatedUser)
+        );
+      }),
+      catchError(error => {
+        console.error('Error updating user:', error);
+        throw error;
+      })
+    );
+  }
 } 

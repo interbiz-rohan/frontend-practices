@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CustomTableComponent } from './custom-table';
+import { AddEditUser } from './add-edit-user';
 
-describe('CustomTable', () => {
-  let component: CustomTableComponent;
-  let fixture: ComponentFixture<CustomTableComponent>;
+describe('AddEditUser', () => {
+  let component: AddEditUser;
+  let fixture: ComponentFixture<AddEditUser>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CustomTableComponent]
+      imports: [AddEditUser]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CustomTableComponent);
+    fixture = TestBed.createComponent(AddEditUser);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

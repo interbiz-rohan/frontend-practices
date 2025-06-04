@@ -4,6 +4,8 @@
   position: relative;
 //   margin: 1rem 0;
   height: max-content;
+  overflow: auto;
+  overflow-y: hidden;
 }
 
 .loading-overlay {

@@ -4,7 +4,6 @@
   </div>
 
   <table mat-table [dataSource]="data">
-    <!-- Dynamic Columns -->
     <ng-container *ngFor="let column of columns" [matColumnDef]="column.key">
       <th mat-header-cell *matHeaderCellDef [style.width]="column.width" [class]="column.customClass">
         {{ column.label }}
@@ -18,14 +17,12 @@
       </td>
     </ng-container>
 
-    <!-- Actions Column -->
     <ng-container matColumnDef="actions" *ngIf="actions.length > 0">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let element">
         <button mat-button *ngFor="let action of actions" [class]="action.class"
           (click)="onActionClick(action.action, element)">
           <mat-icon *ngIf="action.icon">{{ action.icon }}</mat-icon>
-          <!-- {{ action.label }} -->
         </button>
       </td>
     </ng-container>
@@ -40,7 +37,7 @@
   </table>
 
   <div class="custom-pagination">
-    <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1" class="nav-btn">← Prev</button>
+    <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1" class="nav-btn">← &nbsp; Prev</button>
     <ng-container *ngFor="let page of paginationPages">
       <button *ngIf="page !== '...'; else ellipsis" (click)="typeof page === 'number' && goToPage(page)"
         [class.active]="page === currentPage" class="page-btn">
@@ -51,9 +48,8 @@
         <span class="ellipsis">...</span>
       </ng-template>
     </ng-container>
-    <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages" class="nav-btn">Next →</button>
+    <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages" class="nav-btn">Next &nbsp; →</button>
 
-    <!-- Rows per page select box -->
 
     <div class="rows-per-page-box">
       <span>Rows :</span>
