@@ -37,11 +37,22 @@ export class Users implements OnInit {
   ];
 
   actions: TableAction[] = [
-    { label: 'Edit', action: 'edit', class: 'edit', icon: 'edit' },
-    { label: 'Delete', action: 'delete', class: 'delete', icon: 'delete' }
+    {
+      label: 'Edit',
+      action: 'edit',
+      class: 'edit',
+      icon: 'edit'
+    },
+    {
+      label: 'Delete',
+      action: 'delete',
+      class: 'delete',
+      icon: 'delete'
+    }
   ];
 
   filteredUsers = signal<User[]>([]);
+  
   paginatedUsers = computed(() => {
     const start = (this.currentPage() - 1) * this.pageSize();
     const end = start + this.pageSize();
@@ -81,6 +92,19 @@ export class Users implements OnInit {
     if (event.action === 'edit') {
       this.selectedUserId = event.item.id ?? null;
       this.showUserModal = true;
+    } else if (event.action === 'delete') {
+      if (confirm('Are you sure you want to delete this user?')) {
+        if (event.item.id) {
+          this.dbService.deleteUser(event.item.id).subscribe({
+            next: () => {
+              this.loadUsers();
+            },
+            error: (error: Error) => {
+              console.error('Error deleting user:', error);
+            }
+          });
+        }
+      }
     }
   }
 

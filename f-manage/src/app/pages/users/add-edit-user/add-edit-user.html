@@ -2,83 +2,121 @@
 <div class="user-modal">
   <form [formGroup]="form" (ngSubmit)="submit()" (click)="$event.stopPropagation()">
     <h2>{{ isEdit ? 'Edit User' : 'Add User' }}</h2>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Full Name</mat-label>
+      <input matInput formControlName="name" placeholder="Enter full name">
+      @if (form.get('name')?.hasError('required') && form.get('name')?.touched) {
+        <mat-error>Name is required</mat-error>
+      }
+    </mat-form-field>
+
     <div class="form-group">
-      <label>Full Name *</label>
-      <input formControlName="name" placeholder="Enter full name" [class.invalid]="form.get('name')?.invalid && form.get('name')?.touched" />
-      <div class="error" *ngIf="form.get('name')?.invalid && form.get('name')?.touched">This field is required</div>
+      <mat-form-field appearance="outline">
+        <mat-label>E-mail Address</mat-label>
+        <input matInput formControlName="tempEmail" placeholder="Enter email address" type="email">
+        <button mat-icon-button matSuffix type="button" (click)="addToArray('email')">
+          <mat-icon>add</mat-icon>
+        </button>
+        @if (tempEmail?.hasError('required') && tempEmail?.touched && email.length === 0) {
+          <mat-error>Email is required</mat-error>
+        } @else if (tempEmail?.hasError('email') && tempEmail?.touched) {
+          <mat-error>Please enter a valid email address</mat-error>
+        }
+      </mat-form-field>
+      <mat-chip-listbox>
+        <mat-chip *ngFor="let control of email.controls; let i = index" [removable]="true" (removed)="removeFromArray('email', i)">
+          {{control.value}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-listbox>
     </div>
 
     <div class="form-group">
-      <label>E-mail Address *</label>
-      <div class="multi-input">
-        <input
-          [(ngModel)]="newEmail"
-          name="newEmail"
-          placeholder="Enter email address"
-          type="email"
-        />
-        <button type="button" (click)="addToArray('email')">+ Add</button>
-      </div>
-      <div class="multi-chips">
-        <span class="chip" *ngFor="let e of email.controls; let i = index">
-          {{ e.value }}
-          <button type="button" (click)="removeFromArray('email', i)">×</button>
-        </span>
-      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Phone Number</mat-label>
+        <input matInput formControlName="tempContact" placeholder="(___) ___-____" type="tel">
+        <button mat-icon-button matSuffix type="button" (click)="addToArray('contact')">
+          <mat-icon>add</mat-icon>
+        </button>
+        @if (tempContact?.hasError('required') && tempContact?.touched && contact.length === 0) {
+          <mat-error>Phone number is required</mat-error>
+        } @else if (tempContact?.hasError('pattern') && tempContact?.touched) {
+          <mat-error>Please enter a valid 10-digit phone number</mat-error>
+        }
+      </mat-form-field>
+      <mat-chip-listbox>
+        <mat-chip *ngFor="let control of contact.controls; let i = index" [removable]="true" (removed)="removeFromArray('contact', i)">
+          {{control.value}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-listbox>
     </div>
 
     <div class="form-group">
-      <label>Phone Number*</label>
-      <div class="multi-input">
-        <input
-          [(ngModel)]="newContact"
-          name="newContact"
-          placeholder="(___) ___-____"
-          type="text"
-        />
-        <button type="button" (click)="addToArray('contact')">+ Add</button>
-      </div>
-      <div class="multi-chips">
-        <span class="chip" *ngFor="let c of contact.controls; let i = index">
-          {{ c.value }}
-          <button type="button" (click)="removeFromArray('contact', i)">×</button>
-        </span>
-      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="tempAddress" placeholder="Enter address">
+        <button mat-icon-button matSuffix type="button" (click)="addToArray('address')">
+          <mat-icon>add</mat-icon>
+        </button>
+        @if (tempAddress?.hasError('required') && tempAddress?.touched && address.length === 0) {
+          <mat-error>Address is required</mat-error>
+        }
+      </mat-form-field>
+      <mat-chip-listbox>
+        <mat-chip *ngFor="let control of address.controls; let i = index" [removable]="true" (removed)="removeFromArray('address', i)">
+          {{control.value}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-listbox>
     </div>
 
-    <div class="form-group">
-      <label>Address *</label>
-      <div class="multi-input">
-        <input
-          [(ngModel)]="newAddress"
-          name="newAddress"
-          placeholder="Enter address"
-          type="text"
-        />
-        <button type="button" (click)="addToArray('address')">+ Add</button>
-      </div>
-      <div class="multi-chips">
-        <span class="chip" *ngFor="let a of address.controls; let i = index">
-          {{ a.value }}
-          <button type="button" (click)="removeFromArray('address', i)">×</button>
-        </span>
-      </div>
-    </div>
+    <mat-form-field appearance="outline">
+      <mat-label>Gender</mat-label>
+      <mat-select formControlName="gender">
+        <mat-option value="">Select</mat-option>
+        <mat-option value="male">Male</mat-option>
+        <mat-option value="female">Female</mat-option>
+        <mat-option value="other">Other</mat-option>
+      </mat-select>
+      @if (form.get('gender')?.hasError('required') && form.get('gender')?.touched) {
+        <mat-error>Gender is required</mat-error>
+      }
+    </mat-form-field>
 
-    <div class="form-group">
-      <label>Gender *</label>
-      <select formControlName="gender">
-        <option value="">Select</option>
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-      </select>
-    </div>
+    <mat-form-field appearance="outline">
+      <mat-label>Role</mat-label>
+      <mat-select formControlName="role">
+        <mat-option value="">Select</mat-option>
+        <mat-option value="admin">Admin User</mat-option>
+        <mat-option value="user">Regular User</mat-option>
+      </mat-select>
+      @if (form.get('role')?.hasError('required') && form.get('role')?.touched) {
+        <mat-error>Role is required</mat-error>
+      }
+    </mat-form-field>
 
-    <div class="form-group">
-      <label>Password *</label>
-      <input formControlName="password" type="password" placeholder="Password" />
-    </div>
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+      <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
+        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      @if (form.get('password')?.hasError('required') && form.get('password')?.touched) {
+        <mat-error>Password is required</mat-error>
+      } @else if (form.get('password')?.hasError('minlength') && form.get('password')?.touched) {
+        <mat-error>Password must be at least 6 characters</mat-error>
+      }
+    </mat-form-field>
 
-    <button class="submit-btn" type="submit" [disabled]="loading">{{ isEdit ? 'Update' : 'Submit' }} Form</button>
+    <div class="form-actions">
+      <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid || isSubmitting">
+        @if (isSubmitting) {
+          <mat-icon class="spinner">sync</mat-icon>
+        }
+        {{ isEdit ? 'Update' : 'Submit' }} Form
+      </button>
+    </div>
   </form>
 </div>

@@ -3,12 +3,18 @@
         <img src="assets/logos/dark-bg-logo.PNG" alt="F-Manage Logo" class="logo-img" />
         <!-- <span class="brand"><b>F-Manage</b></span> -->
     </div>
-    <div class="nav-links">
-        <a class="nav-link" routerLink="/users" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">
-            Users
-        </a> 
-        <a class="nav-link" routerLink="/files" routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: false }">
+    <div class="hamburger" (click)="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="nav-links" [class.active]="isMenuOpen()">
+        @if (isAdmin) {
+            <a class="nav-link" routerLink="/users" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }" (click)="closeMenu()">
+                Users
+            </a>
+        }
+        <a class="nav-link" routerLink="/files" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }" (click)="closeMenu()">
             Files
         </a>
         <button class="logout-btn" (click)="logout()">Logout</button>

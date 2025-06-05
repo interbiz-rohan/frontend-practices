@@ -8,6 +8,7 @@ import { IndexedDBService, File } from '../../services/indexed-db.service';
 import { UploadFileModal } from './components/upload/upload';
 import { PageEvent } from '@angular/material/paginator';
 import { FileCategory, FILE_CATEGORIES, filterFilesByCategory, getMimeType } from '../../commons/utils/file.utils';
+import { switchMap, map, forkJoin, tap } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -51,7 +52,7 @@ export class FilesCompoenent implements OnInit {
     { key: "overview", label: "Overview", width: "30%" },
     { key: 'type', label: 'Type' },
     { key: 'size', label: 'Size' },
-    { key: 'user_id', label: 'Author' },
+    { key: 'authorName', label: 'Author' },
     { key: 'created_on', label: 'Created On', type: 'date' }
   ];
 
@@ -90,10 +91,23 @@ export class FilesCompoenent implements OnInit {
       ? this.dbService.getAllFiles()
       : this.dbService.getFilesByUser(currentUser.id || '');
 
-    files$.subscribe({
+    files$.pipe(
+      switchMap(files => {
+        const filesWithAuthors$ = files.map(file => 
+          this.dbService.getAuthorName(file.user_id).pipe(
+            map(authorName => ({
+              ...file,
+              authorName
+            }))
+          )
+        );
+        return forkJoin(filesWithAuthors$);
+      }),
+    ).subscribe({
       next: (files) => {
         this.files.set(files);
         this.applyFilters();
+
         this.currentPage.set(1);
         this.loading.set(false);
       },

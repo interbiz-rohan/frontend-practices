@@ -136,12 +136,43 @@ export class IndexedDBService {
   }
 
   getFilesByUser(userId: string): Observable<File[]> {
-    console.log('userId', userId);
+    console.log('Getting files for userId:', userId);
     return this.ensureDB().pipe(
-      switchMap(() => from(this.db!.getAllFromIndex('files', 'by-user', userId))),
-      tap((files: File[]) => console.log('Retrieved files:', files))
+      switchMap(() => {
+        console.log('Database ready, querying files...');
+        return from(this.db!.getAll('files'));
+      }),
+      map(files => files.filter(file => file.user_id == userId)),
+      tap((files: File[]) => {
+        console.log('Retrieved files:', files);
+        if (!files || files.length === 0) {
+          console.log('No files found for user:', userId);
+        }
+      }),
+      catchError(error => {
+        console.error('Error getting files by user:', error);
+        throw error;
+      })
     );
   }
+
+  getAuthorName(userId: string): Observable<string> {
+    console.log('Looking for user with ID:', userId);
+    return this.ensureDB().pipe(
+      switchMap(() => from(this.db!.getAll('users'))),
+      map(users => {
+        let user = users.find(u => u.id === userId);
+                if (!user) {
+          const numericId = parseInt(userId, 10);
+          if (!isNaN(numericId)) {
+            user = users.find(u => parseInt(u.id || '', 10) === numericId);
+          }
+        }
+        return user?.name || 'Unknown Author';
+      }),
+    );
+  }
+  
 
   getAllFiles(): Observable<File[]> {
     return this.ensureDB().pipe(
@@ -174,6 +205,16 @@ export class IndexedDBService {
       }),
       catchError(error => {
         console.error('Error updating user:', error);
+        throw error;
+      })
+    );
+  }
+
+  deleteUser(id: string): Observable<void> {
+    return this.ensureDB().pipe(
+      switchMap(() => from(this.db!.delete('users', id))),
+      catchError(error => {
+        console.error('Error deleting user:', error);
         throw error;
       })
     );
