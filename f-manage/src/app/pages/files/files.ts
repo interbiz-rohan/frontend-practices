@@ -9,11 +9,22 @@ import { UploadFileModal } from './components/upload/upload';
 import { PageEvent } from '@angular/material/paginator';
 import { FileCategory, FILE_CATEGORIES, filterFilesByCategory, getMimeType } from '../../commons/utils/file.utils';
 import { switchMap, map, forkJoin, tap } from 'rxjs';
+import { FooterComponent } from '../../commons/components/footer/footer';
+import { ToastComponent } from '../../commons/components/toast-notification/toast-notification';
+import { ToastService } from '../../commons/services/toast.service';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, FormsModule, HeaderComponent, CustomTableComponent, UploadFileModal],
+  imports: [
+    CommonModule, 
+    FormsModule, 
+    HeaderComponent, 
+    CustomTableComponent, 
+    UploadFileModal, 
+    // FooterComponent,
+    ToastComponent
+  ],
   templateUrl: "./files.html",
   styleUrls: ["./files.scss"],
 })
@@ -30,10 +41,10 @@ export class FilesCompoenent implements OnInit {
   showUploadModal = signal<boolean>(false);
   selectedCategory = signal<FileCategory>('All');
 
-  // Constants
+  today = new Date().toISOString().split('T')[0];
+
   readonly FILE_CATEGORIES = FILE_CATEGORIES;
 
-  // Computed values
   paginatedFiles = computed(() => {
     const start = (this.currentPage() - 1) * this.pageSize();
     const end = start + this.pageSize();
@@ -61,19 +72,20 @@ export class FilesCompoenent implements OnInit {
       label: 'Download',
       action: 'download',
       class: 'download',
-      icon: 'download'
+      icon: 'bi-cloud-download-fill'
     },
     {
       label: 'Delete',
       action: 'delete',
       class: 'delete',
-      icon: 'delete'
+      icon: 'bi-trash'
     }
   ];
 
   constructor(
     private authService: AuthService,
-    private dbService: IndexedDBService
+    private dbService: IndexedDBService,
+    private toastService: ToastService
   ) {
     this.currentUser = this.authService.currentUserValue;
   }
@@ -101,6 +113,7 @@ export class FilesCompoenent implements OnInit {
             }))
           )
         );
+        
         return forkJoin(filesWithAuthors$);
       }),
     ).subscribe({
@@ -109,10 +122,11 @@ export class FilesCompoenent implements OnInit {
         this.applyFilters();
 
         this.currentPage.set(1);
-        this.loading.set(false);
       },
       error: (error) => {
         console.error('Error loading files:', error);
+      },
+      complete: () => {
         this.loading.set(false);
       }
     });
@@ -211,10 +225,12 @@ export class FilesCompoenent implements OnInit {
       if (!file.id) return;
       this.dbService.deleteFile(file.id).subscribe({
         next: () => {
+          this.toastService.showSuccess('File deleted successfully!');
           this.loadFiles();
         },
         error: (error) => {
           console.error('Error deleting file:', error);
+          this.toastService.showError('Failed to delete file. Please try again.');
         }
       });
     }

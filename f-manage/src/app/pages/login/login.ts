@@ -3,11 +3,12 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
+import { FooterComponent } from '../../commons/components/footer/footer';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FooterComponent],
   templateUrl: './login.html',
   styleUrls: ['./login.scss']
 })
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   error = '';
+  hidePassword = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -25,12 +27,24 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email, this.emailDomainValidator()]],
       password: ['', [Validators.required, Validators.minLength(8)]]
     });
   }
 
   get f() { return this.loginForm.controls; }
+
+  emailDomainValidator() {
+    return (control: any) => {
+      const email = control.value;
+      if (!email) return null;
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const isValid = emailRegex.test(email);
+
+      return isValid ? null : { invalidEmailDomain: true };
+    };
+  }
 
   onSubmit() {
     this.submitted = true;
@@ -57,5 +71,9 @@ export class LoginComponent implements OnInit {
         this.loading = false;
       }
     });
-  } 
+  }
+
+  togglePasswordVisibility() {
+    this.hidePassword = !this.hidePassword;
+  }
 } 

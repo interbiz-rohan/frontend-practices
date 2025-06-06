@@ -1,0 +1,1117 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>f-manage documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">f-manage documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  LoginComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/pages/login/login.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-login</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                            <code>ReactiveFormsModule</code>
+                                <code><a href="../components/FooterComponent.html" target="_self" >FooterComponent</a></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./login.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./login.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#error" >error</a>
+                            </li>
+                            <li>
+                                <a href="#hidePassword" >hidePassword</a>
+                            </li>
+                            <li>
+                                <a href="#loading" >loading</a>
+                            </li>
+                            <li>
+                                <a href="#loginForm" >loginForm</a>
+                            </li>
+                            <li>
+                                <a href="#submitted" >submitted</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#emailDomainValidator" >emailDomainValidator</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onSubmit" >onSubmit</a>
+                            </li>
+                            <li>
+                                <a href="#togglePasswordVisibility" >togglePasswordVisibility</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#f" >f</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(formBuilder: FormBuilder, router: Router, authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/pages/login/login.ts:20</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>formBuilder</td>
+                                                  
+                                                        <td>
+                                                                    <code>FormBuilder</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>authService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="emailDomainValidator"></a>
+                    <span class="name">
+                        <span ><b>emailDomainValidator</b></span>
+                        <a href="#emailDomainValidator"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>emailDomainValidator()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="37"
+                                    class="link-to-prism">src/app/pages/login/login.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>(control: any) &#x3D;&gt; { invalidEmailDomain: boolean; }</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="28"
+                                    class="link-to-prism">src/app/pages/login/login.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubmit"></a>
+                    <span class="name">
+                        <span ><b>onSubmit</b></span>
+                        <a href="#onSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSubmit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="49"
+                                    class="link-to-prism">src/app/pages/login/login.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="togglePasswordVisibility"></a>
+                    <span class="name">
+                        <span ><b>togglePasswordVisibility</b></span>
+                        <a href="#togglePasswordVisibility"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>togglePasswordVisibility()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="76"
+                                    class="link-to-prism">src/app/pages/login/login.ts:76</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="error"></a>
+                    <span class="name">
+                        <span ><b>error</b></span>
+                        <a href="#error"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/pages/login/login.ts:19</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hidePassword"></a>
+                    <span class="name">
+                        <span ><b>hidePassword</b></span>
+                        <a href="#hidePassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/pages/login/login.ts:20</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading"></a>
+                    <span class="name">
+                        <span ><b>loading</b></span>
+                        <a href="#loading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/pages/login/login.ts:17</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loginForm"></a>
+                    <span class="name">
+                        <span ><b>loginForm</b></span>
+                        <a href="#loginForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>FormGroup</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/pages/login/login.ts:16</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="submitted"></a>
+                    <span class="name">
+                        <span ><b>submitted</b></span>
+                        <a href="#submitted"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/pages/login/login.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="f"></a>
+                        <span class="name"><b>f</b><a href="#f"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>f()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/pages/login/login.ts:35</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { AuthService } from &#x27;../../services/auth.service&#x27;;
+import { FooterComponent } from &#x27;../../commons/components/footer/footer&#x27;;
+
+@Component({
+  selector: &#x27;app-login&#x27;,
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, FooterComponent],
+  templateUrl: &#x27;./login.html&#x27;,
+  styleUrls: [&#x27;./login.scss&#x27;]
+})
+export class LoginComponent implements OnInit {
+  loginForm!: FormGroup;
+  loading &#x3D; false;
+  submitted &#x3D; false;
+  error &#x3D; &#x27;&#x27;;
+  hidePassword &#x3D; true;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private authService: AuthService
+  ) { }
+
+  ngOnInit() {
+    this.loginForm &#x3D; this.formBuilder.group({
+      email: [&#x27;&#x27;, [Validators.required, Validators.email, this.emailDomainValidator()]],
+      password: [&#x27;&#x27;, [Validators.required, Validators.minLength(8)]]
+    });
+  }
+
+  get f() { return this.loginForm.controls; }
+
+  emailDomainValidator() {
+    return (control: any) &#x3D;&gt; {
+      const email &#x3D; control.value;
+      if (!email) return null;
+
+      const emailRegex &#x3D; /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const isValid &#x3D; emailRegex.test(email);
+
+      return isValid ? null : { invalidEmailDomain: true };
+    };
+  }
+
+  onSubmit() {
+    this.submitted &#x3D; true;
+    this.error &#x3D; &#x27;&#x27;;
+
+    if (this.loginForm.invalid) {
+      return;
+    }
+
+    this.loading &#x3D; true;
+
+    this.authService.login(this.f[&#x27;email&#x27;].value, this.f[&#x27;password&#x27;].value).subscribe({
+      next: (success) &#x3D;&gt; {
+        if (success) {
+          this.router.navigate([&#x27;/files&#x27;]);
+        } else {
+          this.error &#x3D; &#x27;Invalid email or password&#x27;;
+        }
+        this.loading &#x3D; false;
+      },
+      error: (err) &#x3D;&gt; {
+        console.error(&#x27;Login error:&#x27;, err);
+        this.error &#x3D; &#x27;An error occurred during login&#x27;;
+        this.loading &#x3D; false;
+      }
+    });
+  }
+
+  togglePasswordVisibility() {
+    this.hidePassword &#x3D; !this.hidePassword;
+  }
+} </code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;login-container&quot;&gt;
+    &lt;div class&#x3D;&quot;login-form-section&quot;&gt;
+        &lt;div class&#x3D;&quot;form-container&quot;&gt;
+            &lt;h2&gt;Login&lt;/h2&gt;
+            &lt;form [formGroup]&#x3D;&quot;loginForm&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot;&gt;
+                &lt;div class&#x3D;&quot;form-group&quot;&gt;
+                    &lt;label for&#x3D;&quot;email&quot;&gt;Email&lt;/label&gt;
+                    &lt;input 
+                        type&#x3D;&quot;email&quot; 
+                        id&#x3D;&quot;email&quot; 
+                        formControlName&#x3D;&quot;email&quot;
+                        placeholder&#x3D;&quot;Example@email.com&quot;
+                        [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: submitted &amp;&amp; f[&#x27;email&#x27;].errors}&quot;&gt;
+                    &lt;div *ngIf&#x3D;&quot;submitted &amp;&amp; f[&#x27;email&#x27;].errors&quot; class&#x3D;&quot;invalid-feedback&quot;&gt;
+                        &lt;div *ngIf&#x3D;&quot;f[&#x27;email&#x27;].errors[&#x27;required&#x27;]&quot;&gt;Email is required&lt;/div&gt;
+                        &lt;div *ngIf&#x3D;&quot;f[&#x27;email&#x27;].errors[&#x27;email&#x27;] || f[&#x27;email&#x27;].errors[&#x27;invalidEmailDomain&#x27;]&quot;&gt;Please enter a valid email address&lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;form-group&quot;&gt;
+                    &lt;label for&#x3D;&quot;password&quot;&gt;Password&lt;/label&gt;
+                    &lt;div class&#x3D;&quot;password-input-container&quot;&gt;
+                        &lt;input 
+                            [type]&#x3D;&quot;hidePassword ? &#x27;password&#x27; : &#x27;text&#x27;&quot;
+                            id&#x3D;&quot;password&quot; 
+                            formControlName&#x3D;&quot;password&quot;
+                            placeholder&#x3D;&quot;At least 8 characters&quot;
+                            [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: submitted &amp;&amp; f[&#x27;password&#x27;].errors}&quot;&gt;
+                        &lt;span class&#x3D;&quot;password-toggle&quot; (click)&#x3D;&quot;togglePasswordVisibility()&quot;&gt;
+                            &lt;i class&#x3D;&quot;fas&quot; [ngClass]&#x3D;&quot;hidePassword ? &#x27;fa-eye-slash&#x27;:&#x27;fa-eye&#x27; &quot;&gt;&lt;/i&gt;
+                        &lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div *ngIf&#x3D;&quot;submitted &amp;&amp; f[&#x27;password&#x27;].errors&quot; class&#x3D;&quot;invalid-feedback&quot;&gt;
+                        &lt;div *ngIf&#x3D;&quot;f[&#x27;password&#x27;].errors[&#x27;required&#x27;]&quot;&gt;Password is required&lt;/div&gt;
+                        &lt;div *ngIf&#x3D;&quot;f[&#x27;password&#x27;].errors[&#x27;minlength&#x27;]&quot;&gt;Password must be at least 8 characters&lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div *ngIf&#x3D;&quot;error&quot; class&#x3D;&quot;alert alert-danger&quot;&gt;
+                    {{ error }}
+                &lt;/div&gt;
+                &lt;button type&#x3D;&quot;submit&quot; [disabled]&#x3D;&quot;loading&quot;&gt;
+                    &lt;span *ngIf&#x3D;&quot;loading&quot; class&#x3D;&quot;spinner-border spinner-border-sm me-1&quot;&gt;&lt;/span&gt;
+                    Sign in
+                &lt;/button&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
+        &lt;!-- &lt;p class&#x3D;&quot;copyright&quot;&gt;&amp;copy; 2025 ALL RIGHTS RESERVED&lt;/p&gt; --&gt;
+        &lt;app-footer&gt;&lt;/app-footer&gt;    
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;login-image-section&quot;&gt;
+        &lt;img src&#x3D;&quot;assets/images/bg-curve.webp&quot; alt&#x3D;&quot;Background image&quot; class&#x3D;&quot;background-image&quot;&gt;
+        &lt;div class&#x3D;&quot;logo-overlay&quot;&gt;
+            &lt;img src&#x3D;&quot;assets/logos/bg-logo.PNG&quot; alt&#x3D;&quot;F-Manage Logo&quot; class&#x3D;&quot;logo&quot;&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  </code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./login.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@use &#x27;../../../styles.scss&#x27; as *;
+
+:host {
+    display: block;
+}
+
+.login-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.login-image-section {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: top;
+    background-color: var(--accent-color);
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.logo-overlay {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  margin-top: 30px;
+  min-width: 150px;
+  max-width: 280px;
+  height: min-content;
+}
+
+.login-form-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  width: 100%;
+  background-color: var(--secondary-color);
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.form-container{
+    min-width: 450px;
+}
+
+.login-form-section h2 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+}
+
+.form-group input.is-invalid {
+  border-color: var(--error-color);
+}
+
+.invalid-feedback {
+  color: var(--error-color);
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.alert {
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+}
+
+.alert-danger {
+  background-color: var(--error-bg);
+  border: 1px solid var(--error-border);
+  color: var(--error-text);
+}
+
+button[type&#x3D;&quot;submit&quot;] {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--button-primary);
+  color: var(--secondary-color);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+button[type&#x3D;&quot;submit&quot;]:hover {
+  background-color: var(--button-hover);
+}
+
+button[type&#x3D;&quot;submit&quot;]:disabled {
+  background-color: var(--border-color);
+  cursor: not-allowed;
+}
+
+.copyright {
+  font-size: 0.9em;
+  color: var(--text-secondary);
+  text-align: center;
+  position: absolute;
+  bottom: 10px;
+}
+
+.password-input-container {
+    position: relative;
+    width: 100%;
+
+    input {
+        width: 100%;
+        padding-right: 40px; // Make room for the eye icon
+    }
+
+    .password-toggle {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #666;
+        transition: color 0.3s ease;
+
+        &amp;:hover {
+            color: #333;
+        }
+
+        i {
+            font-size: 12px;
+        }
+    }
+}
+
+/* Responsive styles */
+@media (max-width: 900px) {
+  .login-container {
+    flex-direction: column-reverse;
+  }
+
+  .login-image-section {
+    height: 200px; /* Adjust height for mobile */
+  }
+
+  .login-form-section {
+    padding: 20px;
+  }
+
+  .form-container{
+    min-width: unset;
+    width: 100%;
+  }
+} </code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="login-container">    <div class="login-form-section">        <div class="form-container">            <h2>Login</h2>            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">                <div class="form-group">                    <label for="email">Email</label>                    <input                         type="email"                         id="email"                         formControlName="email"                        placeholder="Example@email.com"                        [ngClass]="{\'is-invalid\': submitted && f[\'email\'].errors}">                    <div *ngIf="submitted && f[\'email\'].errors" class="invalid-feedback">                        <div *ngIf="f[\'email\'].errors[\'required\']">Email is required</div>                        <div *ngIf="f[\'email\'].errors[\'email\'] || f[\'email\'].errors[\'invalidEmailDomain\']">Please enter a valid email address</div>                    </div>                </div>                <div class="form-group">                    <label for="password">Password</label>                    <div class="password-input-container">                        <input                             [type]="hidePassword ? \'password\' : \'text\'"                            id="password"                             formControlName="password"                            placeholder="At least 8 characters"                            [ngClass]="{\'is-invalid\': submitted && f[\'password\'].errors}">                        <span class="password-toggle" (click)="togglePasswordVisibility()">                            <i class="fas" [ngClass]="hidePassword ? \'fa-eye-slash\':\'fa-eye\' "></i>                        </span>                    </div>                    <div *ngIf="submitted && f[\'password\'].errors" class="invalid-feedback">                        <div *ngIf="f[\'password\'].errors[\'required\']">Password is required</div>                        <div *ngIf="f[\'password\'].errors[\'minlength\']">Password must be at least 8 characters</div>                    </div>                </div>                <div *ngIf="error" class="alert alert-danger">                    {{ error }}                </div>                <button type="submit" [disabled]="loading">                    <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>                    Sign in                </button>            </form>        </div>        <!-- <p class="copyright">&copy; 2025 ALL RIGHTS RESERVED</p> -->        <app-footer></app-footer>        </div>    <div class="login-image-section">        <img src="assets/images/bg-curve.webp" alt="Background image" class="background-image">        <div class="logo-overlay">            <img src="assets/logos/bg-logo.PNG" alt="F-Manage Logo" class="logo">        </div>    </div>  </div>  </div>'
+    var COMPONENTS = [{'name': 'AddEditUser', 'selector': 'app-add-edit-user'},{'name': 'App', 'selector': 'app-root'},{'name': 'CustomTableComponent', 'selector': 'app-custom-table'},{'name': 'FilesCompoenent', 'selector': 'app-dashboard'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'LoadingScreenComponent', 'selector': 'app-loading-screen'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ToastComponent', 'selector': 'app-toast'},{'name': 'UploadFileModal', 'selector': 'app-upload-file-modal'},{'name': 'Users', 'selector': 'app-users'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'LoginComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'LoginComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

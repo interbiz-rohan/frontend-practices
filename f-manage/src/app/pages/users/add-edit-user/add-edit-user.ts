@@ -8,9 +8,14 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { IndexedDBService } from '../../../services/indexed-db.service';
 import { User } from '../../../services/indexed-db.service';
 import { finalize } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { ToastService } from '../../../commons/services/toast.service';
+import { PhoneNumberPipe } from '../../../commons/pipes/phone-number.pipe';
 
 @Component({
   selector: 'app-add-edit-user',
@@ -25,7 +30,10 @@ import { finalize } from 'rxjs/operators';
     MatSelectModule,
     MatIconModule,
     MatChipsModule,
-    MatDividerModule
+    MatDividerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    PhoneNumberPipe
   ],
   templateUrl: './add-edit-user.html',
   styleUrls: ['./add-edit-user.scss']
@@ -53,7 +61,9 @@ export class AddEditUser implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private dbService: IndexedDBService
+    private dbService: IndexedDBService,
+    private router: Router,
+    private toastService: ToastService
   ) {
     effect(() => {
       console.log(this.emailError());
@@ -68,12 +78,12 @@ export class AddEditUser implements OnInit {
   initForm() {
     this.form = this.fb.group({
       name: ['', Validators.required],
-      tempEmail: ['', [Validators.email]],
-      tempContact: ['', [Validators.pattern(/^\d{10}$/)]],
-      tempAddress: [''],
+      tempEmail: ['', [Validators.email, this.emailValidator()]],
+      tempContact: ['', [Validators.minLength(10), Validators.pattern(/^[0-9-]{0,12}$/)]],
+      tempAddress: ['',[Validators.maxLength(30),Validators.minLength(3)]],
       gender: ['', Validators.required],
       role: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(8), this.passwordValidator()]],
       email: this.fb.array([], [Validators.required, Validators.minLength(1)]),
       contact: this.fb.array([], [Validators.required, Validators.minLength(1)]),
       address: this.fb.array([], [Validators.required, Validators.minLength(1)])
@@ -120,28 +130,86 @@ export class AddEditUser implements OnInit {
   get tempContact() { return this.form.get('tempContact'); }
   get tempAddress() { return this.form.get('tempAddress'); }
 
+  emailValidator() {
+    return (control: any) => {
+      const email = control.value;
+      if (!email) return null;
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const isValid = emailRegex.test(email);
+
+      return isValid ? null : { invalidEmail: true };
+    };
+  }
+
   updateEmailValidation() {
     const control = this.tempEmail;
     if (this.email.length === 0) {
-      control?.setValidators([Validators.required, Validators.email]);
+      control?.setValidators([Validators.required, Validators.email, this.emailValidator()]);
       this.emailError.set('At least one email is required');
     } else {
-      control?.setValidators([Validators.email]);
+      control?.setValidators([Validators.email, this.emailValidator()]);
       this.emailError.set('');
     }
-    control?.updateValueAndValidity();
+    control?.updateValueAndValidity({ emitEvent: false });
   }
 
   updateContactValidation() {
     const control = this.tempContact;
     if (this.contact.length === 0) {
-      control?.setValidators([Validators.required, Validators.pattern('^[0-9]{10}$')]);
+      control?.setValidators([Validators.required, Validators.pattern(/^[0-9-]{0,12}$/), this.phoneNumberValidator()]);
       this.contactError.set('At least one phone number is required');
     } else {
-      control?.setValidators([Validators.pattern('^[0-9]{10}$')]);
+      control?.setValidators([Validators.pattern(/^[0-9-]{0,12}$/), this.phoneNumberValidator()]);
       this.contactError.set('');
     }
-    control?.updateValueAndValidity();
+    control?.updateValueAndValidity({ emitEvent: false });
+  }
+
+  phoneNumberValidator() {
+    return (control: any) => {
+      const value = control.value;
+      if (!value) return null;
+
+      const digitsOnly = value.replace(/-/g, '');
+      
+      if (digitsOnly.length > 10) {
+        return { maxLength: true };
+      }
+
+      const hyphenPositions = [...value.matchAll(/-/g)].map(m => m.index);
+      const validHyphenPositions = [3, 7];
+      
+      for (const pos of hyphenPositions) {
+        if (!validHyphenPositions.includes(pos!)) {
+          return { invalidHyphenPosition: true };
+        }
+      }
+
+      return null;
+    };
+  }
+
+  formatPhoneNumber(event: any) {
+    const input = event.target as HTMLInputElement;
+    let value = input.value.replace(/\D/g, ''); // Remove non-digits
+    
+    // Limit to 10 digits
+    if (value.length > 10) {
+      value = value.slice(0, 10);
+    }
+
+    // Add hyphens
+    if (value.length > 3) {
+      value = value.slice(0, 3) + '-' + value.slice(3);
+    }
+    if (value.length > 7) {
+      value = value.slice(0, 7) + '-' + value.slice(7);
+    }
+
+    // Update input value
+    input.value = value;
+    this.tempContact?.setValue(value);
   }
 
   updateAddressValidation() {
@@ -232,11 +300,42 @@ export class AddEditUser implements OnInit {
           console.log('User saved successfully:', user);
           this.saved.emit();
           this.close();
+          this.toastService.showSuccess(this.isEdit ? 'User updated successfully!' : 'User added successfully!');
+          this.router.navigate(['/users']);
         },
         error: (error) => {
           console.error('Error saving user:', error);
+          this.toastService.showError(this.isEdit ? 'Failed to update user. Please try again.' : 'Failed to add user. Please try again.');
         }
       });
+    } else {
+      this.toastService.showError('Please fill all required fields correctly');
     }
+  }
+
+  passwordValidator() {
+    return (control: any) => {
+      const value = control.value;
+      if (!value) return null;
+
+      // Check if password starts or ends with space
+      if (value.startsWith(' ') || value.endsWith(' ')) {
+        return { invalidSpaces: true };
+      }
+
+      return null;
+    };
+  }
+
+  formatPassword(event: any) {
+    const input = event.target as HTMLInputElement;
+    let value = input.value;
+    
+    // Remove leading and trailing spaces
+    value = value.trim();
+    
+    // Update input value
+    input.value = value;
+    this.form.get('password')?.setValue(value);
   }
 }

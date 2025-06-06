@@ -1,5 +1,5 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
@@ -14,7 +14,8 @@ export class HeaderComponent implements OnInit {
   isMenuOpen = signal<boolean>(false);
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -32,5 +33,9 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.closeMenu();
     this.authService.logout();
+  }
+
+  navigateToHome() {
+    this.router.navigate(['/files']);
   }
 }

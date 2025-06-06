@@ -6,11 +6,16 @@ import { CustomTableComponent, TableColumn, TableAction } from '../../commons/co
 import { IndexedDBService, User } from '../../services/indexed-db.service';
 import { PageEvent } from '@angular/material/paginator';
 import { AddEditUser } from './add-edit-user/add-edit-user';
+import { FooterComponent } from '../../commons/components/footer/footer';
+import { ToastComponent } from '../../commons/components/toast-notification/toast-notification';
+import { ToastService } from '../../commons/services/toast.service';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonModule, FormsModule, HeaderComponent, CustomTableComponent , AddEditUser],
+  imports: [CommonModule, FormsModule, HeaderComponent, CustomTableComponent , AddEditUser , 
+    // FooterComponent, 
+    ToastComponent],
   templateUrl: "./users.html",
   styleUrls: ["./users.scss"],
 })
@@ -41,13 +46,13 @@ export class Users implements OnInit {
       label: 'Edit',
       action: 'edit',
       class: 'edit',
-      icon: 'edit'
+      icon: 'bi-pencil'
     },
     {
       label: 'Delete',
       action: 'delete',
       class: 'delete',
-      icon: 'delete'
+      icon: 'bi-trash'
     }
   ];
 
@@ -65,7 +70,7 @@ export class Users implements OnInit {
 
   totalItems = computed(() => this.filteredUsers().length);
 
-  constructor(private dbService: IndexedDBService) {}
+  constructor(private dbService: IndexedDBService, private toastService: ToastService) {}
 
   ngOnInit() {
     this.loadUsers();
@@ -98,6 +103,7 @@ export class Users implements OnInit {
           this.dbService.deleteUser(event.item.id).subscribe({
             next: () => {
               this.loadUsers();
+              this.toastService.showSuccess('User deleted successfully');
             },
             error: (error: Error) => {
               console.error('Error deleting user:', error);

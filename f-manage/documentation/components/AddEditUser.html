@@ -1,0 +1,2544 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>f-manage documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">f-manage documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  AddEditUser</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/pages/users/add-edit-user/add-edit-user.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-add-edit-user</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                            <code>ReactiveFormsModule</code>
+                            <code>FormsModule</code>
+                            <code>MatFormFieldModule</code>
+                            <code>MatInputModule</code>
+                            <code>MatButtonModule</code>
+                            <code>MatSelectModule</code>
+                            <code>MatIconModule</code>
+                            <code>MatChipsModule</code>
+                            <code>MatDividerModule</code>
+                            <code>MatDatepickerModule</code>
+                            <code>MatNativeDateModule</code>
+                            <code>PhoneNumberPipe</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./add-edit-user.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./add-edit-user.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addressError" >addressError</a>
+                            </li>
+                            <li>
+                                <a href="#contactError" >contactError</a>
+                            </li>
+                            <li>
+                                <a href="#emailError" >emailError</a>
+                            </li>
+                            <li>
+                                <a href="#form" >form</a>
+                            </li>
+                            <li>
+                                <a href="#hidePassword" >hidePassword</a>
+                            </li>
+                            <li>
+                                <a href="#isEdit" >isEdit</a>
+                            </li>
+                            <li>
+                                <a href="#isSubmitting" >isSubmitting</a>
+                            </li>
+                            <li>
+                                <a href="#newAddress" >newAddress</a>
+                            </li>
+                            <li>
+                                <a href="#newContact" >newContact</a>
+                            </li>
+                            <li>
+                                <a href="#newEmail" >newEmail</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addToArray" >addToArray</a>
+                            </li>
+                            <li>
+                                <a href="#close" >close</a>
+                            </li>
+                            <li>
+                                <a href="#emailValidator" >emailValidator</a>
+                            </li>
+                            <li>
+                                <a href="#formatPassword" >formatPassword</a>
+                            </li>
+                            <li>
+                                <a href="#formatPhoneNumber" >formatPhoneNumber</a>
+                            </li>
+                            <li>
+                                <a href="#initForm" >initForm</a>
+                            </li>
+                            <li>
+                                <a href="#isValidEmail" >isValidEmail</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#passwordValidator" >passwordValidator</a>
+                            </li>
+                            <li>
+                                <a href="#phoneNumberValidator" >phoneNumberValidator</a>
+                            </li>
+                            <li>
+                                <a href="#removeFromArray" >removeFromArray</a>
+                            </li>
+                            <li>
+                                <a href="#submit" >submit</a>
+                            </li>
+                            <li>
+                                <a href="#updateAddressValidation" >updateAddressValidation</a>
+                            </li>
+                            <li>
+                                <a href="#updateContactValidation" >updateContactValidation</a>
+                            </li>
+                            <li>
+                                <a href="#updateEmailValidation" >updateEmailValidation</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#userId" >userId</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#closed" >closed</a>
+                            </li>
+                            <li>
+                                <a href="#saved" >saved</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#email" >email</a>
+                                </li>
+                                <li>
+                                    <a href="#contact" >contact</a>
+                                </li>
+                                <li>
+                                    <a href="#address" >address</a>
+                                </li>
+                                <li>
+                                    <a href="#tempEmail" >tempEmail</a>
+                                </li>
+                                <li>
+                                    <a href="#tempContact" >tempContact</a>
+                                </li>
+                                <li>
+                                    <a href="#tempAddress" >tempAddress</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(fb: FormBuilder, dbService: <a href="../injectables/IndexedDBService.html" target="_self">IndexedDBService</a>, router: Router, toastService: <a href="../injectables/ToastService.html" target="_self">ToastService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:58</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>fb</td>
+                                                  
+                                                        <td>
+                                                                    <code>FormBuilder</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>dbService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/IndexedDBService.html" target="_self" >IndexedDBService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>toastService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ToastService.html" target="_self" >ToastService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="userId"></a>
+                        <b>userId</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:42</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="closed"></a>
+                        <b>closed</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:43</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="saved"></a>
+                        <b>saved</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:44</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addToArray"></a>
+                    <span class="name">
+                        <span ><b>addToArray</b></span>
+                        <a href="#addToArray"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>addToArray(key: "email" | "contact" | "address")</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="227"
+                                    class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:227</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>key</td>
+                                            <td>
+                                                        <code>&quot;email&quot; | &quot;contact&quot; | &quot;address&quot;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="close"></a>
+                    <span class="name">
+                        <span ><b>close</b></span>
+                        <a href="#close"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>close()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="268"
+                                    class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:268</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="emailValidator"></a>
+                    <span class="name">
+                        <span ><b>emailValidator</b></span>
+                        <a href="#emailValidator"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>emailValidator()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="133"
+                                    class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:133</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>(control: any) &#x3D;&gt; { invalidEmail: boolean; }</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formatPassword"></a>
+                    <span class="name">
+                        <span ><b>formatPassword</b></span>
+                        <a href="#formatPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>formatPassword(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="330"
+                                    class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:330</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formatPhoneNumber"></a>
+                    <span class="name">
+                        <span ><b>formatPhoneNumber</b></span>
+                        <a href="#formatPhoneNumber"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>formatPhoneNumber(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="193"
+                                    class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:193</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initForm"></a>
+                    <span class="name">
+                        <span ><b>initForm</b></span>
+                        <a href="#initForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>initForm()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="78"
+                                    class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:78</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isValidEmail"></a>
+                    <span class="name">
+                        <span ><b>isValidEmail</b></span>
+                        <a href="#isValidEmail"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isValidEmail(email: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="259"
+                                    class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:259</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>email</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="73"
+                                    class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:73</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="passwordValidator"></a>
+                    <span class="name">
+                        <span ><b>passwordValidator</b></span>
+                        <a href="#passwordValidator"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>passwordValidator()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="316"
+                                    class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:316</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>(control: any) &#x3D;&gt; { invalidSpaces: boolean; }</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="phoneNumberValidator"></a>
+                    <span class="name">
+                        <span ><b>phoneNumberValidator</b></span>
+                        <a href="#phoneNumberValidator"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>phoneNumberValidator()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="169"
+                                    class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:169</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>(control: any) &#x3D;&gt; { maxLength: boolean; invalidHyphenPosition?: undefined; } | { invalidHyphenPosition: boolean; maxLength?: undefined; }</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeFromArray"></a>
+                    <span class="name">
+                        <span ><b>removeFromArray</b></span>
+                        <a href="#removeFromArray"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>removeFromArray(key: "email" | "contact" | "address", index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="263"
+                                    class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:263</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>key</td>
+                                            <td>
+                                                        <code>&quot;email&quot; | &quot;contact&quot; | &quot;address&quot;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>index</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="submit"></a>
+                    <span class="name">
+                        <span ><b>submit</b></span>
+                        <a href="#submit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>submit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="272"
+                                    class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:272</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateAddressValidation"></a>
+                    <span class="name">
+                        <span ><b>updateAddressValidation</b></span>
+                        <a href="#updateAddressValidation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateAddressValidation()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="215"
+                                    class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:215</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateContactValidation"></a>
+                    <span class="name">
+                        <span ><b>updateContactValidation</b></span>
+                        <a href="#updateContactValidation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateContactValidation()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="157"
+                                    class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:157</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateEmailValidation"></a>
+                    <span class="name">
+                        <span ><b>updateEmailValidation</b></span>
+                        <a href="#updateEmailValidation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateEmailValidation()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="145"
+                                    class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:145</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addressError"></a>
+                    <span class="name">
+                        <span ><b>addressError</b></span>
+                        <a href="#addressError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;string&gt;(&#x27;&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:58</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="contactError"></a>
+                    <span class="name">
+                        <span ><b>contactError</b></span>
+                        <a href="#contactError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;string&gt;(&#x27;&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:57</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="emailError"></a>
+                    <span class="name">
+                        <span ><b>emailError</b></span>
+                        <a href="#emailError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;string&gt;(&#x27;&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="form"></a>
+                    <span class="name">
+                        <span ><b>form</b></span>
+                        <a href="#form"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>FormGroup</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hidePassword"></a>
+                    <span class="name">
+                        <span ><b>hidePassword</b></span>
+                        <a href="#hidePassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isEdit"></a>
+                    <span class="name">
+                        <span ><b>isEdit</b></span>
+                        <a href="#isEdit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSubmitting"></a>
+                    <span class="name">
+                        <span ><b>isSubmitting</b></span>
+                        <a href="#isSubmitting"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="newAddress"></a>
+                    <span class="name">
+                        <span ><b>newAddress</b></span>
+                        <a href="#newAddress"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:53</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="newContact"></a>
+                    <span class="name">
+                        <span ><b>newContact</b></span>
+                        <a href="#newContact"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="newEmail"></a>
+                    <span class="name">
+                        <span ><b>newEmail</b></span>
+                        <a href="#newEmail"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="email"></a>
+                        <span class="name"><b>email</b><a href="#email"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>email()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="126" class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:126</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="contact"></a>
+                        <span class="name"><b>contact</b><a href="#contact"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>contact()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:127</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="address"></a>
+                        <span class="name"><b>address</b><a href="#address"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>address()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="128" class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:128</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="tempEmail"></a>
+                        <span class="name"><b>tempEmail</b><a href="#tempEmail"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>tempEmail()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="129" class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:129</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="tempContact"></a>
+                        <span class="name"><b>tempContact</b><a href="#tempContact"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>tempContact()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="130" class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:130</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="tempAddress"></a>
+                        <span class="name"><b>tempAddress</b><a href="#tempAddress"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>tempAddress()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="131" class="link-to-prism">src/app/pages/users/add-edit-user/add-edit-user.ts:131</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, Output, EventEmitter, OnInit, signal, effect } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { FormBuilder, FormGroup, FormArray, Validators, ReactiveFormsModule, FormsModule } from &#x27;@angular/forms&#x27;;
+import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
+import { MatInputModule } from &#x27;@angular/material/input&#x27;;
+import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
+import { MatSelectModule } from &#x27;@angular/material/select&#x27;;
+import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
+import { MatChipsModule } from &#x27;@angular/material/chips&#x27;;
+import { MatDividerModule } from &#x27;@angular/material/divider&#x27;;
+import { MatDatepickerModule } from &#x27;@angular/material/datepicker&#x27;;
+import { MatNativeDateModule } from &#x27;@angular/material/core&#x27;;
+import { IndexedDBService } from &#x27;../../../services/indexed-db.service&#x27;;
+import { User } from &#x27;../../../services/indexed-db.service&#x27;;
+import { finalize } from &#x27;rxjs/operators&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { ToastService } from &#x27;../../../commons/services/toast.service&#x27;;
+import { PhoneNumberPipe } from &#x27;../../../commons/pipes/phone-number.pipe&#x27;;
+
+@Component({
+  selector: &#x27;app-add-edit-user&#x27;,
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatIconModule,
+    MatChipsModule,
+    MatDividerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    PhoneNumberPipe
+  ],
+  templateUrl: &#x27;./add-edit-user.html&#x27;,
+  styleUrls: [&#x27;./add-edit-user.scss&#x27;]
+})
+export class AddEditUser implements OnInit {
+  @Input() userId: string | null &#x3D; null;
+  @Output() closed &#x3D; new EventEmitter&lt;void&gt;();
+  @Output() saved &#x3D; new EventEmitter&lt;void&gt;();
+
+  form!: FormGroup;
+  isEdit &#x3D; false;
+  hidePassword &#x3D; true;
+  isSubmitting &#x3D; false;
+  
+  newEmail &#x3D; &#x27;&#x27;;
+  newContact &#x3D; &#x27;&#x27;;
+  newAddress &#x3D; &#x27;&#x27;;
+
+
+  emailError &#x3D; signal&lt;string&gt;(&#x27;&#x27;);
+  contactError &#x3D; signal&lt;string&gt;(&#x27;&#x27;);
+  addressError &#x3D; signal&lt;string&gt;(&#x27;&#x27;);
+
+
+
+  constructor(
+    private fb: FormBuilder,
+    private dbService: IndexedDBService,
+    private router: Router,
+    private toastService: ToastService
+  ) {
+    effect(() &#x3D;&gt; {
+      console.log(this.emailError());
+    });
+  }
+
+  ngOnInit() {
+    this.isEdit &#x3D; !!this.userId;
+    this.initForm();
+  }
+
+  initForm() {
+    this.form &#x3D; this.fb.group({
+      name: [&#x27;&#x27;, Validators.required],
+      tempEmail: [&#x27;&#x27;, [Validators.email, this.emailValidator()]],
+      tempContact: [&#x27;&#x27;, [Validators.minLength(10), Validators.pattern(/^[0-9-]{0,12}$/)]],
+      tempAddress: [&#x27;&#x27;,[Validators.maxLength(30),Validators.minLength(3)]],
+      gender: [&#x27;&#x27;, Validators.required],
+      role: [&#x27;&#x27;, Validators.required],
+      password: [&#x27;&#x27;, [Validators.required, Validators.minLength(8), this.passwordValidator()]],
+      email: this.fb.array([], [Validators.required, Validators.minLength(1)]),
+      contact: this.fb.array([], [Validators.required, Validators.minLength(1)]),
+      address: this.fb.array([], [Validators.required, Validators.minLength(1)])
+    });
+
+    if (this.isEdit &amp;&amp; this.userId) {
+      this.dbService.getUserById(this.userId).subscribe((user: User | null) &#x3D;&gt; {
+        if (user) {
+          this.form.patchValue({
+            name: user.name,
+            gender: user.gender,
+            role: user.role,
+            password: user.password
+          });
+
+          while (this.email.length) this.email.removeAt(0);
+          while (this.contact.length) this.contact.removeAt(0);
+          while (this.address.length) this.address.removeAt(0);
+
+          user.email.forEach(email &#x3D;&gt; {
+            this.email.push(this.fb.control(email));
+          });
+
+          user.contact.forEach(contact &#x3D;&gt; {
+            this.contact.push(this.fb.control(contact));
+          });
+
+          user.address.forEach(address &#x3D;&gt; {
+            this.address.push(this.fb.control(address));
+          });
+        }
+      });
+    }
+
+    this.email.valueChanges.subscribe(() &#x3D;&gt; this.updateEmailValidation());
+    this.contact.valueChanges.subscribe(() &#x3D;&gt; this.updateContactValidation());
+    this.address.valueChanges.subscribe(() &#x3D;&gt; this.updateAddressValidation());
+  }
+
+  get email() { return this.form.get(&#x27;email&#x27;) as FormArray; }
+  get contact() { return this.form.get(&#x27;contact&#x27;) as FormArray; }
+  get address() { return this.form.get(&#x27;address&#x27;) as FormArray; }
+  get tempEmail() { return this.form.get(&#x27;tempEmail&#x27;); }
+  get tempContact() { return this.form.get(&#x27;tempContact&#x27;); }
+  get tempAddress() { return this.form.get(&#x27;tempAddress&#x27;); }
+
+  emailValidator() {
+    return (control: any) &#x3D;&gt; {
+      const email &#x3D; control.value;
+      if (!email) return null;
+
+      const emailRegex &#x3D; /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const isValid &#x3D; emailRegex.test(email);
+
+      return isValid ? null : { invalidEmail: true };
+    };
+  }
+
+  updateEmailValidation() {
+    const control &#x3D; this.tempEmail;
+    if (this.email.length &#x3D;&#x3D;&#x3D; 0) {
+      control?.setValidators([Validators.required, Validators.email, this.emailValidator()]);
+      this.emailError.set(&#x27;At least one email is required&#x27;);
+    } else {
+      control?.setValidators([Validators.email, this.emailValidator()]);
+      this.emailError.set(&#x27;&#x27;);
+    }
+    control?.updateValueAndValidity({ emitEvent: false });
+  }
+
+  updateContactValidation() {
+    const control &#x3D; this.tempContact;
+    if (this.contact.length &#x3D;&#x3D;&#x3D; 0) {
+      control?.setValidators([Validators.required, Validators.pattern(/^[0-9-]{0,12}$/), this.phoneNumberValidator()]);
+      this.contactError.set(&#x27;At least one phone number is required&#x27;);
+    } else {
+      control?.setValidators([Validators.pattern(/^[0-9-]{0,12}$/), this.phoneNumberValidator()]);
+      this.contactError.set(&#x27;&#x27;);
+    }
+    control?.updateValueAndValidity({ emitEvent: false });
+  }
+
+  phoneNumberValidator() {
+    return (control: any) &#x3D;&gt; {
+      const value &#x3D; control.value;
+      if (!value) return null;
+
+      const digitsOnly &#x3D; value.replace(/-/g, &#x27;&#x27;);
+      
+      if (digitsOnly.length &gt; 10) {
+        return { maxLength: true };
+      }
+
+      const hyphenPositions &#x3D; [...value.matchAll(/-/g)].map(m &#x3D;&gt; m.index);
+      const validHyphenPositions &#x3D; [3, 7];
+      
+      for (const pos of hyphenPositions) {
+        if (!validHyphenPositions.includes(pos!)) {
+          return { invalidHyphenPosition: true };
+        }
+      }
+
+      return null;
+    };
+  }
+
+  formatPhoneNumber(event: any) {
+    const input &#x3D; event.target as HTMLInputElement;
+    let value &#x3D; input.value.replace(/\D/g, &#x27;&#x27;); // Remove non-digits
+    
+    // Limit to 10 digits
+    if (value.length &gt; 10) {
+      value &#x3D; value.slice(0, 10);
+    }
+
+    // Add hyphens
+    if (value.length &gt; 3) {
+      value &#x3D; value.slice(0, 3) + &#x27;-&#x27; + value.slice(3);
+    }
+    if (value.length &gt; 7) {
+      value &#x3D; value.slice(0, 7) + &#x27;-&#x27; + value.slice(7);
+    }
+
+    // Update input value
+    input.value &#x3D; value;
+    this.tempContact?.setValue(value);
+  }
+
+  updateAddressValidation() {
+    const control &#x3D; this.tempAddress;
+    if (this.address.length &#x3D;&#x3D;&#x3D; 0) {
+      control?.setValidators([Validators.required]);
+      this.addressError.set(&#x27;At least one address is required&#x27;);
+    } else {
+      control?.clearValidators();
+      this.addressError.set(&#x27;&#x27;);
+    }
+    control?.updateValueAndValidity();
+  }
+
+  addToArray(key: &#x27;email&#x27; | &#x27;contact&#x27; | &#x27;address&#x27;) {
+    let value &#x3D; &#x27;&#x27;;
+    let control &#x3D; null;
+
+    switch(key) {
+      case &#x27;email&#x27;:
+        control &#x3D; this.tempEmail;
+        if (control?.valid) {
+          value &#x3D; control.value.trim();
+          this.email.push(this.fb.control(value));
+          control.reset();
+        }
+        break;
+      case &#x27;contact&#x27;:
+        control &#x3D; this.tempContact;
+        if (control?.valid) {
+          value &#x3D; control.value.trim();
+          this.contact.push(this.fb.control(value));
+          control.reset();
+        }
+        break;
+      case &#x27;address&#x27;:
+        control &#x3D; this.tempAddress;
+        if (control?.valid) {
+          value &#x3D; control.value.trim();
+          this.address.push(this.fb.control(value));
+          control.reset();
+        }
+        break;
+    }
+  }
+
+  isValidEmail(email: string): boolean {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  removeFromArray(key: &#x27;email&#x27; | &#x27;contact&#x27; | &#x27;address&#x27;, index: number) {
+    const arr &#x3D; this.form.get(key) as FormArray;
+    arr.removeAt(index);
+  }
+
+  close() {
+    this.closed.emit();
+  }
+
+  submit() {
+    if (this.form.valid) {
+      this.isSubmitting &#x3D; true;
+      
+      const userData: Omit&lt;User, &#x27;id&#x27; | &#x27;created_at&#x27; | &#x27;updated_at&#x27;&gt; &#x3D; {
+        name: this.form.get(&#x27;name&#x27;)?.value,
+        email: this.email.controls.map(control &#x3D;&gt; control.value),
+        contact: this.contact.controls.map(control &#x3D;&gt; control.value),
+        address: this.address.controls.map(control &#x3D;&gt; control.value),
+        gender: this.form.get(&#x27;gender&#x27;)?.value,
+        password: this.form.get(&#x27;password&#x27;)?.value,
+        role: this.form.get(&#x27;role&#x27;)?.value,
+        date_of_birth: &#x27;&#x27;
+      };
+
+      let operation$;
+      if (this.isEdit &amp;&amp; this.userId) {
+        operation$ &#x3D; this.dbService.updateUser(this.userId, userData);
+      } else {
+        operation$ &#x3D; this.dbService.addUser(userData);
+      }
+
+      operation$.pipe(
+        finalize(() &#x3D;&gt; {
+          this.isSubmitting &#x3D; false;
+        })
+      ).subscribe({
+        next: (user) &#x3D;&gt; {
+          console.log(&#x27;User saved successfully:&#x27;, user);
+          this.saved.emit();
+          this.close();
+          this.toastService.showSuccess(this.isEdit ? &#x27;User updated successfully!&#x27; : &#x27;User added successfully!&#x27;);
+          this.router.navigate([&#x27;/users&#x27;]);
+        },
+        error: (error) &#x3D;&gt; {
+          console.error(&#x27;Error saving user:&#x27;, error);
+          this.toastService.showError(this.isEdit ? &#x27;Failed to update user. Please try again.&#x27; : &#x27;Failed to add user. Please try again.&#x27;);
+        }
+      });
+    } else {
+      this.toastService.showError(&#x27;Please fill all required fields correctly&#x27;);
+    }
+  }
+
+  passwordValidator() {
+    return (control: any) &#x3D;&gt; {
+      const value &#x3D; control.value;
+      if (!value) return null;
+
+      // Check if password starts or ends with space
+      if (value.startsWith(&#x27; &#x27;) || value.endsWith(&#x27; &#x27;)) {
+        return { invalidSpaces: true };
+      }
+
+      return null;
+    };
+  }
+
+  formatPassword(event: any) {
+    const input &#x3D; event.target as HTMLInputElement;
+    let value &#x3D; input.value;
+    
+    // Remove leading and trailing spaces
+    value &#x3D; value.trim();
+    
+    // Update input value
+    input.value &#x3D; value;
+    this.form.get(&#x27;password&#x27;)?.setValue(value);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;modal-backdrop&quot; (click)&#x3D;&quot;close()&quot;&gt;&lt;/div&gt;
+&lt;div class&#x3D;&quot;user-modal&quot;&gt;
+  &lt;form [formGroup]&#x3D;&quot;form&quot; (ngSubmit)&#x3D;&quot;submit()&quot; (click)&#x3D;&quot;$event.stopPropagation()&quot;&gt;
+    &lt;h2&gt;{{ isEdit ? &#x27;Edit User&#x27; : &#x27;Add User&#x27; }}&lt;/h2&gt;
+    &lt;div class&#x3D;&quot;form-group&quot;&gt;
+      &lt;mat-form-field appearance&#x3D;&quot;outline&quot;&gt;
+        &lt;mat-label&gt;Full Name&lt;/mat-label&gt;
+        &lt;input matInput formControlName&#x3D;&quot;name&quot; placeholder&#x3D;&quot;Enter full name&quot;&gt;
+        @if (form.get(&#x27;name&#x27;)?.hasError(&#x27;required&#x27;) &amp;&amp; form.get(&#x27;name&#x27;)?.touched) {
+        &lt;mat-error&gt;Name is required&lt;/mat-error&gt;
+        }
+      &lt;/mat-form-field&gt;
+    &lt;/div&gt;
+      &lt;div class&#x3D;&quot;form-group&quot;&gt;
+        &lt;mat-form-field  appearance&#x3D;&quot;outline&quot;&gt;
+          &lt;mat-label&gt;E-mail Address*&lt;/mat-label&gt;
+          &lt;input matInput  formControlName&#x3D;&quot;tempEmail&quot; placeholder&#x3D;&quot;Enter email address&quot; type&#x3D;&quot;email&quot;&gt;
+          &lt;button class&#x3D;&quot;add-btn&quot; mat-icon-button matSuffix type&#x3D;&quot;button&quot; (click)&#x3D;&quot;addToArray(&#x27;email&#x27;)&quot;&gt;
+            &lt;mat-icon class&#x3D;&quot;add-icon&quot;&gt;add&lt;/mat-icon&gt; Add
+          &lt;/button&gt;
+          @if (tempEmail?.hasError(&#x27;required&#x27;) &amp;&amp; tempEmail?.touched &amp;&amp; email.length &#x3D;&#x3D;&#x3D; 0) {
+            &lt;mat-error&gt;Email is required&lt;/mat-error&gt;
+          } @else if ((tempEmail?.hasError(&#x27;email&#x27;) || tempEmail?.hasError(&#x27;invalidEmail&#x27;)) &amp;&amp; tempEmail?.touched) {
+            &lt;mat-error&gt;Please enter a valid email address&lt;/mat-error&gt;
+          }
+        &lt;/mat-form-field&gt;
+        @if(email.controls.length &gt; 0){
+        &lt;mat-chip-listbox&gt;
+          &lt;mat-chip class&#x3D;&quot;chip-item&quot; *ngFor&#x3D;&quot;let control of email.controls; let i &#x3D; index&quot; [removable]&#x3D;&quot;true&quot;
+            (removed)&#x3D;&quot;removeFromArray(&#x27;email&#x27;, i)&quot;&gt;
+            {{control.value}}
+            &lt;mat-icon matChipRemove&gt;cancel&lt;/mat-icon&gt;
+          &lt;/mat-chip&gt;
+        &lt;/mat-chip-listbox&gt;}
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;form-group&quot;&gt;
+        &lt;mat-form-field appearance&#x3D;&quot;outline&quot;&gt;
+          &lt;mat-label&gt;Phone Number*&lt;/mat-label&gt;
+          &lt;input 
+            matInput 
+            formControlName&#x3D;&quot;tempContact&quot; 
+            placeholder&#x3D;&quot;(123) 456-7890&quot; 
+            type&#x3D;&quot;tel&quot;
+            (input)&#x3D;&quot;formatPhoneNumber($event)&quot;
+            maxlength&#x3D;&quot;12&quot;&gt;
+          &lt;button class&#x3D;&quot;add-btn&quot; mat-icon-button matSuffix type&#x3D;&quot;button&quot; (click)&#x3D;&quot;addToArray(&#x27;contact&#x27;)&quot;&gt;
+            &lt;mat-icon class&#x3D;&quot;add-icon&quot;&gt;add&lt;/mat-icon&gt; Add
+          &lt;/button&gt;
+          @if (tempContact?.hasError(&#x27;required&#x27;) &amp;&amp; tempContact?.touched &amp;&amp; contact.length &#x3D;&#x3D;&#x3D; 0) {
+            &lt;mat-error&gt;Phone number is required&lt;/mat-error&gt;
+          } @else if (tempContact?.hasError(&#x27;pattern&#x27;) &amp;&amp; tempContact?.touched) {
+            &lt;mat-error&gt;Please enter a valid phone number&lt;/mat-error&gt;
+          } @else if (tempContact?.hasError(&#x27;maxLength&#x27;) &amp;&amp; tempContact?.touched) {
+            &lt;mat-error&gt;Phone number cannot exceed 10 digits&lt;/mat-error&gt;
+          } @else if (tempContact?.hasError(&#x27;invalidHyphenPosition&#x27;) &amp;&amp; tempContact?.touched) {
+            &lt;mat-error&gt;Invalid hyphen position&lt;/mat-error&gt;
+          }
+        &lt;/mat-form-field&gt;
+        @if(contact.controls.length &gt; 0){
+          &lt;mat-chip-listbox&gt;
+            &lt;mat-chip class&#x3D;&quot;chip-item&quot; *ngFor&#x3D;&quot;let control of contact.controls; let i &#x3D; index&quot; [removable]&#x3D;&quot;true&quot;
+              (removed)&#x3D;&quot;removeFromArray(&#x27;contact&#x27;, i)&quot;&gt;
+              {{control.value | phoneNumber}}
+              &lt;mat-icon matChipRemove&gt;cancel&lt;/mat-icon&gt;
+            &lt;/mat-chip&gt;
+          &lt;/mat-chip-listbox&gt;
+        }
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;form-group&quot;&gt;
+        &lt;mat-form-field appearance&#x3D;&quot;outline&quot;&gt;
+          &lt;mat-label&gt;Address*&lt;/mat-label&gt;
+          &lt;input matInput formControlName&#x3D;&quot;tempAddress&quot; placeholder&#x3D;&quot;Enter address&quot; &gt;
+          &lt;button class&#x3D;&quot;add-btn&quot; mat-icon-button matSuffix type&#x3D;&quot;button&quot; (click)&#x3D;&quot;addToArray(&#x27;address&#x27;)&quot;&gt;
+            &lt;mat-icon class&#x3D;&quot;add-icon&quot;&gt;add&lt;/mat-icon&gt; Add
+          &lt;/button&gt;
+          @if (tempAddress?.hasError(&#x27;required&#x27;) &amp;&amp; tempAddress?.touched &amp;&amp; address.length &#x3D;&#x3D;&#x3D; 0) {
+          &lt;mat-error&gt;Address is required&lt;/mat-error&gt;
+          }
+        &lt;/mat-form-field&gt;
+        @if(address.controls.length &gt; 0){
+        &lt;mat-chip-listbox&gt;
+          &lt;mat-chip class&#x3D;&quot;chip-item&quot; *ngFor&#x3D;&quot;let control of address.controls; let i &#x3D; index&quot; [removable]&#x3D;&quot;true&quot;
+            (removed)&#x3D;&quot;removeFromArray(&#x27;address&#x27;, i)&quot;&gt;
+            {{control.value}}
+            &lt;mat-icon matChipRemove class&#x3D;&quot;add-icon&quot;&gt;cancel&lt;/mat-icon&gt;
+          &lt;/mat-chip&gt;
+        &lt;/mat-chip-listbox&gt;}
+      &lt;/div&gt;
+
+      &lt;mat-form-field appearance&#x3D;&quot;outline&quot;&gt;
+        &lt;mat-label&gt;Gender&lt;/mat-label&gt;
+        &lt;mat-select formControlName&#x3D;&quot;gender&quot;&gt;
+          &lt;mat-option value&#x3D;&quot;&quot;&gt;Select&lt;/mat-option&gt;
+          &lt;mat-option value&#x3D;&quot;male&quot;&gt;Male&lt;/mat-option&gt;
+          &lt;mat-option value&#x3D;&quot;female&quot;&gt;Female&lt;/mat-option&gt;
+          &lt;mat-option value&#x3D;&quot;other&quot;&gt;Other&lt;/mat-option&gt;
+        &lt;/mat-select&gt;
+        @if (form.get(&#x27;gender&#x27;)?.hasError(&#x27;required&#x27;) &amp;&amp; form.get(&#x27;gender&#x27;)?.touched) {
+        &lt;mat-error&gt;Gender is required&lt;/mat-error&gt;
+        }
+      &lt;/mat-form-field&gt;
+
+      &lt;mat-form-field appearance&#x3D;&quot;outline&quot;&gt;
+        &lt;mat-label&gt;Role&lt;/mat-label&gt;
+        &lt;mat-select formControlName&#x3D;&quot;role&quot;&gt;
+          &lt;mat-option value&#x3D;&quot;&quot;&gt;Select&lt;/mat-option&gt;
+          &lt;mat-option value&#x3D;&quot;admin&quot;&gt;Admin User&lt;/mat-option&gt;
+          &lt;mat-option value&#x3D;&quot;user&quot;&gt;Regular User&lt;/mat-option&gt;
+        &lt;/mat-select&gt;
+        @if (form.get(&#x27;role&#x27;)?.hasError(&#x27;required&#x27;) &amp;&amp; form.get(&#x27;role&#x27;)?.touched) {
+        &lt;mat-error&gt;Role is required&lt;/mat-error&gt;
+        }
+      &lt;/mat-form-field&gt;
+
+      &lt;mat-form-field appearance&#x3D;&quot;outline&quot;&gt;
+        &lt;mat-label&gt;Password&lt;/mat-label&gt;
+        &lt;input 
+          matInput 
+          [type]&#x3D;&quot;hidePassword ? &#x27;password&#x27; : &#x27;text&#x27;&quot; 
+          formControlName&#x3D;&quot;password&quot;
+          (input)&#x3D;&quot;formatPassword($event)&quot;&gt;
+        &lt;button mat-icon-button matSuffix type&#x3D;&quot;button&quot; (click)&#x3D;&quot;hidePassword &#x3D; !hidePassword&quot;&gt;
+          &lt;mat-icon&gt;{{hidePassword ? &#x27;visibility_off&#x27; : &#x27;visibility&#x27;}}&lt;/mat-icon&gt;
+        &lt;/button&gt;
+        @if (form.get(&#x27;password&#x27;)?.hasError(&#x27;required&#x27;) &amp;&amp; form.get(&#x27;password&#x27;)?.touched) {
+          &lt;mat-error&gt;Password is required&lt;/mat-error&gt;
+        } @else if (form.get(&#x27;password&#x27;)?.hasError(&#x27;minlength&#x27;) &amp;&amp; form.get(&#x27;password&#x27;)?.touched) {
+          &lt;mat-error&gt;Password must be at least 8 characters&lt;/mat-error&gt;
+        } @else if (form.get(&#x27;password&#x27;)?.hasError(&#x27;invalidSpaces&#x27;) &amp;&amp; form.get(&#x27;password&#x27;)?.touched) {
+          &lt;mat-error&gt;Password cannot start or end with spaces&lt;/mat-error&gt;
+        }
+      &lt;/mat-form-field&gt;
+
+      &lt;div class&#x3D;&quot;form-actions&quot;&gt;
+        &lt;button class&#x3D;&quot;submit-btn&quot; mat-flat-button color&#x3D;&quot;primary&quot; type&#x3D;&quot;submit&quot;
+          [disabled]&#x3D;&quot;form.invalid || isSubmitting&quot;&gt;
+          @if (isSubmitting) {
+          &lt;mat-icon class&#x3D;&quot;spinner&quot;&gt;sync&lt;/mat-icon&gt;
+          }
+          {{ isEdit ? &#x27;Update&#x27; : &#x27;Submit&#x27; }} Form
+        &lt;/button&gt;
+      &lt;/div&gt;
+  &lt;/form&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./add-edit-user.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.user-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 24px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 100vh;
+  overflow-y: auto;
+  z-index: 1001;
+
+  h2 {
+    margin: 0 0 20px;
+    color: #333;
+    font-size: 1.5rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+
+    .mat-mdc-form-field {
+      width: 100%;
+    }
+
+    // Adjust form field height and padding
+    ::ng-deep {
+      .mat-mdc-form-field {
+        .mat-mdc-form-field-flex {
+          padding-top: 0;
+        }
+
+        .mat-mdc-form-field-infix {
+          padding-top: 12px;
+          padding-bottom: 12px;
+          min-height: 48px;
+        }
+
+        .mat-mdc-form-field-subscript-wrapper {
+          padding-top: 6px;
+        }
+
+        .mat-mdc-text-field-wrapper {
+          padding: 0 12px;
+        }
+
+        .mat-mdc-form-field-icon-suffix {
+          padding: 0 8px;
+        }
+
+        .mat-mdc-form-field-icon-prefix {
+          padding: 0 8px;
+        }
+      }
+
+      .mat-mdc-chip-listbox {
+        margin-top: 6px;
+      }
+
+      .mat-mdc-chip {
+        height: 28px;
+        font-size: 13px;
+        padding: 0 10px;
+
+        .mat-mdc-chip-remove {
+          width: 18px;
+          height: 18px;
+          margin: 0 0 0 6px;
+        }
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 12px;
+
+      button {
+        min-width: 130px;
+        height: 40px;
+        font-size: 14px;
+
+        .spinner {
+          animation: spin 1s linear infinite;
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+}
+
+.mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-floating-label{
+  top: 0 !important;
+}
+
+// Error message styles
+::ng-deep {
+  .mat-mdc-form-field {
+    .mat-mdc-form-field-subscript-wrapper {
+      height: 0;
+      padding: 0;
+      margin: 0;
+      overflow: visible;
+    }
+
+    &amp;.mat-form-field-invalid {
+      .mat-mdc-form-field-subscript-wrapper {
+        height: auto;
+        padding: 0.25em 0;
+        margin-top: 0.25em;
+      }
+    }
+  }
+
+  .mat-mdc-form-field-error {
+    color: #f44336;
+    font-size: 12px;
+  }
+
+  // Fix for select dropdown z-index
+  .mat-mdc-select-panel {
+    z-index: 1002 !important;
+  }
+
+  .cdk-overlay-container {
+    z-index: 1002 !important;
+  }
+}
+
+.chip-item {
+  background-color: #c7c7c7 !important;
+  color: #fff !important;
+  font-size: 12px !important;
+  font-family: &quot;Instrument Sans&quot;, sans-serif !important;
+  border-radius: 5px !important;
+  display: flex !important;
+  border: unset !important;
+}
+
+.add-btn{
+  width: auto !important;
+  min-width: 70px !important;
+  height: 30px !important;
+  background-color: #000 !important;
+  color: #fff !important;
+  font-size: 12px !important;
+  font-family: &quot;Instrument Sans&quot;, sans-serif !important;
+  border-radius: 5px !important;
+  display: flex !important;
+}
+
+.add-icon{
+  position:relative;
+  top: -2px !important;
+  font-size: 20px !important;
+}
+
+
+.submit-btn{
+  border-radius: 5px !important;
+  color: #fff !important;
+  background-color: #000 !important;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 600px) {
+  .user-modal {
+    width: 95%;
+    padding: 20px;
+    max-height: 95vh;
+
+    h2 {
+      font-size: 1.25rem;
+      margin-bottom: 16px;
+    }
+
+    form {
+      gap: 12px;
+    }
+  }
+}
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0px;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #f8f9fa;
+  border-radius: 8px 8px 0 0;
+
+  h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #333;
+    font-weight: 500;
+  }
+
+  .close-btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: #666;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+
+    &amp;:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+      color: #333;
+    }
+
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="modal-backdrop" (click)="close()"></div><div class="user-modal">  <form [formGroup]="form" (ngSubmit)="submit()" (click)="$event.stopPropagation()">    <h2>{{ isEdit ? \'Edit User\' : \'Add User\' }}</h2>    <div class="form-group">      <mat-form-field appearance="outline">        <mat-label>Full Name</mat-label>        <input matInput formControlName="name" placeholder="Enter full name">        @if (form.get(\'name\')?.hasError(\'required\') && form.get(\'name\')?.touched) {        <mat-error>Name is required</mat-error>        }      </mat-form-field>    </div>      <div class="form-group">        <mat-form-field  appearance="outline">          <mat-label>E-mail Address*</mat-label>          <input matInput  formControlName="tempEmail" placeholder="Enter email address" type="email">          <button class="add-btn" mat-icon-button matSuffix type="button" (click)="addToArray(\'email\')">            <mat-icon class="add-icon">add</mat-icon> Add          </button>          @if (tempEmail?.hasError(\'required\') && tempEmail?.touched && email.length === 0) {            <mat-error>Email is required</mat-error>          } @else if ((tempEmail?.hasError(\'email\') || tempEmail?.hasError(\'invalidEmail\')) && tempEmail?.touched) {            <mat-error>Please enter a valid email address</mat-error>          }        </mat-form-field>        @if(email.controls.length > 0){        <mat-chip-listbox>          <mat-chip class="chip-item" *ngFor="let control of email.controls; let i = index" [removable]="true"            (removed)="removeFromArray(\'email\', i)">            {{control.value}}            <mat-icon matChipRemove>cancel</mat-icon>          </mat-chip>        </mat-chip-listbox>}      </div>      <div class="form-group">        <mat-form-field appearance="outline">          <mat-label>Phone Number*</mat-label>          <input             matInput             formControlName="tempContact"             placeholder="(123) 456-7890"             type="tel"            (input)="formatPhoneNumber($event)"            maxlength="12">          <button class="add-btn" mat-icon-button matSuffix type="button" (click)="addToArray(\'contact\')">            <mat-icon class="add-icon">add</mat-icon> Add          </button>          @if (tempContact?.hasError(\'required\') && tempContact?.touched && contact.length === 0) {            <mat-error>Phone number is required</mat-error>          } @else if (tempContact?.hasError(\'pattern\') && tempContact?.touched) {            <mat-error>Please enter a valid phone number</mat-error>          } @else if (tempContact?.hasError(\'maxLength\') && tempContact?.touched) {            <mat-error>Phone number cannot exceed 10 digits</mat-error>          } @else if (tempContact?.hasError(\'invalidHyphenPosition\') && tempContact?.touched) {            <mat-error>Invalid hyphen position</mat-error>          }        </mat-form-field>        @if(contact.controls.length > 0){          <mat-chip-listbox>            <mat-chip class="chip-item" *ngFor="let control of contact.controls; let i = index" [removable]="true"              (removed)="removeFromArray(\'contact\', i)">              {{control.value | phoneNumber}}              <mat-icon matChipRemove>cancel</mat-icon>            </mat-chip>          </mat-chip-listbox>        }      </div>      <div class="form-group">        <mat-form-field appearance="outline">          <mat-label>Address*</mat-label>          <input matInput formControlName="tempAddress" placeholder="Enter address" >          <button class="add-btn" mat-icon-button matSuffix type="button" (click)="addToArray(\'address\')">            <mat-icon class="add-icon">add</mat-icon> Add          </button>          @if (tempAddress?.hasError(\'required\') && tempAddress?.touched && address.length === 0) {          <mat-error>Address is required</mat-error>          }        </mat-form-field>        @if(address.controls.length > 0){        <mat-chip-listbox>          <mat-chip class="chip-item" *ngFor="let control of address.controls; let i = index" [removable]="true"            (removed)="removeFromArray(\'address\', i)">            {{control.value}}            <mat-icon matChipRemove class="add-icon">cancel</mat-icon>          </mat-chip>        </mat-chip-listbox>}      </div>      <mat-form-field appearance="outline">        <mat-label>Gender</mat-label>        <mat-select formControlName="gender">          <mat-option value="">Select</mat-option>          <mat-option value="male">Male</mat-option>          <mat-option value="female">Female</mat-option>          <mat-option value="other">Other</mat-option>        </mat-select>        @if (form.get(\'gender\')?.hasError(\'required\') && form.get(\'gender\')?.touched) {        <mat-error>Gender is required</mat-error>        }      </mat-form-field>      <mat-form-field appearance="outline">        <mat-label>Role</mat-label>        <mat-select formControlName="role">          <mat-option value="">Select</mat-option>          <mat-option value="admin">Admin User</mat-option>          <mat-option value="user">Regular User</mat-option>        </mat-select>        @if (form.get(\'role\')?.hasError(\'required\') && form.get(\'role\')?.touched) {        <mat-error>Role is required</mat-error>        }      </mat-form-field>      <mat-form-field appearance="outline">        <mat-label>Password</mat-label>        <input           matInput           [type]="hidePassword ? \'password\' : \'text\'"           formControlName="password"          (input)="formatPassword($event)">        <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">          <mat-icon>{{hidePassword ? \'visibility_off\' : \'visibility\'}}</mat-icon>        </button>        @if (form.get(\'password\')?.hasError(\'required\') && form.get(\'password\')?.touched) {          <mat-error>Password is required</mat-error>        } @else if (form.get(\'password\')?.hasError(\'minlength\') && form.get(\'password\')?.touched) {          <mat-error>Password must be at least 8 characters</mat-error>        } @else if (form.get(\'password\')?.hasError(\'invalidSpaces\') && form.get(\'password\')?.touched) {          <mat-error>Password cannot start or end with spaces</mat-error>        }      </mat-form-field>      <div class="form-actions">        <button class="submit-btn" mat-flat-button color="primary" type="submit"          [disabled]="form.invalid || isSubmitting">          @if (isSubmitting) {          <mat-icon class="spinner">sync</mat-icon>          }          {{ isEdit ? \'Update\' : \'Submit\' }} Form        </button>      </div>  </form></div></div>'
+    var COMPONENTS = [{'name': 'AddEditUser', 'selector': 'app-add-edit-user'},{'name': 'App', 'selector': 'app-root'},{'name': 'CustomTableComponent', 'selector': 'app-custom-table'},{'name': 'FilesCompoenent', 'selector': 'app-dashboard'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'LoadingScreenComponent', 'selector': 'app-loading-screen'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ToastComponent', 'selector': 'app-toast'},{'name': 'UploadFileModal', 'selector': 'app-upload-file-modal'},{'name': 'Users', 'selector': 'app-users'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'AddEditUser'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'AddEditUser.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

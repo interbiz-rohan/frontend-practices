@@ -131,6 +131,34 @@ button[type="submit"]:disabled {
   bottom: 10px;
 }
 
+.password-input-container {
+    position: relative;
+    width: 100%;
+
+    input {
+        width: 100%;
+        padding-right: 40px; // Make room for the eye icon
+    }
+
+    .password-toggle {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #666;
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: #333;
+        }
+
+        i {
+            font-size: 12px;
+        }
+    }
+}
+
 /* Responsive styles */
 @media (max-width: 900px) {
   .login-container {

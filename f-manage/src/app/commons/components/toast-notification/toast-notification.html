@@ -1,0 +1,12 @@
+<!-- <p>toast-notification works!</p> -->
+<div *ngIf="toastService.toast$ | async as toast" 
+[class]="'toast ' + (toast.show ? 'show' : '') + ' ' + toast.type">
+<div class="toast-content">
+<i class="fas" [ngClass]="{
+ 'fa-check-circle': toast.type === 'success',
+ 'fa-exclamation-circle': toast.type === 'error',
+ 'fa-info-circle': toast.type === 'info'
+}"></i>
+<span>{{ toast.message }}</span>
+</div>
+</div>

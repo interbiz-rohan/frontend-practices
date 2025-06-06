@@ -169,7 +169,7 @@ th {
 
 
 .type-select {
-    padding: 12px 12px;
+    padding: 8px 12px;
     border-radius: 6px;
     border: 1px solid #e0e0e0;
     background: #fff;
@@ -209,7 +209,7 @@ th {
     color: #fff;
     border: none;
     border-radius: 8px;
-    padding: 12px 22px;
+    padding: 8px 22px;
     font-size: 16px;
     font-weight: 500;
     display: flex;
@@ -227,4 +227,19 @@ th {
     font-size: 20px;
     font-weight: bold;
     margin-right: 4px;
+}
+
+@media (max-width: 400px) {
+    .files-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .search-group{
+        width: 100%;
+    }
+    .search-input{
+        width: unset !important;
+        min-width: 100%;
+        width: 100% !important;
+    }
 }

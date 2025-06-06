@@ -8,3 +8,7 @@
 body {
     font-family: 'Instrument Sans', sans-serif;
   }
+
+  .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__text-label{
+    color: #fff !important;
+  }

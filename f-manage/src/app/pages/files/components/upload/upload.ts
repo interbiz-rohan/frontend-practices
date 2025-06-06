@@ -3,6 +3,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { IndexedDBService } from '../../../../services/indexed-db.service';
 import { AuthService } from '../../../../services/auth.service';
 import { FormsModule } from '@angular/forms';
+import { ToastService } from '../../../../commons/services/toast.service';
 
 @Component({
   selector: 'app-upload-file-modal',
@@ -17,7 +18,7 @@ export class UploadFileModal {
   overview: string = '';
   @Output() uploaded = new EventEmitter<void>();
 
-  constructor(private dbService: IndexedDBService, private authService: AuthService) {}
+  constructor(private dbService: IndexedDBService, private authService: AuthService, private toastService: ToastService) {}
   close() {
     this.closed.emit();
   }
@@ -59,11 +60,17 @@ export class UploadFileModal {
         data: this.selectedFile,
         user_id: currentUser?.id || '',
         overview: this.overview || 'No overview provided'
-      }).subscribe(() => {
-        this.close();
+      }).subscribe({
+        next: () => {
+          this.toastService.showSuccess('File uploaded successfully!');
+          this.close();
+          this.uploaded.emit();
+        },
+        error: (error) => {
+          console.error('Error uploading file:', error);
+          this.toastService.showError('Failed to upload file. Please try again.');
+        }
       });
-
-      this.uploaded.emit();
     }
   }
 }
