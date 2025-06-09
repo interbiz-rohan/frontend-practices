@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CurrentBattingBowlingCardComponent } from './current-batting-bowling-card.component';
+import { CurrentBattingBowlingCardComponent } from './hightlights.component';
 
 describe('CurrentBattingBowlingCardComponent', () => {
   let component: CurrentBattingBowlingCardComponent;

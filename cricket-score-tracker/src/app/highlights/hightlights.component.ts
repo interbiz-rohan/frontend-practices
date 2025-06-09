@@ -1,23 +1,26 @@
 import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AppService } from '../services/app.service';
+import { AppService } from '../commons/services/app.service';
 import { Observable, Observer, Subject, takeUntil } from 'rxjs';
+import { HighlightsService } from './services/highlights.service';
+import { Match } from './interfaces/highlights.interface';
 
 @Component({
-  selector: 'app-current-batting-bowling-card',
+  selector: 'app-hightlights',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './current-batting-bowling-card.component.html',
-  styleUrl: './current-batting-bowling-card.component.css'
+  templateUrl: './hightlights.component.html',
+  styleUrl: './hightlights.component.css'
 })
 export class CurrentBattingBowlingCardComponent implements OnInit,OnDestroy{
-  matchData = signal<any>(null);
+  matchData = signal<Match | null>(null);
   private destroy$ = new Subject<void>()
 
-  constructor(private appService:AppService){}
+  constructor(private highlightService:HighlightsService){}
 
   ngOnInit(): void {
-    this.appService.currentMatchData$
+    this.highlightService.fetchMatchData();
+    this.highlightService.currentMatchData$
     .pipe(takeUntil(this.destroy$))
     .subscribe((observe) => {
       this.matchData.set(observe);

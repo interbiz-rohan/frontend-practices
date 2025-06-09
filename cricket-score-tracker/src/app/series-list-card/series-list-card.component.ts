@@ -1,8 +1,8 @@
 import { Component, signal, computed, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AppService } from '../services/app.service';
-import { Series, Match } from '../interfaces/cricket.interface';
 import { Subject, takeUntil } from 'rxjs';
+import { Match, Series } from './interfaces/series.interface';
+import { SeriesService } from './services/series.service';
 
 @Component({
   selector: 'app-series-list-card',
@@ -34,32 +34,23 @@ export class SeriesListCardComponent implements OnInit, OnDestroy {
     return series.matchList.find(match => match.id === this.selectedMatch()) || null;
   });
 
-  constructor(private appService: AppService) {}
+  constructor(public seriesService: SeriesService) {}
 
   onSearch(event: Event) {
     const searchTerm = (event.target as HTMLInputElement).value;
-    this.appService.searchSeries(searchTerm);
+    this.seriesService.searchSeries(searchTerm);
   }
 
   toggleSeriesList() {
-    this.isSeriesListExpanded.update(value => !value);
+    this.seriesService.toggleSeriesList();
   }
 
   selectSeries(id: string) {
-    const updatedSeries = this.series().map((s) => {
-      if (s.id === id) {
-        if (!s.matchList || s.matchList.length === 0) {
-          this.appService.setSelectedSeries(id);
-        }
-        return { ...s, showMatches: !s.showMatches };
-      }
-      return s;
-    });
-    this.series.set(updatedSeries);
+    this.seriesService.selectSeries(id);
   }
 
   ngOnInit(): void {
-    this.appService.series$
+    this.seriesService.series$
       .pipe(takeUntil(this.destroy$))
       .subscribe((seriesData) => {
         if (seriesData) {
@@ -67,21 +58,28 @@ export class SeriesListCardComponent implements OnInit, OnDestroy {
         }
       });
 
-    this.appService.selectedMatch$
+    this.seriesService.selectedMatch$
       .pipe(takeUntil(this.destroy$))
-      .subscribe((observer) => {
-        this.selectedMatch.set(observer);
+      .subscribe((matchId) => {
+        this.selectedMatch.set(matchId);
       });
 
-    this.appService.currentMatchData$
+    this.seriesService.currentMatchData$
       .pipe(takeUntil(this.destroy$))
-      .subscribe((observe) => {
-        this.matchData.set(observe);
+      .subscribe((matchData) => {
+        this.matchData.set(matchData);
       });
+
+    this.seriesService.isSeriesListExpanded$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((expanded) => {
+        this.isSeriesListExpanded.set(expanded);
+      });
+    // this.seriesService.fetchMatchData();
   }
 
   selectMatch(id: string) {
-    this.appService.setSelectedMatch(id);
+    this.seriesService.selectMatch(id);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 

@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ScorecardCardComponent } from './scorecard-card/scorecard-card.component';
+import { ScoreCardComponent } from './score-card/score-card.component';
 import { SeriesListCardComponent } from './series-list-card/series-list-card.component';
-import { CurrentBattingBowlingCardComponent } from './current-batting-bowling-card/current-batting-bowling-card.component';
-import { LoadingComponent } from './components/loading/loading.component';
+import { CurrentBattingBowlingCardComponent } from './highlights/hightlights.component';
+import { LoadingComponent } from './commons/components/loading/loading.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [  ScorecardCardComponent, SeriesListCardComponent, CurrentBattingBowlingCardComponent , LoadingComponent],
+  imports: [  ScoreCardComponent, SeriesListCardComponent, CurrentBattingBowlingCardComponent , LoadingComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -22,18 +22,24 @@
           <span class="toggle-arrow">{{ s.showMatches ? "▲" : "▼" }}</span>
         </div>
         <div class="match-list-accordion" *ngIf="s.showMatches">
-          <div *ngFor="let match of s.matchList">
-            <div class="match-item" [class.active]="selectedMatch() === match.id" (click)="selectMatch(match.id)">
-              <div class="team-info">{{ match.teams[0] }}</div>
-              <div class="team-info">
-                <span>vs</span>
-                <div class="match-result">{{ match.status }}</div>
+          <div *ngIf="seriesService.isSeriesLoading(s.id)" class="loading-matches">
+            <div class="spinner"></div>
+            <div class="loading-text">Loading matches...</div>
+          </div>
+          <div *ngIf="!seriesService.isSeriesLoading(s.id)">
+            <div *ngFor="let match of s.matchList">
+              <div class="match-item" [class.active]="selectedMatch() === match.id" (click)="selectMatch(match.id)">
+                <div class="team-info">{{ match.teams[0] }}</div>
+                <div class="team-info">
+                  <span>vs</span>
+                  <div class="match-result">{{ match.status }}</div>
+                </div>
+                <div class="team-info">{{ match.teams[1] }}</div>
               </div>
-              <div class="team-info">{{ match.teams[1] }}</div>
+              <hr />
             </div>
             <hr />
           </div>
-          <hr />
         </div>
       </div>
     </div>

@@ -8,7 +8,7 @@ import { AppService } from '../../services/app.service';
   imports: [CommonModule],
   template: `
     <ng-container>
-      <div class="loading-overlay" *ngIf="appService.isLoading()">
+      <div class="loading-overlay" *ngIf="false">
         <div class="loading-spinner">
           <div class="spinner"></div>
           <p>Loading...</p>
