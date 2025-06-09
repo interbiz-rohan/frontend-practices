@@ -8,7 +8,7 @@ import { IndexedDBService, File } from '../../services/indexed-db.service';
 import { UploadFileModal } from './components/upload/upload';
 import { PageEvent } from '@angular/material/paginator';
 import { FileCategory, FILE_CATEGORIES, filterFilesByCategory, getMimeType } from '../../commons/utils/file.utils';
-import { switchMap, map, forkJoin, tap } from 'rxjs';
+import { switchMap, map, forkJoin, tap, mergeMap, from, toArray } from 'rxjs';
 import { FooterComponent } from '../../commons/components/footer/footer';
 import { ToastComponent } from '../../commons/components/toast-notification/toast-notification';
 import { ToastService } from '../../commons/services/toast.service';
@@ -113,11 +113,16 @@ export class FilesCompoenent implements OnInit {
             }))
           )
         );
-        
+        console.log("filesWithAuthors$ values - ",filesWithAuthors$);
         return forkJoin(filesWithAuthors$);
+        // return from(filesWithAuthors$).pipe(
+        //   mergeMap(file$ => file$),
+        //   toArray()
+        // );
       }),
     ).subscribe({
       next: (files) => {
+        // console.log("fork join files - ", files);
         this.files.set(files);
         this.applyFilters();
 
