@@ -1,5 +1,7 @@
+<app-layout>
+  
 <div class="files-container">
-  <app-header></app-header>
+  <!-- <app-header></app-header> -->
   <app-toast></app-toast>
   <app-upload-file-modal *ngIf="showUploadModal()" (closed)="showUploadModal.set(false)" (uploaded)="loadFiles()"></app-upload-file-modal>
   <div class="files-content">
@@ -47,3 +49,4 @@
 
   <!-- <app-footer></app-footer> -->
 </div>
+</app-layout>

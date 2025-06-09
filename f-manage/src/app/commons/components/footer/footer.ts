@@ -17,7 +17,7 @@ import { CommonModule } from '@angular/common';
   styles: [`
     .footer {
       padding: 20px 0;
-      position: fixed;
+      position: absolute;
       bottom: 0;
       left: 0;
       min-height: 50px;

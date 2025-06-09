@@ -12,6 +12,7 @@ import { switchMap, map, forkJoin, tap, mergeMap, from, toArray } from 'rxjs';
 import { FooterComponent } from '../../commons/components/footer/footer';
 import { ToastComponent } from '../../commons/components/toast-notification/toast-notification';
 import { ToastService } from '../../commons/services/toast.service';
+import { Layout } from '../../commons/components/layout/layout';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,9 +20,10 @@ import { ToastService } from '../../commons/services/toast.service';
   imports: [
     CommonModule, 
     FormsModule, 
-    HeaderComponent, 
+    // HeaderComponent, 
     CustomTableComponent, 
     UploadFileModal, 
+    Layout,
     // FooterComponent,
     ToastComponent
   ],
