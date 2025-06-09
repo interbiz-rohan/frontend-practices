@@ -38,3 +38,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
    font-weight: 500 !important;
    letter-spacing: 1px;
   }
+
+  .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-floating-label{
+    top: 50% !important;
+  }

@@ -1,36 +1,29 @@
-<app-header></app-header>
-<app-toast></app-toast>
-
-<div class="users-container">
-    <div class="users-content">
-        <div class="users-toolbar">
-            <div class="search-group">
-                <input
-                    class="search-input"
-                    type="text"
-                    placeholder="Search by name & email"
-                    [value]="searchTerm()"
-                    (input)="onSearchChange($event)"
-                />
-                <i class="fas fa-search search-icon"></i>
+<!-- <app-header></app-header> -->
+<app-layout>
+    <app-toast></app-toast>
+    <div class="users-container">
+        <div class="users-content">
+            <div class="users-toolbar">
+                <div class="search-group">
+                    <input class="search-input" type="text" placeholder="Search by name & email" [value]="searchTerm()"
+                        (input)="onSearchChange($event)" />
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+                <button class="add-user-btn" (click)="onAddUser()">
+                    <span class="plus-icon">+</span> Add user
+                </button>
             </div>
-            <button class="add-user-btn" (click)="onAddUser()">
-                <span class="plus-icon">+</span> Add user
-            </button>
+
+            <app-custom-table [columns]="columns" [data]="paginatedUsers()" [totalItems]="totalItems()"
+                [currentPage]="currentPage()" [pageSize]="pageSize()" [actions]="actions" [loading]="loading()"
+                (pageChange)="onPageChange($event)" (actionClick)="onActionClick($event)">
+            </app-custom-table>
+
+            <app-add-edit-user *ngIf="showUserModal" [userId]="selectedUserId" (closed)="showUserModal = false"
+                (saved)="onUserSaved()">
+            </app-add-edit-user>
         </div>
 
-        <app-custom-table [columns]="columns" [data]="paginatedUsers()" [totalItems]="totalItems()"
-            [currentPage]="currentPage()" [pageSize]="pageSize()" [actions]="actions" [loading]="loading()"
-            (pageChange)="onPageChange($event)" (actionClick)="onActionClick($event)">
-        </app-custom-table>
-
-        <app-add-edit-user
-            *ngIf="showUserModal"
-            [userId]="selectedUserId"
-            (closed)="showUserModal = false"
-            (saved)="onUserSaved()">
-        </app-add-edit-user>
+        <!-- <app-footer></app-footer> -->
     </div>
-
-    <!-- <app-footer></app-footer> -->
-</div>
+</app-layout>

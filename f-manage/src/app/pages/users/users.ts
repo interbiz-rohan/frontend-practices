@@ -9,12 +9,13 @@ import { AddEditUser } from './add-edit-user/add-edit-user';
 import { FooterComponent } from '../../commons/components/footer/footer';
 import { ToastComponent } from '../../commons/components/toast-notification/toast-notification';
 import { ToastService } from '../../commons/services/toast.service';
+import { Layout } from '../../commons/components/layout/layout';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonModule, FormsModule, HeaderComponent, CustomTableComponent , AddEditUser , 
-    // FooterComponent, 
+  imports: [CommonModule, FormsModule, CustomTableComponent , AddEditUser , 
+    Layout,
     ToastComponent],
   templateUrl: "./users.html",
   styleUrls: ["./users.scss"],
