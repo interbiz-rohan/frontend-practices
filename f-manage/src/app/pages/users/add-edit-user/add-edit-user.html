@@ -1,7 +1,12 @@
 <div class="modal-backdrop" (click)="close()"></div>
 <div class="user-modal">
   <form [formGroup]="form" (ngSubmit)="submit()" (click)="$event.stopPropagation()">
-    <h2>{{ isEdit ? 'Edit User' : 'Add User' }}</h2>
+    <div class="form-header">
+      <h2>{{ isEdit ? 'Edit User' : 'Add User' }}</h2>
+      <button class="close-btn" (click)="close()">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
     <div class="form-group">
       <mat-form-field appearance="outline">
         <mat-label>Full Name</mat-label>

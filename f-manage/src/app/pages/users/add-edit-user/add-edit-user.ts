@@ -47,7 +47,7 @@ export class AddEditUser implements OnInit {
   isEdit = false;
   hidePassword = true;
   isSubmitting = false;
-  
+
   newEmail = '';
   newContact = '';
   newAddress = '';
@@ -57,7 +57,7 @@ export class AddEditUser implements OnInit {
   contactError = signal<string>('');
   addressError = signal<string>('');
 
-
+  private isClosing = false;
 
   constructor(
     private fb: FormBuilder,
@@ -172,14 +172,14 @@ export class AddEditUser implements OnInit {
       if (!value) return null;
 
       const digitsOnly = value.replace(/-/g, '');
-      
+
       if (digitsOnly.length > 10) {
         return { maxLength: true };
       }
 
       const hyphenPositions = [...value.matchAll(/-/g)].map(m => m.index);
       const validHyphenPositions = [3, 7];
-      
+
       for (const pos of hyphenPositions) {
         if (!validHyphenPositions.includes(pos!)) {
           return { invalidHyphenPosition: true };
@@ -193,7 +193,7 @@ export class AddEditUser implements OnInit {
   formatPhoneNumber(event: any) {
     const input = event.target as HTMLInputElement;
     let value = input.value.replace(/\D/g, ''); // Remove non-digits
-    
+
     // Limit to 10 digits
     if (value.length > 10) {
       value = value.slice(0, 10);
@@ -266,10 +266,16 @@ export class AddEditUser implements OnInit {
   }
 
   close() {
+    this.isClosing = true;
+    this.form.reset();
     this.closed.emit();
   }
 
   submit() {
+    if (this.isClosing) {
+      return;
+    }
+
     if (this.form.valid) {
       this.isSubmitting = true;
       
@@ -330,10 +336,10 @@ export class AddEditUser implements OnInit {
   formatPassword(event: any) {
     const input = event.target as HTMLInputElement;
     let value = input.value;
-    
+
     // Remove leading and trailing spaces
     value = value.trim();
-    
+
     // Update input value
     input.value = value;
     this.form.get('password')?.setValue(value);
