@@ -1,6 +1,7 @@
 import { IndexedDBService, User, File } from '../../services/indexed-db.service';
 import { Observable, from, forkJoin } from 'rxjs';
 import { map, catchError, tap, switchMap } from 'rxjs/operators';
+import { readFileFromAssets, saveFile, FilePayload } from '../utils/file-operations';
 
 export const initialUsers: Omit<User, 'id' | 'created_at' | 'updated_at'>[] = [
   {
@@ -28,25 +29,11 @@ export const initialUsers: Omit<User, 'id' | 'created_at' | 'updated_at'>[] = [
 const FILE_PATHS = {
   docx: 'assets/file-manager.docx',
   pdf: 'assets/notification.pdf',
-  jpg: 'assets/Capture.PNG',
-  txt: 'assets/logos/dark-bg-logo.PNG'
+  png: 'assets/logos/dark-bg-logo.PNG'
 };
 
-async function readFileFromAssets(path: string): Promise<Blob> {
-  try {
-    const response = await fetch(path);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch file: ${path}`);
-    }
-    return response.blob();
-  } catch (error) {
-    console.error(`Error reading file ${path}:`, error);
-    throw error;
-  }
-}
-
 // File metadata without data
-const initialFileMetadata: Omit<File, 'id' | 'created_on' | 'updated_on' | 'data'>[] = [
+const initialFileMetadata: FilePayload[] = [
   {
     name: 'Document of f-manage',
     type: 'docx',
@@ -67,18 +54,10 @@ const initialFileMetadata: Omit<File, 'id' | 'created_on' | 'updated_on' | 'data
     name: 'Header Image',
     type: 'jpg',
     size: '1MB',
-    url: FILE_PATHS.jpg,
+    url: FILE_PATHS.png,
     user_id: '2',
     overview: 'Product demonstration image showing the latest features and updates.'
   },
-  {
-    name: 'Text File',
-    type: 'txt',
-    size: '0.5MB',
-    url: FILE_PATHS.txt,
-    user_id: '2',
-    overview: 'Meeting notes and action items from the last team discussion.'
-  }
 ];
 
 export function initializeDatabase(dbService: IndexedDBService): Observable<void> {
@@ -94,21 +73,11 @@ export function initializeDatabase(dbService: IndexedDBService): Observable<void
     switchMap(() => dbService.getAllFiles()),
     switchMap(existingFiles => {
       if (!existingFiles || existingFiles.length === 0) {
-        const fileInitializations = initialFileMetadata.map(async (fileMetadata) => {
-          try {
-            const fileData = await readFileFromAssets(fileMetadata.url);
-            return dbService.addFile({
-              ...fileMetadata,
-              url:"",
-              data: fileData
-            }).toPromise();
-          } catch (error) {
-            console.error(`Error initializing file ${fileMetadata.name}:`, error);
-            return null;
-          }
-        });
-
-        return forkJoin(fileInitializations).pipe(
+        return from(Promise.all(initialFileMetadata.map(async (fileMetadata) => {
+          const fileData = await readFileFromAssets(fileMetadata.url || '');
+          return { ...fileMetadata, data: fileData };
+        }))).pipe(
+          switchMap(filePayloads => saveFile(dbService, filePayloads)),
           tap(() => console.log('Initial files added successfully'))
         );
       }
@@ -120,4 +89,4 @@ export function initializeDatabase(dbService: IndexedDBService): Observable<void
       return from(Promise.resolve());
     })
   );
-} 
+}

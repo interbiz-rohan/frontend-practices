@@ -12,7 +12,7 @@ import { Layout } from '../../commons/components/layout/layout';
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonModule, FormsModule, CustomTableComponent , AddEditUser , 
+  imports: [CommonModule, FormsModule, CustomTableComponent , AddEditUser ,
     Layout,
     ToastComponent],
   templateUrl: "./users.html",
@@ -36,8 +36,8 @@ export class Users implements OnInit {
     { key: 'email', label: 'Email' },
     { key: 'role', label: 'Role' },
     { key: 'address', label: 'Location' },
-    { key: 'created_at', label: 'Created', type: 'date' },
-    { key: 'updated_at', label: 'Edited', type: 'date' }
+    { key: 'created_at', label: 'Created On', type: 'date' },
+    { key: 'updated_at', label: 'Edited On', type: 'date' }
   ];
 
   actions: TableAction[] = [
@@ -56,7 +56,7 @@ export class Users implements OnInit {
   ];
 
   filteredUsers = signal<User[]>([]);
-  
+
   paginatedUsers = computed(() => {
     const start = (this.currentPage() - 1) * this.pageSize();
     const end = start + this.pageSize();
@@ -129,7 +129,9 @@ export class Users implements OnInit {
       const term = this.searchTerm().toLowerCase();
       filtered = filtered.filter(user =>
         user.name.toLowerCase().includes(term) ||
-        user.email.join(' ').toLowerCase().includes(term)
+        user.email.join(' ').toLowerCase().includes(term) ||
+        user.address.join(' ').toLowerCase().includes(term) ||
+        user.role.toLowerCase().includes(term)
       );
     }
     this.filteredUsers.set(filtered);

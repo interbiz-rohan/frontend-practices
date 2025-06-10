@@ -92,6 +92,8 @@ export class IndexedDBService {
   }
 
   addUser(user: Omit<User, 'id' | 'created_at' | 'updated_at'>): Observable<User> {
+    console.log(user)
+
     return this.ensureDB().pipe(
       switchMap(() => from(this.db!.add('users', {
         ...user,
@@ -99,6 +101,7 @@ export class IndexedDBService {
         updated_at: new Date()
       }))),
       map(id => ({ ...user, id: id.toString() })),
+      tap(user => console.log('Added user:', user)),
       catchError(error => {
         console.error('Error adding user:', error);
         throw error;

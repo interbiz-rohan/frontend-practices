@@ -18,11 +18,11 @@ import { Layout } from '../../commons/components/layout/layout';
   selector: 'app-dashboard',
   standalone: true,
   imports: [
-    CommonModule, 
-    FormsModule, 
-    // HeaderComponent, 
-    CustomTableComponent, 
-    UploadFileModal, 
+    CommonModule,
+    FormsModule,
+    // HeaderComponent,
+    CustomTableComponent,
+    UploadFileModal,
     Layout,
     // FooterComponent,
     ToastComponent
@@ -107,7 +107,7 @@ export class FilesCompoenent implements OnInit {
 
     files$.pipe(
       switchMap(files => {
-        const filesWithAuthors$ = files.map(file => 
+        const filesWithAuthors$ = files.map(file =>
           this.dbService.getAuthorName(file.user_id).pipe(
             map(authorName => ({
               ...file,
@@ -115,7 +115,7 @@ export class FilesCompoenent implements OnInit {
             }))
           )
         );
-        console.log("filesWithAuthors$ values - ",filesWithAuthors$);
+        console.log("filesWithAuthors$ values - ", filesWithAuthors$);
         return forkJoin(filesWithAuthors$);
         // return from(filesWithAuthors$).pipe(
         //   mergeMap(file$ => file$),
@@ -141,13 +141,13 @@ export class FilesCompoenent implements OnInit {
 
   applyFilters() {
     let filtered = this.files();
-    
+
     // Apply category filter
     filtered = filterFilesByCategory(filtered, this.selectedCategory());
-    
+
     // Apply search filter
     if (this.searchTerm()) {
-      filtered = filtered.filter(file => 
+      filtered = filtered.filter(file =>
         file.name.toLowerCase().includes(this.searchTerm().toLowerCase())
       );
     }
@@ -212,17 +212,17 @@ export class FilesCompoenent implements OnInit {
       console.error('No file data available');
       return;
     }
-    
+
     const mimeType = getMimeType(file.type);
     const blob = new Blob([file.data], { type: mimeType });
     const url = window.URL.createObjectURL(blob);
-    
+
     const link = document.createElement('a');
     link.href = url;
     link.download = file.name;
     document.body.appendChild(link);
     link.click();
-    
+
     document.body.removeChild(link);
     window.URL.revokeObjectURL(url);
   }
@@ -256,4 +256,4 @@ export class FilesCompoenent implements OnInit {
   onUploadFile() {
     this.showUploadModal.set(true);
   }
-} 
+}

@@ -4,6 +4,7 @@ import { IndexedDBService } from '../../../../services/indexed-db.service';
 import { AuthService } from '../../../../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { ToastService } from '../../../../commons/services/toast.service';
+import { saveFile, FilePayload } from '../../../../commons/utils/file-operations';
 
 @Component({
   selector: 'app-upload-file-modal',
@@ -17,13 +18,14 @@ export class UploadFileModal {
   @Output() closed = new EventEmitter<void>();
   overview: string = '';
   @Output() uploaded = new EventEmitter<void>();
+  isSubmitting = false;
 
   constructor(private dbService: IndexedDBService, private authService: AuthService, private toastService: ToastService) {}
   close() {
     this.closed.emit();
   }
 
-  onFileSelected(event: Event) {
+  onFileSelect(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.selectedFile = input.files[0];
@@ -52,15 +54,16 @@ export class UploadFileModal {
       const currentUser = this.authService.currentUserValue;
       const sizeInMB = (this.selectedFile.size / (1024 * 1024)).toFixed(2) + ' MB';
 
-      this.dbService.addFile({
+      const filePayload: FilePayload = {
         name: this.selectedFile.name,
         type: this.selectedFile.name.split('.').pop()?.toLowerCase() || '',
         size: sizeInMB,
-        url: '',
         data: this.selectedFile,
         user_id: currentUser?.id || '',
         overview: this.overview || 'No overview provided'
-      }).subscribe({
+      };
+
+      saveFile(this.dbService, filePayload).subscribe({
         next: () => {
           this.toastService.showSuccess('File uploaded successfully!');
           this.close();

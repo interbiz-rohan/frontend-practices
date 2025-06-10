@@ -14,7 +14,12 @@
           {{ category }}
         </button>
       </div>
-      <select class="type-select" [value]="selectedType()" (change)="onTypeChange($event)">
+      <select 
+        class="type-select" 
+        [value]="selectedType()" 
+        (change)="onTypeChange($event)"
+        [disabled]="selectedCategory() !== 'All'"
+        >
         <option value="">All</option>
         <option *ngFor="let type of fileTypes()" [value]="type">{{ type }}</option>
       </select>

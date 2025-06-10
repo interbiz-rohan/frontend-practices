@@ -72,15 +72,11 @@ export class AddEditUser implements OnInit {
 
   ngOnInit() {
     this.isEdit = !!this.userId;
-    this.initForm();
-  }
-
-  initForm() {
     this.form = this.fb.group({
       name: ['', Validators.required],
-      tempEmail: ['', [Validators.email, this.emailValidator()]],
-      tempContact: ['', [Validators.minLength(10), Validators.pattern(/^[0-9-]{0,12}$/)]],
-      tempAddress: ['',[Validators.maxLength(30),Validators.minLength(3)]],
+      tempEmail: ['', [Validators.required, Validators.email, this.emailValidator()]],
+      tempContact: ['', [Validators.required, Validators.minLength(10), Validators.pattern(/^[0-9-]{0,12}$/)]],
+      tempAddress: ['', [Validators.required, Validators.maxLength(30), Validators.minLength(3)]],
       gender: ['', Validators.required],
       role: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(8), this.passwordValidator()]],
@@ -103,20 +99,34 @@ export class AddEditUser implements OnInit {
           while (this.contact.length) this.contact.removeAt(0);
           while (this.address.length) this.address.removeAt(0);
 
-          user.email.forEach(email => {
-            this.email.push(this.fb.control(email));
-          });
+          if (user.email.length == 1) {
+            this.tempEmail?.setValue(user.email[0]);
+          }
+          else {
+            user.email.forEach(email => {
+              this.email.push(this.fb.control(email));
+            });
+          }
 
-          user.contact.forEach(contact => {
-            this.contact.push(this.fb.control(contact));
-          });
-
-          user.address.forEach(address => {
-            this.address.push(this.fb.control(address));
-          });
+          if (user.contact.length == 1) {
+            this.tempContact?.setValue(user.contact[0]);
+          } else {
+            user.contact.forEach(contact => {
+              this.contact.push(this.fb.control(contact));
+            });
+          }
+          if (user.address.length == 1) {
+            this.tempAddress?.setValue(user.address[0]);
+          } else {
+            user.address.forEach(address => {
+              this.address.push(this.fb.control(address));
+            });
+          }
         }
       });
     }
+
+    console.log(this.form.value);
 
     this.email.valueChanges.subscribe(() => this.updateEmailValidation());
     this.contact.valueChanges.subscribe(() => this.updateContactValidation());
@@ -129,6 +139,129 @@ export class AddEditUser implements OnInit {
   get tempEmail() { return this.form.get('tempEmail'); }
   get tempContact() { return this.form.get('tempContact'); }
   get tempAddress() { return this.form.get('tempAddress'); }
+
+
+
+  isValidEmail(email: string): boolean {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  removeFromArray(key: 'email' | 'contact' | 'address', index: number) {
+    const arr = this.form.get(key) as FormArray;
+    arr.removeAt(index);
+
+    // Update validation after removal
+    switch (key) {
+      case 'email':
+        this.updateEmailValidation();
+        break;
+      case 'contact':
+        this.updateContactValidation();
+        break;
+      case 'address':
+        this.updateAddressValidation();
+        break;
+    }
+  }
+
+  close() {
+    this.isClosing = true;
+    this.form.reset();
+    this.closed.emit();
+  }
+
+  async submit() {
+    console.log(this.form.value);
+    try {
+      this.isSubmitting = true;
+
+      // Check if we have any values in temp fields that haven't been added to arrays
+      console.log(this.tempEmail?.value, this.tempEmail?.valid);
+      if (this.tempEmail?.value && this.tempEmail?.valid) {
+        this.addToArray('email');
+      }
+      if (this.tempContact?.value && this.tempContact?.valid) {
+        this.addToArray('contact');
+      }
+      if (this.tempAddress?.value && this.tempAddress?.valid) {
+        this.addToArray('address');
+      }
+
+      // Validate that we have at least one value in each array
+      if (this.email.length === 0 || this.contact.length === 0 || this.address.length === 0) {
+        this.toastService.showError('Please add at least one value for email, contact, and address');
+        this.isSubmitting = false;
+        return;
+      }
+
+      const userData: Omit<User, 'id' | 'created_at' | 'updated_at'> = {
+        name: this.form.get('name')?.value,
+        email: this.email.controls.map(control => control.value),
+        contact: this.contact.controls.map(control => control.value),
+        address: this.address.controls.map(control => control.value),
+        gender: this.form.get('gender')?.value,
+        password: this.form.get('password')?.value,
+        role: this.form.get('role')?.value,
+        date_of_birth: ''
+      };
+
+      let operation$;
+      if (this.isEdit && this.userId) {
+        operation$ = this.dbService.updateUser(this.userId, userData);
+      } else {
+        operation$ = this.dbService.addUser(userData);
+      }
+
+      operation$.pipe(
+        finalize(() => {
+          this.isSubmitting = false;
+        })
+      ).subscribe({
+        next: (user) => {
+          console.log('User saved successfully:', user);
+          this.saved.emit();
+          this.close();
+          this.toastService.showSuccess(this.isEdit ? 'User updated successfully!' : 'User added successfully!');
+          this.router.navigate(['/users']);
+        },
+        error: (error) => {
+          console.error('Error saving user:', error);
+          this.toastService.showError(this.isEdit ? 'Failed to update user. Please try again.' : 'Failed to add user. Please try again.');
+        }
+      });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      this.toastService.showError('Error submitting form');
+    } finally {
+      this.isSubmitting = false;
+    }
+  }
+
+  passwordValidator() {
+    return (control: any) => {
+      const value = control.value;
+      if (!value) return null;
+
+      // Check if password starts or ends with space
+      if (value.startsWith(' ') || value.endsWith(' ')) {
+        return { invalidSpaces: true };
+      }
+
+      return null;
+    };
+  }
+
+  formatPassword(event: any) {
+    const input = event.target as HTMLInputElement;
+    let value = input.value;
+
+    // Remove leading and trailing spaces
+    value = value.trim();
+
+    // Update input value
+    input.value = value;
+    this.form.get('password')?.setValue(value);
+  }
 
   emailValidator() {
     return (control: any) => {
@@ -146,10 +279,8 @@ export class AddEditUser implements OnInit {
     const control = this.tempEmail;
     if (this.email.length === 0) {
       control?.setValidators([Validators.required, Validators.email, this.emailValidator()]);
-      this.emailError.set('At least one email is required');
     } else {
       control?.setValidators([Validators.email, this.emailValidator()]);
-      this.emailError.set('');
     }
     control?.updateValueAndValidity({ emitEvent: false });
   }
@@ -158,10 +289,8 @@ export class AddEditUser implements OnInit {
     const control = this.tempContact;
     if (this.contact.length === 0) {
       control?.setValidators([Validators.required, Validators.pattern(/^[0-9-]{0,12}$/), this.phoneNumberValidator()]);
-      this.contactError.set('At least one phone number is required');
     } else {
       control?.setValidators([Validators.pattern(/^[0-9-]{0,12}$/), this.phoneNumberValidator()]);
-      this.contactError.set('');
     }
     control?.updateValueAndValidity({ emitEvent: false });
   }
@@ -199,7 +328,6 @@ export class AddEditUser implements OnInit {
       value = value.slice(0, 10);
     }
 
-    // Add hyphens
     if (value.length > 3) {
       value = value.slice(0, 3) + '-' + value.slice(3);
     }
@@ -215,11 +343,9 @@ export class AddEditUser implements OnInit {
   updateAddressValidation() {
     const control = this.tempAddress;
     if (this.address.length === 0) {
-      control?.setValidators([Validators.required]);
-      this.addressError.set('At least one address is required');
+      control?.setValidators([Validators.required, Validators.maxLength(30), Validators.minLength(3)]);
     } else {
-      control?.clearValidators();
-      this.addressError.set('');
+      control?.setValidators([Validators.maxLength(30), Validators.minLength(3)]);
     }
     control?.updateValueAndValidity();
   }
@@ -228,120 +354,38 @@ export class AddEditUser implements OnInit {
     let value = '';
     let control = null;
 
-    switch(key) {
+    switch (key) {
       case 'email':
         control = this.tempEmail;
-        if (control?.valid) {
+        if (control?.valid && control?.value?.trim()) {
           value = control.value.trim();
           this.email.push(this.fb.control(value));
           control.reset();
+          this.updateEmailValidation();
         }
         break;
       case 'contact':
         control = this.tempContact;
-        if (control?.valid) {
+        if (control?.valid && control?.value?.trim()) {
           value = control.value.trim();
           this.contact.push(this.fb.control(value));
           control.reset();
+          this.updateContactValidation();
         }
         break;
       case 'address':
         control = this.tempAddress;
-        if (control?.valid) {
+        if (control?.valid && control?.value?.trim()) {
           value = control.value.trim();
           this.address.push(this.fb.control(value));
           control.reset();
+          this.updateAddressValidation();
         }
         break;
     }
   }
 
-  isValidEmail(email: string): boolean {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
+  CompleteFormValidate() {
 
-  removeFromArray(key: 'email' | 'contact' | 'address', index: number) {
-    const arr = this.form.get(key) as FormArray;
-    arr.removeAt(index);
-  }
-
-  close() {
-    this.isClosing = true;
-    this.form.reset();
-    this.closed.emit();
-  }
-
-  submit() {
-    if (this.isClosing) {
-      return;
-    }
-
-    if (this.form.valid) {
-      this.isSubmitting = true;
-      
-      const userData: Omit<User, 'id' | 'created_at' | 'updated_at'> = {
-        name: this.form.get('name')?.value,
-        email: this.email.controls.map(control => control.value),
-        contact: this.contact.controls.map(control => control.value),
-        address: this.address.controls.map(control => control.value),
-        gender: this.form.get('gender')?.value,
-        password: this.form.get('password')?.value,
-        role: this.form.get('role')?.value,
-        date_of_birth: ''
-      };
-
-      let operation$;
-      if (this.isEdit && this.userId) {
-        operation$ = this.dbService.updateUser(this.userId, userData);
-      } else {
-        operation$ = this.dbService.addUser(userData);
-      }
-
-      operation$.pipe(
-        finalize(() => {
-          this.isSubmitting = false;
-        })
-      ).subscribe({
-        next: (user) => {
-          console.log('User saved successfully:', user);
-          this.saved.emit();
-          this.close();
-          this.toastService.showSuccess(this.isEdit ? 'User updated successfully!' : 'User added successfully!');
-          this.router.navigate(['/users']);
-        },
-        error: (error) => {
-          console.error('Error saving user:', error);
-          this.toastService.showError(this.isEdit ? 'Failed to update user. Please try again.' : 'Failed to add user. Please try again.');
-        }
-      });
-    } else {
-      this.toastService.showError('Please fill all required fields correctly');
-    }
-  }
-
-  passwordValidator() {
-    return (control: any) => {
-      const value = control.value;
-      if (!value) return null;
-
-      // Check if password starts or ends with space
-      if (value.startsWith(' ') || value.endsWith(' ')) {
-        return { invalidSpaces: true };
-      }
-
-      return null;
-    };
-  }
-
-  formatPassword(event: any) {
-    const input = event.target as HTMLInputElement;
-    let value = input.value;
-
-    // Remove leading and trailing spaces
-    value = value.trim();
-
-    // Update input value
-    input.value = value;
-    this.form.get('password')?.setValue(value);
   }
 }

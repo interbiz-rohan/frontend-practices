@@ -3,42 +3,63 @@ les */
 @import "bootstrap-icons/font/bootstrap-icons.css";
 
 :root {
-    --primary-color: #000;
-    --secondary-color: #fff;
-    --tertiary-color: #f5f5f5;
-    --accent-color: #6A5ACD;
-    --border-color: #e7e7e7;
-    --error-color: #dc3545;
-    --error-bg: #f8d7da;
-    --error-border: #f5c6cb;
-    --error-text: #721c24;
-    --button-primary: #007bff;
-    --button-hover: #0056b3;
-    --text-secondary: #666666;
-    --success-color: #28a745;
-    --table-border: #ddd;
-    --table-header-bg: #f8f9fa;
+  --primary-color: #000;
+  --secondary-color: #fff;
+  --tertiary-color: #f5f5f5;
+  --accent-color: #6A5ACD;
+  --border-color: #e7e7e7;
+  --error-color: #dc3545;
+  --error-bg: #f8d7da;
+  --error-border: #f5c6cb;
+  --error-text: #721c24;
+  --button-primary: #007bff;
+  --button-hover: #0056b3;
+  --text-secondary: #666666;
+  --success-color: #28a745;
+  --table-border: #ddd;
+  --table-header-bg: #f8f9fa;
 }
 
 /* Global Styles */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    background-color: var( --secondary-color);
-    font-family: 'Instrument Sans', sans-serif;
+  background-color: var(--secondary-color);
+  font-family: 'Instrument Sans', sans-serif;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__text-label{
-   font-weight: 500 !important;
-   letter-spacing: 1px;
-  }
+html,
+body {
+  height: 100%;
+}
 
-  .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-floating-label{
-    top: 50% !important;
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__text-label {
+  font-weight: 500 !important;
+  letter-spacing: 1px;
+}
+
+.mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-floating-label {
+  top: 50% !important;
+}
+
+.mat-mdc-button .mdc-button__label {
+  top: 2px !important;
+}
+
+
+.mat-mdc-button-touch-target{
+  display:none !important;
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-form-field-disabled, ::ng-deep .mat-form-field-outline {
+  opacity: 0;
   }
