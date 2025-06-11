@@ -1,27 +1,38 @@
 <div class="container">
   <div class="match-summary">
-    <div class="team-scores">
-      <div class="team-score">
-        <div class="team-name">{{matchData()?.teamInfo?.[0]?.shortname ?? "--"}}</div>
-        <div class="score-details">
-          <span class="runs">{{matchData()?.score?.[1]?.r ?? "--"}} - {{ matchData()?.score?.[1]?.w ?? "--"}}</span>
-          <!-- <span class="run-text">runs</span> -->
-          <span class="separator">/</span>
-          <span class="overs">{{matchData()?.score?.[0]?.o ?? "--"}}</span>
-          <span class="over-text">overs</span>
+    <ng-container *ngIf="!appService.isLoading(); else loadingTemplate">
+      <div class="team-scores">
+        <div class="team-score">
+          <div class="team-name">{{matchData()?.teamInfo?.[0]?.shortname ?? "--"}}</div>
+          <div class="score-details">
+            <span class="runs">{{matchData()?.score?.[1]?.r ?? "--"}} - {{ matchData()?.score?.[1]?.w ?? "--"}}</span>
+            <!-- <span class="run-text">runs</span> -->
+            <span class="separator">/</span>
+            <span class="overs">{{matchData()?.score?.[0]?.o ?? "--"}}</span>
+            <span class="over-text">overs</span>
+          </div>
+        </div>
+        <div class="vs">VS</div>
+        <div class="team-score">
+          <div class="team-name">{{matchData()?.teamInfo?.[1]?.shortname ?? "--"}}</div>
+          <div class="score-details">
+            <span class="runs">{{matchData()?.score?.[1]?.r ?? "--"}} - {{ matchData()?.score?.[1]?.w ?? "--"}}</span>
+            <!-- <span class="run-text">runs</span> -->
+            <span class="separator">/</span>
+            <span class="overs">{{matchData()?.score?.[1]?.o ?? "--"}}</span>
+            <span class="over-text">overs</span>
+          </div>
         </div>
       </div>
-      <div class="vs">VS</div>
-      <div class="team-score">
-        <div class="team-name">{{matchData()?.teamInfo?.[1]?.shortname ?? "--"}}</div>
-        <div class="score-details">
-          <span class="runs">{{matchData()?.score?.[1]?.r ?? "--"}} - {{ matchData()?.score?.[1]?.w ?? "--"}}</span>
-          <!-- <span class="run-text">runs</span> -->
-          <span class="separator">/</span>
-          <span class="overs">{{matchData()?.score?.[1]?.o ?? "--"}}</span>
-          <span class="over-text">overs</span>
+    </ng-container>
+
+    <ng-template #loadingTemplate>
+      <div class="team-scores loading-container">
+        <div class="loading-spinner">
+          <div class="spinner"></div>
+          <p>Loading...</p>
         </div>
       </div>
-    </div>
+    </ng-template>
   </div>
 </div>

@@ -47,7 +47,7 @@ export class AppService {
   }
 
 
-  fetchMatchData(id: string) {
+  fetchMatchData(id: string) { 
     this.isLoading.set(true);
     this.apiService
       .getSelectedMatchData(id)

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
 import { Match, InningStats } from './interfaces/scorecard.interface';
 import { ScorecardService } from './services/scorecard.service';
+import { AppService } from '../commons/services/app.service';
 
 @Component({
   selector: 'app-score-card',
@@ -16,7 +17,10 @@ export class ScoreCardComponent implements OnInit, OnDestroy {
   matchData = signal<Match | null>(null);
   selectedTeam = signal<string>('');
 
-  constructor(private scorecardService: ScorecardService) {}
+  constructor(
+    private scorecardService: ScorecardService,
+    public appService: AppService
+  ) {}
 
   ngOnInit(): void {
     this.scorecardService.fetchMatchData();

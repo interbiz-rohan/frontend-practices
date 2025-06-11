@@ -12,19 +12,22 @@ import { Match } from './interfaces/highlights.interface';
   templateUrl: './hightlights.component.html',
   styleUrl: './hightlights.component.css'
 })
-export class CurrentBattingBowlingCardComponent implements OnInit,OnDestroy{
+export class CurrentBattingBowlingCardComponent implements OnInit, OnDestroy {
   matchData = signal<Match | null>(null);
-  private destroy$ = new Subject<void>()
+  private destroy$ = new Subject<void>();
 
-  constructor(private highlightService:HighlightsService){}
+  constructor(
+    private highlightService: HighlightsService,
+    public appService: AppService
+  ) {}
 
   ngOnInit(): void {
     this.highlightService.fetchMatchData();
     this.highlightService.currentMatchData$
-    .pipe(takeUntil(this.destroy$))
-    .subscribe((observe) => {
-      this.matchData.set(observe);
-    });
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((observe) => {
+        this.matchData.set(observe);
+      });
   }
 
   ngOnDestroy(): void {

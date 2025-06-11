@@ -11,69 +11,80 @@
     </button>
   </div>
 
-  <div class="scroller">
-    <div class="batting-section">
-      <table>
-        <thead>
-          <tr>
-            <th><span>Batting</span> <span class="arrow">▲</span></th>
-            <th>R</th>
-            <th>B</th>
-            <th>6s</th>
-            <th>4s</th>
-            <th>S/R</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let batsman of getCurrentInning()?.batting">
-            <td>
-              <div class="player-info">
-                <span class="player-name">{{ batsman.batsman.name }}</span>
-                <span class="player-role">{{ batsman['dismissal-text'] || 'not out' }}</span>
-              </div>
-            </td>
-            <td>{{ batsman.r }}</td>
-            <td>{{ batsman.b }}</td>
-            <td>{{ batsman['6s'] }}</td>
-            <td>{{ batsman['4s'] }}</td>
-            <td>{{ batsman.sr }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <ng-container *ngIf="!appService.isLoading(); else loadingTemplate">
+    <div class="scroller">
+      <div class="batting-section">
+        <table>
+          <thead>
+            <tr>
+              <th><span>Batting</span> <span class="arrow">▲</span></th>
+              <th>R</th>
+              <th>B</th>
+              <th>6s</th>
+              <th>4s</th>
+              <th>S/R</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let batsman of getCurrentInning()?.batting">
+              <td>
+                <div class="player-info">
+                  <span class="player-name">{{ batsman.batsman.name }}</span>
+                  <span class="player-role">{{ batsman['dismissal-text'] || 'not out' }}</span>
+                </div>
+              </td>
+              <td>{{ batsman.r }}</td>
+              <td>{{ batsman.b }}</td>
+              <td>{{ batsman['6s'] }}</td>
+              <td>{{ batsman['4s'] }}</td>
+              <td>{{ batsman.sr }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-    <div class="bowling-section">
-      <table>
-        <thead>
-          <tr>
-            <th><span>Bowling</span> <span class="arrow">▲</span></th>
-            <th>O</th>
-            <th>M</th>
-            <th>R</th>
-            <th>W</th>
-            <th>NB</th>
-            <th>WD</th>
-            <th>ECO</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let bowler of getCurrentInning()?.bowling">
-            <td>
-              <div class="player-info">
-                <span class="player-name">{{ bowler.bowler.name }}</span>
-                <span class="player-role">Bowler</span>
-              </div>
-            </td>
-            <td>{{ bowler.o }}</td>
-            <td>{{ bowler.m }}</td>
-            <td>{{ bowler.r }}</td>
-            <td>{{ bowler.w }}</td>
-            <td>{{ bowler.nb }}</td>
-            <td>{{ bowler.wd }}</td>
-            <td>{{ bowler.eco }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="bowling-section">
+        <table>
+          <thead>
+            <tr>
+              <th><span>Bowling</span> <span class="arrow">▲</span></th>
+              <th>O</th>
+              <th>M</th>
+              <th>R</th>
+              <th>W</th>
+              <th>NB</th>
+              <th>WD</th>
+              <th>ECO</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let bowler of getCurrentInning()?.bowling">
+              <td>
+                <div class="player-info">
+                  <span class="player-name">{{ bowler.bowler.name }}</span>
+                  <span class="player-role">Bowler</span>
+                </div>
+              </td>
+              <td>{{ bowler.o }}</td>
+              <td>{{ bowler.m }}</td>
+              <td>{{ bowler.r }}</td>
+              <td>{{ bowler.w }}</td>
+              <td>{{ bowler.nb }}</td>
+              <td>{{ bowler.wd }}</td>
+              <td>{{ bowler.eco }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
+  </ng-container>
+
+  <ng-template #loadingTemplate>
+    <div class="scroller loading-container">
+      <div class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+      </div>
+    </div>
+  </ng-template>
 </div>
