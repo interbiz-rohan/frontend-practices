@@ -5,6 +5,7 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { TooltipDirective } from '../tooltip/tooltip';
 
 export interface TableColumn {
   key: string;
@@ -20,6 +21,7 @@ export interface TableAction {
   icon?: string;
   action: string;
   class?: string;
+  tooltip?: string;
 }
 
 @Component({
@@ -33,7 +35,8 @@ export interface TableAction {
     MatPaginatorModule,
     MatButtonModule,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    TooltipDirective
   ]
 })
 export class CustomTableComponent {
@@ -90,7 +93,7 @@ export class CustomTableComponent {
 
   // Outputs
   @Output() pageChange = new EventEmitter<PageEvent>();
-  @Output() actionClick = new EventEmitter<{action: string, item: any}>();
+  @Output() actionClick = new EventEmitter<{ action: string; item: any }>();
 
   get data() { return this._data(); }
   get loading() { return this._loading(); }
@@ -111,11 +114,21 @@ export class CustomTableComponent {
     this.pageChange.emit({ pageIndex: 0, pageSize: newSize, length: this._totalItems() });
   }
 
-  onActionClick(action: string, item: any): void {
+  onActionClick(action: string, item: any) {
     this.actionClick.emit({ action, item });
   }
 
   onPageChange(event: PageEvent) {
     this.pageChange.emit(event);
+  }
+
+  getDefaultTooltip(action: string): string {
+    const tooltips: { [key: string]: string } = {
+      'edit': 'Edit this item',
+      'delete': 'Delete this item',
+      'view': 'View details',
+      'download': 'Download file',
+    };
+    return tooltips[action] || action.charAt(0).toUpperCase() + action.slice(1);
   }
 }

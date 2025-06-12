@@ -29,9 +29,12 @@
       <ng-container matColumnDef="actions" *ngIf="actions.length > 0">
         <th mat-header-cell *matHeaderCellDef>Actions</th>
         <td mat-cell *matCellDef="let element" style="padding: 20px 5px !important">
-          <button mat-button *ngFor="let action of actions" [class]="action.class"
-            (click)="onActionClick(action.action, element)">
-           <i *ngIf="action.icon" [class]="'action-icon bi ' + action.icon"></i>
+          <button mat-button 
+                  *ngFor="let action of actions" 
+                  [class]="action.class"
+                  [appTooltip]="action.tooltip || getDefaultTooltip(action.action)"
+                  (click)="onActionClick(action.action, element)">
+            <i *ngIf="action.icon" [class]="'action-icon bi ' + action.icon"></i>
           </button>
         </td>
       </ng-container>

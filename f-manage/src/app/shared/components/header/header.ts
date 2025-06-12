@@ -4,13 +4,19 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../services/auth.service';
 import { PageLoaderComponent } from '../../../shared/components/page-loader/page-loader';
 import { delay } from 'rxjs';
+import { TooltipDirective } from '../tooltip/tooltip';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.html',
   styleUrls: ['./header.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule, PageLoaderComponent]
+  imports: [
+    CommonModule,
+    RouterModule,
+    PageLoaderComponent,
+    TooltipDirective
+  ]
 })
 export class HeaderComponent {
   isMenuOpen = signal(false);

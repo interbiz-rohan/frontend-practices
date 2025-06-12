@@ -10,7 +10,8 @@
         <button 
           *ngFor="let category of FILE_CATEGORIES"
           [ngClass]="{active: selectedCategory() === category}"
-          (click)="selectTab(category)">
+          (click)="selectTab(category)"
+          [appTooltip]="'View ' + category.toLowerCase() + ' files'">
           {{ category }}
         </button>
       </div>
@@ -31,10 +32,13 @@
           [max]="today"
           (change)="onDateChange($event)"
           placeholder="Search by date"
+          [appTooltip]="'Filter files by date'"
         />
         <!-- <i class="fas fa-search search-icon"></i> -->
       </div>
-      <button class="upload-btn" (click)="onUploadFile()">
+      <button class="upload-btn" 
+              (click)="onUploadFile()"
+              [appTooltip]="'Upload new files to the system'">
         <span class="plus-icon">+</span> Upload File
       </button>
     </div>

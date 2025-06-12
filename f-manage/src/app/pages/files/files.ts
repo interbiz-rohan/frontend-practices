@@ -13,6 +13,9 @@ import { FooterComponent } from '../../shared/components/footer/footer';
 import { ToastComponent } from '../../shared/components/toast-notification/toast-notification';
 import { ToastService } from '../../shared/services/toast.service';
 import { Layout } from '../../shared/components/layout/layout';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog/confirm-dialog';
+import { TooltipDirective } from '../../shared/components/tooltip/tooltip';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,7 +28,8 @@ import { Layout } from '../../shared/components/layout/layout';
     UploadFileModal,
     Layout,
     // FooterComponent,
-    ToastComponent
+    ToastComponent,
+    TooltipDirective
   ],
   templateUrl: "./files.html",
   styleUrls: ["./files.scss"],
@@ -87,7 +91,8 @@ export class FilesCompoenent implements OnInit {
   constructor(
     private authService: AuthService,
     private dbService: IndexedDBService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private dialog: MatDialog
   ) {
     this.currentUser = this.authService.currentUserValue;
   }
@@ -228,19 +233,25 @@ export class FilesCompoenent implements OnInit {
   }
 
   deleteFile(file: File) {
-    if (confirm('Are you sure you want to delete this file?')) {
-      if (!file.id) return;
-      this.dbService.deleteFile(file.id).subscribe({
-        next: () => {
-          this.toastService.showSuccess('File deleted successfully!');
-          this.loadFiles();
-        },
-        error: (error) => {
-          console.error('Error deleting file:', error);
-          this.toastService.showError('Failed to delete file. Please try again.');
-        }
-      });
-    }
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '400px',
+      data: { message: 'Are you sure you want to delete this file?' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && file.id) {
+        this.dbService.deleteFile(file.id).subscribe({
+          next: () => {
+            this.toastService.showSuccess('File deleted successfully!');
+            this.loadFiles();
+          },
+          error: (error) => {
+            console.error('Error deleting file:', error);
+            this.toastService.showError('Failed to delete file. Please try again.');
+          }
+        });
+      }
+    });
   }
 
   logout() {

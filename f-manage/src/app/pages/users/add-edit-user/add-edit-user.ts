@@ -16,6 +16,9 @@ import { finalize } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ToastService } from '../../../shared/services/toast.service';
 import { PhoneNumberPipe } from '../../../shared/pipes/phone-number.pipe';
+import { getErrorMessage, isFieldInvalid, emailDomainValidator, passwordValidator } from '../../../shared/utils/form.utils';
+import { FORM_ERROR_MESSAGES } from '../../../shared/constants/error-messages';
+import { TooltipDirective } from '../../../shared/components/tooltip/tooltip';
 
 @Component({
   selector: 'app-add-edit-user',
@@ -33,7 +36,8 @@ import { PhoneNumberPipe } from '../../../shared/pipes/phone-number.pipe';
     MatDividerModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    PhoneNumberPipe
+    PhoneNumberPipe,
+    TooltipDirective
   ],
   templateUrl: './add-edit-user.html',
   styleUrls: ['./add-edit-user.scss']
@@ -47,11 +51,13 @@ export class AddEditUser implements OnInit {
   isEdit = false;
   hidePassword = true;
   isSubmitting = false;
+  errorMessages = FORM_ERROR_MESSAGES;
+  originalFormValue: any = null;
+  hasFormChanged = signal(false);
 
   newEmail = '';
   newContact = '';
   newAddress = '';
-
 
   emailError = signal<string>('');
   contactError = signal<string>('');
@@ -74,12 +80,12 @@ export class AddEditUser implements OnInit {
     this.isEdit = !!this.userId;
     this.form = this.fb.group({
       name: ['', Validators.required],
-      tempEmail: ['', [Validators.required, Validators.email, this.emailValidator()]],
+      tempEmail: ['', [Validators.required, Validators.email, emailDomainValidator()]],
       tempContact: ['', [Validators.required, Validators.minLength(10), Validators.pattern(/^[0-9-]{0,12}$/)]],
       tempAddress: ['', [Validators.required, Validators.maxLength(30), Validators.minLength(3)]],
       gender: ['', Validators.required],
       role: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(8), this.passwordValidator()]],
+      password: ['', [Validators.required, Validators.minLength(8), passwordValidator()]],
       email: this.fb.array([], [Validators.required, Validators.minLength(1)]),
       contact: this.fb.array([], [Validators.required, Validators.minLength(1)]),
       address: this.fb.array([], [Validators.required, Validators.minLength(1)])
@@ -122,6 +128,9 @@ export class AddEditUser implements OnInit {
               this.address.push(this.fb.control(address));
             });
           }
+
+          // Store original form value after setting all values
+          this.originalFormValue = this.getFormValue();
         }
       });
     }
@@ -131,6 +140,14 @@ export class AddEditUser implements OnInit {
     this.email.valueChanges.subscribe(() => this.updateEmailValidation());
     this.contact.valueChanges.subscribe(() => this.updateContactValidation());
     this.address.valueChanges.subscribe(() => this.updateAddressValidation());
+
+    // Subscribe to form value changes
+    this.form.valueChanges.subscribe(() => {
+      if (this.isEdit) {
+        const currentValue = this.getFormValue();
+        this.hasFormChanged.set(this.hasFormValuesChanged(this.originalFormValue, currentValue));
+      }
+    });
   }
 
   get email() { return this.form.get('email') as FormArray; }
@@ -139,8 +156,6 @@ export class AddEditUser implements OnInit {
   get tempEmail() { return this.form.get('tempEmail'); }
   get tempContact() { return this.form.get('tempContact'); }
   get tempAddress() { return this.form.get('tempAddress'); }
-
-
 
   isValidEmail(email: string): boolean {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -235,20 +250,6 @@ export class AddEditUser implements OnInit {
     } finally {
       this.isSubmitting = false;
     }
-  }
-
-  passwordValidator() {
-    return (control: any) => {
-      const value = control.value;
-      if (!value) return null;
-
-      // Check if password starts or ends with space
-      if (value.startsWith(' ') || value.endsWith(' ')) {
-        return { invalidSpaces: true };
-      }
-
-      return null;
-    };
   }
 
   formatPassword(event: any) {
@@ -387,5 +388,45 @@ export class AddEditUser implements OnInit {
 
   CompleteFormValidate() {
 
+  }
+
+  getErrorMessage(control: any, fieldName: string): string {
+    return getErrorMessage(control, fieldName as any, this.errorMessages);
+  }
+
+  isFieldInvalid(control: any): boolean {
+    return isFieldInvalid(control, this.isSubmitting);
+  }
+
+  getFormValue() {
+    return {
+      name: this.form.get('name')?.value,
+      email: this.email.controls.map(control => control.value),
+      contact: this.contact.controls.map(control => control.value),
+      address: this.address.controls.map(control => control.value),
+      gender: this.form.get('gender')?.value,
+      role: this.form.get('role')?.value,
+      password: this.form.get('password')?.value
+    };
+  }
+
+  hasFormValuesChanged(original: any, current: any): boolean {
+    if (!original || !current) return false;
+
+    // Compare arrays
+    const arraysEqual = (arr1: any[], arr2: any[]) => {
+      if (arr1.length !== arr2.length) return false;
+      return arr1.every((val, index) => val === arr2[index]);
+    };
+
+    return (
+      original.name !== current.name ||
+      !arraysEqual(original.email, current.email) ||
+      !arraysEqual(original.contact, current.contact) ||
+      !arraysEqual(original.address, current.address) ||
+      original.gender !== current.gender ||
+      original.role !== current.role ||
+      original.password !== current.password
+    );
   }
 }

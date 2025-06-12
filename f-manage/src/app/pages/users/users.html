@@ -4,12 +4,12 @@
     <div class="users-container">
         <div class="users-content">
             <div class="users-toolbar">
-                <div class="search-group">
+                <div class="search-group" [appTooltip]="'Search for a user'">
                     <input class="search-input" type="text" placeholder="Search here" [value]="searchTerm()"
                         (input)="onSearchChange($event)" />
                     <i class="fas fa-search search-icon"></i>
                 </div>
-                <button class="add-user-btn" (click)="onAddUser()">
+                <button class="add-user-btn" (click)="onAddUser()" [appTooltip]="'Create a new user account'">
                     <span class="plus-icon">+</span> Add user
                 </button>
             </div>
