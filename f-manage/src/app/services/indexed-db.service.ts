@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { openDB, DBSchema, IDBPDatabase } from 'idb';
 import { Observable, from, defer } from 'rxjs';
 import { map, catchError, tap, switchMap } from 'rxjs/operators';
-import { initializeDatabase } from '../commons/initializers/db-initial';
+import { initializeDatabase } from '../shared/initializers/db-initial';
 
 interface FManageDB extends DBSchema {
   users: {

@@ -244,7 +244,7 @@
 import { openDB, DBSchema, IDBPDatabase } from &#x27;idb&#x27;;
 import { Observable, from, defer } from &#x27;rxjs&#x27;;
 import { map, catchError, tap, switchMap } from &#x27;rxjs/operators&#x27;;
-import { initializeDatabase } from &#x27;../commons/initializers/db-initial&#x27;;
+import { initializeDatabase } from &#x27;../shared/initializers/db-initial&#x27;;
 
 interface FManageDB extends DBSchema {
   users: {

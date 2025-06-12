@@ -1,0 +1,71 @@
+<app-page-loader [isLoading]="loading()"></app-page-loader>
+<div class="login-container">
+    <div class="login-form-section">
+        <div class="form-container">
+            <h2 class="mat-headline-4">Login</h2>
+            <br/>
+            <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Email</mat-label>
+                    <input 
+                        matInput
+                        type="email" 
+                        formControlName="email"
+                        placeholder="Example@email.com"
+                        style="max-height: 40px;"
+                        >
+                    <mat-error *ngIf="isFieldInvalid('email')">
+                        {{ getErrorMessage('email') }}
+                    </mat-error> 
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Password</mat-label>
+                    <input 
+                        matInput
+                        [type]="hidePassword ? 'password' : 'text'"
+                        formControlName="password"
+                        placeholder="At least 8 characters"
+                        style="max-height: 40px;"
+                        >
+                    <button 
+                        mat-icon-button 
+                        matSuffix 
+                        class="password-toggle-button"
+                        type="button"
+                        (click)="togglePasswordVisibility()">
+                        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="isFieldInvalid('password')" >
+                        {{ getErrorMessage('password') }}
+                    </mat-error>
+                </mat-form-field>
+
+                <div *ngIf="error" class="error-message">
+                    {{ error }}
+                </div>
+
+                <button 
+                    mat-raised-button 
+                    color="primary" 
+                    type="submit" 
+                    [disabled]="loading()"
+                    class="submit-button">
+                    @if (loading()) {
+                        <mat-spinner diameter="20" class="spinner"></mat-spinner>
+                    }
+                    Sign in
+                </button>
+            </form>
+        </div>
+        <!-- <p class="copyright">&copy; 2025 ALL RIGHTS RESERVED</p> -->
+        <app-footer></app-footer>    
+    </div>
+    <div class="login-image-section">
+        <img src="assets/images/bg-curve.webp" alt="Background image" class="background-image">
+        <div class="logo-overlay">
+            <img src="assets/logos/bg-logo.PNG" alt="F-Manage Logo" class="logo">
+        </div>
+    </div>
+  </div>
+  

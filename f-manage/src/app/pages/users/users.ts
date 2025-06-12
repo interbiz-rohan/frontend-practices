@@ -1,13 +1,13 @@
 import { Component, OnInit, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, } from '@angular/forms';
-import { CustomTableComponent, TableColumn, TableAction } from '../../commons/components/custom-table/custom-table';
+import { CustomTableComponent, TableColumn, TableAction } from '../../shared/components/custom-table/custom-table';
 import { IndexedDBService, User } from '../../services/indexed-db.service';
 import { PageEvent } from '@angular/material/paginator';
 import { AddEditUser } from './add-edit-user/add-edit-user';
-import { ToastComponent } from '../../commons/components/toast-notification/toast-notification';
-import { ToastService } from '../../commons/services/toast.service';
-import { Layout } from '../../commons/components/layout/layout';
+import { ToastComponent } from '../../shared/components/toast-notification/toast-notification';
+import { ToastService } from '../../shared/services/toast.service';
+import { Layout } from '../../shared/components/layout/layout';
 
 @Component({
   selector: 'app-users',

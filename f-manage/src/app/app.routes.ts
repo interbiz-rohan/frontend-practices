@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthGuard, LoginGuard } from './guards/auth.guard';
-import { LoadingScreenComponent } from './pages/loading-screen/loading-screen.component';
+import { LoadingScreenComponent } from './cores/splash-screen/loading-screen.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'loading', pathMatch: 'full' },
@@ -8,7 +8,7 @@ export const routes: Routes = [
   {
     path: 'login',
     canActivate: [LoginGuard],
-    loadComponent: () => import('./pages/login/login').then(m => m.LoginComponent)
+    loadComponent: () => import('./cores/login/login').then(m => m.LoginComponent)
   },
   {
     path: 'files',

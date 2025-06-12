@@ -3,8 +3,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { IndexedDBService } from '../../../../services/indexed-db.service';
 import { AuthService } from '../../../../services/auth.service';
 import { FormsModule } from '@angular/forms';
-import { ToastService } from '../../../../commons/services/toast.service';
-import { saveFile, FilePayload } from '../../../../commons/utils/file-operations';
+import { ToastService } from '../../../../shared/services/toast.service';
+import { saveFile, FilePayload } from '../../../../shared/utils/file-operations';
 
 @Component({
   selector: 'app-upload-file-modal',

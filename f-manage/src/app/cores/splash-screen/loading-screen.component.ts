@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IndexedDBService } from '../../services/indexed-db.service';
-import { initializeDatabase } from '../../commons/initializers/db-initial';
+import { initializeDatabase } from '../../shared/initializers/db-initial';
 import { CommonModule } from '@angular/common';
 
 @Component({

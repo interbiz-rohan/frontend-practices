@@ -14,8 +14,8 @@
 // import { User } from '../../../services/indexed-db.service';
 // import { finalize } from 'rxjs/operators';
 // import { Router } from '@angular/router';
-// import { ToastService } from '../../../commons/services/toast.service';
-// import { PhoneNumberPipe } from '../../../commons/pipes/phone-number.pipe';
+// import { ToastService } from '../../../shared/services/toast.service';
+// import { PhoneNumberPipe } from '../../../shared/pipes/phone-number.pipe';
 
 // @Component({
 //   selector: 'app-add-edit-user',

@@ -2,17 +2,17 @@ import { Component, OnInit, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { HeaderComponent } from '../../commons/components/header/header';
-import { CustomTableComponent, TableColumn, TableAction } from '../../commons/components/custom-table/custom-table';
+import { HeaderComponent } from '../../shared/components/header/header';
+import { CustomTableComponent, TableColumn, TableAction } from '../../shared/components/custom-table/custom-table';
 import { IndexedDBService, File } from '../../services/indexed-db.service';
 import { UploadFileModal } from './components/upload/upload';
 import { PageEvent } from '@angular/material/paginator';
-import { FileCategory, FILE_CATEGORIES, filterFilesByCategory, getMimeType } from '../../commons/utils/file.utils';
+import { FileCategory, FILE_CATEGORIES, filterFilesByCategory, getMimeType } from '../../shared/utils/file.utils';
 import { switchMap, map, forkJoin, tap, mergeMap, from, toArray } from 'rxjs';
-import { FooterComponent } from '../../commons/components/footer/footer';
-import { ToastComponent } from '../../commons/components/toast-notification/toast-notification';
-import { ToastService } from '../../commons/services/toast.service';
-import { Layout } from '../../commons/components/layout/layout';
+import { FooterComponent } from '../../shared/components/footer/footer';
+import { ToastComponent } from '../../shared/components/toast-notification/toast-notification';
+import { ToastService } from '../../shared/services/toast.service';
+import { Layout } from '../../shared/components/layout/layout';
 
 @Component({
   selector: 'app-dashboard',

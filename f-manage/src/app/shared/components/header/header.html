@@ -1,3 +1,4 @@
+<app-page-loader [isLoading]="isLoading()"></app-page-loader>
 <nav class="main-header">
     <div class="logo-section">
         <img src="assets/logos/dark-bg-logo.PNG" alt="F-Manage Logo" class="logo-img" (click)="navigateToHome()"/>
@@ -10,11 +11,15 @@
     </div>
     <div class="nav-links" [class.active]="isMenuOpen()">
         @if (isAdmin) {
-            <a class="nav-link" routerLink="/users" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }" (click)="closeMenu()">
+            <a class="nav-link" 
+               [class.active]="isActiveRoute('/users')"
+               (click)="navigateWithLoader('/users')">
                 Users
             </a>
         }
-        <a class="nav-link" routerLink="/files" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }" (click)="closeMenu()">
+        <a class="nav-link" 
+           [class.active]="isActiveRoute('/files')"
+           (click)="navigateWithLoader('/files')">
             Files
         </a>
         <button class="logout-btn" (click)="logout()">Logout</button>

@@ -6,7 +6,7 @@ import { readFileFromAssets, saveFile, FilePayload } from '../utils/file-operati
 export const initialUsers: Omit<User, 'id' | 'created_at' | 'updated_at'>[] = [
   {
     email: ['admin@fmanage.com'],
-    password: 'admin123',
+    password: 'Admin@123',
     name: 'Admin User',
     role: 'admin' as const,
     date_of_birth: '1990-01-01',
@@ -16,7 +16,7 @@ export const initialUsers: Omit<User, 'id' | 'created_at' | 'updated_at'>[] = [
   },
   {
     email: ['user@fmanage.com'],
-    password: 'user12345',
+    password: 'User@123',
     name: 'Regular User',
     role: 'user' as const,
     date_of_birth: '1995-05-15',

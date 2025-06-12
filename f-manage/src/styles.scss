@@ -63,3 +63,17 @@ body {
 ::ng-deep .mat-form-field-appearance-outline.mat-form-field-disabled, ::ng-deep .mat-form-field-outline {
   opacity: 0;
   }
+
+  
+.mat-mdc-form-field-error-wrapper{
+  padding: 0 !important;
+}
+
+
+.mdc-text-field{
+  max-height: 50px;
+}
+
+.mat-mdc-form-field-infix{
+  padding: 15px 0 !important;
+}

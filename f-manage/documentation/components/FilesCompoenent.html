@@ -1667,16 +1667,16 @@
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { FormsModule } from &#x27;@angular/forms&#x27;;
 import { AuthService } from &#x27;../../services/auth.service&#x27;;
-import { HeaderComponent } from &#x27;../../commons/components/header/header&#x27;;
-import { CustomTableComponent, TableColumn, TableAction } from &#x27;../../commons/components/custom-table/custom-table&#x27;;
+import { HeaderComponent } from &#x27;../../shared/components/header/header&#x27;;
+import { CustomTableComponent, TableColumn, TableAction } from &#x27;../../shared/components/custom-table/custom-table&#x27;;
 import { IndexedDBService, File } from &#x27;../../services/indexed-db.service&#x27;;
 import { UploadFileModal } from &#x27;./components/upload/upload&#x27;;
 import { PageEvent } from &#x27;@angular/material/paginator&#x27;;
-import { FileCategory, FILE_CATEGORIES, filterFilesByCategory, getMimeType } from &#x27;../../commons/utils/file.utils&#x27;;
+import { FileCategory, FILE_CATEGORIES, filterFilesByCategory, getMimeType } from &#x27;../../shared/utils/file.utils&#x27;;
 import { switchMap, map, forkJoin, tap } from &#x27;rxjs&#x27;;
-import { FooterComponent } from &#x27;../../commons/components/footer/footer&#x27;;
-import { ToastComponent } from &#x27;../../commons/components/toast-notification/toast-notification&#x27;;
-import { ToastService } from &#x27;../../commons/services/toast.service&#x27;;
+import { FooterComponent } from &#x27;../../shared/components/footer/footer&#x27;;
+import { ToastComponent } from &#x27;../../shared/components/toast-notification/toast-notification&#x27;;
+import { ToastService } from &#x27;../../shared/services/toast.service&#x27;;
 
 @Component({
   selector: &#x27;app-dashboard&#x27;,
