@@ -401,6 +401,9 @@ export class AddEditUser implements OnInit {
   getFormValue() {
     return {
       name: this.form.get('name')?.value,
+      tempEmail: this.tempEmail?.value,
+      tempContact: this.tempContact?.value,
+      tempAddress: this.tempAddress?.value,
       email: this.email.controls.map(control => control.value),
       contact: this.contact.controls.map(control => control.value),
       address: this.address.controls.map(control => control.value),
@@ -424,6 +427,9 @@ export class AddEditUser implements OnInit {
       !arraysEqual(original.email, current.email) ||
       !arraysEqual(original.contact, current.contact) ||
       !arraysEqual(original.address, current.address) ||
+      original.tempEmail !== current.tempEmail ||
+      original.tempContact !== current.tempContact ||
+      original.tempAddress !== current.tempAddress ||
       original.gender !== current.gender ||
       original.role !== current.role ||
       original.password !== current.password
